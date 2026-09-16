@@ -1,0 +1,14 @@
+---
+description: Language trainer project laws. Always apply when editing this repo.
+globs:
+  - "**/*"
+---
+
+Follow `AGENTS.md` and `docs/constitution.md`.
+
+This repo is an international language trainer only.
+Never add Next.js or TanStack Start.
+Never add expat-admin or Polish-citizen civic features.
+Never introduce a feature without a file in `specs/`.
+Keep skills project-local under `.cursor/skills/`.
+After implementing a spec, tick its Done checkboxes.
