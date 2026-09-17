@@ -247,7 +247,7 @@ Do UI that users see before the rewrite, unless you are starting a fresh local r
 |---|---|---|---|
 | 1 | 001 Dark mode | G-01 | done |
 | 2 | 002 Poland GeoJSON | P-01, P-03 | done |
-| 3 | 003 Kraków map (no key) | P-02, P-03 | 002 |
+| 3 | 003 Kraków map (no key) | P-02, P-03 | done |
 | 4 | 004 Story images | P-04 | — |
 | 5 | 005 Local web bootstrap | S-01 | — (new repo) |
 | 6 | 006 Context persist | S-02 | 005 |

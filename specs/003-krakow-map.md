@@ -1,6 +1,6 @@
 # SPEC 003 — Kraków city map (OpenFreeMap + MapLibre)
 
-Status: in-progress
+Status: done
 Covers: **P-02**, **P-03** (Kraków hover)
 Depends on: 002
 Parent: [000-global.md](./000-global.md)
@@ -57,13 +57,13 @@ Same no-key rule as 002. Raster CDNs (CARTO, MapTiler, Mapbox, OSM raster) are o
 
 ## Done when
 
-- [ ] Schematic Old Town SVG is gone
-- [ ] Map shows Kraków streets (OpenFreeMap), not Poland-at-country-zoom
-- [ ] Pins sit on Mariacki / Rynek / Wawel / Zwierzyniec (approx)
-- [ ] Pin click opens `/krakow/$storyId`
-- [ ] Hover shows title + place
-- [ ] Completed pin uses success color
-- [ ] List under the map still works on mobile
-- [ ] Dark mode swaps OpenFreeMap style
-- [ ] No Mapbox logo, no API-key watermark
-- [ ] Typecheck passes
+- [x] Schematic Old Town SVG is gone
+- [x] Map shows Kraków streets (OpenFreeMap), not Poland-at-country-zoom
+- [x] Pins sit on Mariacki / Rynek / Wawel / Zwierzyniec (approx)
+- [x] Pin click opens `/krakow/$storyId`
+- [x] Hover shows title + place
+- [x] Completed pin uses success color
+- [x] List under the map still works on mobile
+- [x] Dark mode swaps OpenFreeMap style
+- [x] No Mapbox logo, no API-key watermark
+- [x] Typecheck passes
