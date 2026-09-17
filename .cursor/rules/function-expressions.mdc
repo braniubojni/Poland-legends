@@ -1,0 +1,34 @@
+---
+description: Prefer function expressions over function declarations in all new JS/TS.
+alwaysApply: true
+---
+
+# Function expressions, not declarations
+
+Always write functions as expressions assigned to `const`. Do not use `function` declarations.
+
+Prefer arrow expressions. Use `const name = function () {}` only when you need a non-arrow `this` or `arguments`.
+
+```ts
+// ❌ BAD
+function loadStories() {
+  return stories;
+}
+
+export default function KrakowMap() {
+  return null;
+}
+
+// ✅ GOOD
+const loadStories = () => {
+  return stories;
+};
+
+const KrakowMap = () => {
+  return null;
+};
+
+export default KrakowMap;
+```
+
+Allowed exceptions: class methods, object literal methods, and generators (`function*`).

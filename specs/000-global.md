@@ -35,25 +35,26 @@ Honest delta so we do not “migrate” things that are already done.
 
 | Area | Today | Target from your list |
 |---|---|---|
-| UI library | React 19 + Vite + **TanStack Start** | React SPA (not Next.js) |
+| UI library | React 19 + Vite SPA in `apps/web` | React SPA (not Next.js) — **done (005)** |
 | Routing | **TanStack Router** (file routes) | TanStack Router — **keep** |
 | Icons | **lucide-react** | lucide-react — **keep** |
-| Styling | Tailwind v4 tokens in `src/styles.css` | **MUI** theme using the same tokens |
-| State | zustand + persist (`opowiesci-v1`) | **React Context** |
-| Data | static TS: `src/data/krakow.ts`, `cities.ts` | Go API + SQLite later; same JSON shape |
+| Styling | **MUI v9** custom parchment theme | MUI — **done (005)** |
+| State | zustand + persist (`opowiesci-v1`) | **React Context** (006) |
+| Data | static TS: `apps/web/src/data/` | Go API + SQLite later; same JSON shape |
 | Fetch | none | `fetch` + **TanStack Query** + **Zod** |
-| Tests | almost none (platform scripts only) | **Vitest v5** |
-| Lint/format | ESLint + Prettier (sandbox defaults) | **oxlint** + **oxfmt** |
+| Tests | **Vitest v5** | Vitest v5 — **done (005)** |
+| Lint/format | **oxlint** + **oxfmt** | oxlint + oxfmt — **done (005)** |
 | Backend | none | **Go** (Fiber *or* Gin — lock in 007) + **SQLite** |
 | Auth | off | **none** |
-| Maps | **MapLibre + OpenFreeMap** (Poland), schematic Kraków | Kraków map in 003, still **no API key / no Mapbox** |
-| Story art | geometric SVG in `StoryArt.tsx` | Informative stills (generated 3D / editorial) |
-| Theme | light parchment only | **dark mode** |
-| Deploy | Grok sandbox → **Vercel** (`nitro({ preset: "vercel" })`). GitHub repo has **no** Pages, Actions, environments, or homepage URL | **Netlify** from GitHub (`main`) |
+| Maps | **MapLibre + OpenFreeMap** (Poland + Kraków) | still **no API key / no Mapbox** |
+| Story art | WebP stills in `apps/web/public/stories/` | Informative stills — **done (004)** |
+| Theme | light parchment + dark ink | **dark mode** — **done (001)** |
+| Deploy | not shipping | **Netlify** from GitHub (`main`) |
+| Code style | mixed `function` declarations, large components, ref-stale callbacks | house rules in `.cursor/rules/` — **011** |
 
 There is **no Next.js**, **no react-router**, **no react-icons** in this app. Do not spend a child spec on those switches.
 
-**Local Cursor/Grok repo** may drop TanStack Start (SSR) and become a Vite SPA that talks to the Go API. That is spec **005**, not a silent rewrite of this preview.
+**005** turned this repo into a Vite SPA at `apps/web` (MUI, oxlint/oxfmt, Vitest). Later talks to the Go API.
 
 ---
 
@@ -180,7 +181,7 @@ MUI must encode current tokens (see G-01). If MUI starts looking like a dashboar
 Suggested local layout (child **005**):
 
 ```
-opowiesci/
+orbit-berry-palm-mountain/
   apps/web/          # Vite + React + TanStack Router + MUI
   apps/api/          # Go (007)
   packages/content/  # optional: shared Zod schemas
@@ -188,9 +189,9 @@ opowiesci/
   AGENTS.md
 ```
 
-### S-01 — Repo bootstrap (web)
+### S-01 — Repo bootstrap (web) → 005
 
-Vite, TanStack Router, MUI theme, oxlint, oxfmt, Vitest v5, path alias `@/`. Port existing routes: `/`, `/krakow`, `/krakow/$storyId`. Child: **005**
+Vite, TanStack Router, MUI theme, oxlint, oxfmt, Vitest v5, path alias `@/`. Port existing routes: `/`, `/krakow`, `/krakow/$storyId`. Child: **005** (done)
 
 ### S-02 — Context instead of zustand
 
@@ -225,6 +226,27 @@ GitHub `braniubojni/orbit-berry-palm-mountain` is not shipping anywhere today. T
 - Do not add a Vercel project or GitHub Pages as a substitute.
 - Child: **010** when started; this ID is enough until then.
 
+### S-07 — Align `apps/web` to house rules
+
+One-day pass over existing UI code. **No new features, no stack rewrite.** Behaviour, copy, and visual language stay as they are. Source of truth is `.cursor/rules/` (already always-on for new work); this spec is the backlog to retrofit old files.
+
+Rules to apply:
+
+| Rule file | Do |
+|---|---|
+| `function-expressions.mdc` | `const name = () => {}` — no `function` declarations (class methods, object methods, `function*` OK) |
+| `component-size.mdc` | ~100 lines per component file; **150 hard cap** |
+| `helpers-files.mdc` | colocated `helpers.ts` for pure helpers, one-off controls, long effect mount/cleanup — not a global `src/helpers.ts` |
+| `react-19.mdc` | `useEffectEvent` (not `fooRef.current = foo`), `<Activity>`, `<Suspense>`, `use()`, `ref` as a prop — still no RSC / `use server` / `forwardRef` |
+
+Known first file: `apps/web/src/components/map/KrakowLibre.tsx` (already over the cap; extract `mountKrakowMap` + pins/controls; replace stale-callback refs with `useEffectEvent`).
+
+Then the rest of `apps/web/src` the same way. Split oversized files; do not “fix” by deleting blank lines.
+
+Out of this ID: 006 Context, maps/content/copy changes, Go, Netlify.
+
+Child: **011** when started; this ID is enough until then.
+
 ---
 
 ## Backend (detail for 007 / 009)
@@ -252,7 +274,7 @@ _Empty._ Parking lot for later: more Kraków pins (Wanda, Wit Stwosz, Kazimierz)
 
 ## Suggested split order
 
-Do UI that users see before the rewrite, unless you are starting a fresh local repo.
+Do UI that users see before the rewrite. **005** is this repo in place, not a second clone.
 
 | Order | Child | IDs | Depends on |
 |---|---|---|---|
@@ -260,14 +282,15 @@ Do UI that users see before the rewrite, unless you are starting a fresh local r
 | 2 | 002 Poland GeoJSON | P-01, P-03 | done |
 | 3 | 003 Kraków map (no key) | P-02, P-03 | done |
 | 4 | 004 Story images | P-04 | done |
-| 5 | 005 Local web bootstrap | S-01 | — (new repo) |
+| 5 | 005 Local web bootstrap | S-01 | done |
 | 6 | 006 Context persist | S-02 | 005 |
 | 7 | 007 Go + SQLite | S-03 | 005 |
 | 8 | 008 Query + Zod | S-04 | 006, 007 |
 | 9 | 009 Content API | S-05 | 007, 008 |
 | 10 | 010 Netlify | S-06 | 004 (current app) or 005 (cleaner SPA) |
+| 11 | 011 House-style pass | S-07 | 005 |
 
-If you stay in **this** Grok preview app: do **001–004** here (local maps + images + dark mode on the current Tailwind stack). Do **005–009** only in the local repo. **S-06** is the public host either way.
+**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006–009** follow in that tree. **S-06** is the public host. **S-07** can run anytime after **005**; it does not block 006–010.
 
 ---
 

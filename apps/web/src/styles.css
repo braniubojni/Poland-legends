@@ -1,0 +1,303 @@
+:root {
+  --op-bg: #f3eee6;
+  --op-surface: #faf6f0;
+  --op-fg: #1c1917;
+  --op-muted: #6f6458;
+  --op-primary: #9c1c2c;
+  --op-primary-fg: #faf6f0;
+  --op-border: #d9cfc3;
+  --op-ink-soft: #3a322c;
+  --op-success: #2f5d3a;
+  --op-map: #ebe3d6;
+  --radius-sm: 8px;
+  color-scheme: light;
+}
+
+.dark {
+  --op-bg: #161310;
+  --op-surface: #1f1b18;
+  --op-fg: #f3eee6;
+  --op-muted: #a89888;
+  --op-primary: #c4454a;
+  --op-primary-fg: #faf6f0;
+  --op-border: #3a322c;
+  --op-ink-soft: #d4c4b4;
+  --op-success: #7aaf82;
+  --op-map: #2a241f;
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.op-map-stage {
+  position: relative;
+  width: 100%;
+  height: min(32rem, 56dvh);
+  min-height: 20rem;
+  background: var(--op-map);
+}
+
+.op-map-fallback {
+  position: absolute;
+  inset: 0;
+  background: var(--op-map);
+}
+
+.op-map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--op-bg);
+  font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  color: var(--op-fg);
+}
+
+.op-map .maplibregl-canvas {
+  outline: none;
+}
+
+.op-map-light .maplibregl-canvas {
+  filter: sepia(0.14) saturate(0.92) hue-rotate(4deg) brightness(1) contrast(1.12);
+}
+
+.op-map-dark .maplibregl-canvas {
+  filter: sepia(0.08) saturate(0.95) hue-rotate(-6deg) brightness(1) contrast(1.08);
+}
+
+.op-map .maplibregl-ctrl-group {
+  border: 1px solid var(--op-border);
+  border-radius: var(--radius-sm);
+  box-shadow: none;
+  overflow: hidden;
+  background: var(--op-surface);
+}
+
+.op-map .maplibregl-ctrl-group button {
+  width: 44px;
+  height: 44px;
+  background: var(--op-surface);
+}
+
+.op-map .maplibregl-ctrl-group button + button {
+  border-top: 1px solid var(--op-border);
+}
+
+.op-map .maplibregl-ctrl-icon {
+  filter: none;
+}
+
+.op-map .maplibregl-ctrl-scale {
+  background: color-mix(in srgb, var(--op-surface) 88%, transparent);
+  border: none;
+  border-bottom: 2px solid var(--op-fg);
+  color: var(--op-fg);
+  font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.75rem;
+}
+
+.op-map .maplibregl-ctrl-attrib {
+  background: color-mix(in srgb, var(--op-bg) 88%, transparent);
+  color: var(--op-muted);
+  font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.7rem;
+}
+
+.op-map .maplibregl-ctrl-attrib a {
+  color: var(--op-muted);
+}
+
+.op-map .op-map-home {
+  font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--op-fg);
+}
+
+.op-city-pin {
+  position: relative;
+  display: flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.op-city-dot {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--op-muted);
+  border: 2px solid var(--op-surface);
+  opacity: 0.85;
+  transition: transform 160ms ease;
+}
+
+.op-city-pin.is-open .op-city-dot {
+  width: 16px;
+  height: 16px;
+  background: var(--op-primary);
+  opacity: 1;
+  box-shadow: 0 0 0 7px color-mix(in srgb, var(--op-primary) 28%, transparent);
+}
+
+.op-city-pin:hover .op-city-dot,
+.op-city-pin:focus-visible .op-city-dot {
+  transform: scale(1.28);
+}
+
+.op-city-tip {
+  position: absolute;
+  bottom: calc(100% - 4px);
+  left: 50%;
+  z-index: 5;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--op-border);
+  border-radius: var(--radius-sm);
+  background: var(--op-surface);
+  color: var(--op-fg);
+  font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: opacity 150ms ease;
+}
+
+.op-city-pin.is-north .op-city-tip {
+  bottom: auto;
+  top: calc(100% - 4px);
+}
+
+.op-city-pin:hover .op-city-tip,
+.op-city-pin:focus-visible .op-city-tip {
+  opacity: 1;
+}
+
+.op-story-pin {
+  position: relative;
+  display: flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.op-story-dot {
+  display: flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1.5px solid var(--op-primary);
+  background: var(--op-primary);
+  color: var(--op-primary-fg);
+  font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1;
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--op-fg) 18%, transparent);
+  transition: transform 160ms ease;
+}
+
+.op-story-pin.is-done .op-story-dot {
+  border-color: var(--op-success);
+  background: var(--op-success);
+  color: var(--op-primary-fg);
+}
+
+.op-story-pin:hover .op-story-dot,
+.op-story-pin:focus-visible .op-story-dot {
+  transform: scale(1.12);
+}
+
+.op-story-tip {
+  position: absolute;
+  bottom: calc(100% - 2px);
+  left: 50%;
+  z-index: 5;
+  max-width: 14rem;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid var(--op-border);
+  border-radius: var(--radius-sm);
+  background: var(--op-surface);
+  color: var(--op-fg);
+  font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: opacity 150ms ease;
+}
+
+.op-story-pin:hover .op-story-tip,
+.op-story-pin:focus-visible .op-story-tip {
+  opacity: 1;
+}
+
+.op-story-still-wrap {
+  position: relative;
+}
+
+.op-story-still {
+  display: block;
+  width: 100%;
+  height: 20rem;
+  object-fit: cover;
+  object-position: center 58%;
+}
+
+.op-story-still[data-story="hejnal"],
+.op-story-still[data-story="wieze"] {
+  object-position: center 38%;
+}
+
+.op-story-still[data-story="lajkonik"] {
+  object-position: 62% 70%;
+}
+
+.op-story-still[data-story="golebie"] {
+  object-position: center 72%;
+}
+
+.op-story-still[data-story="smok"] {
+  object-position: center 48%;
+}
+
+.dark .op-story-still-wrap:not(.is-paired)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--op-bg) 32%, transparent);
+}
