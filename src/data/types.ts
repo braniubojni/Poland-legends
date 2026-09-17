@@ -33,7 +33,7 @@ export type Story = {
   cityId: string;
   title: Copy;
   place: Copy;
-  pin: { x: number; y: number };
+  pin: { lat: number; lng: number };
   legend: Copy;
   fact: Copy;
   seeToday: Copy;

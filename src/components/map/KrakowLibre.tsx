@@ -9,17 +9,17 @@ import {
 } from "maplibre-gl";
 import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { cities } from "@/data/cities";
+import { krakowStories } from "@/data/krakow";
 import type { Locale } from "@/data/types";
 import { t } from "@/lib/copy";
 import {
   applyMapTone,
+  KRAKOW_BOUNDS,
+  KRAKOW_FIT,
+  KRAKOW_LNG_LAT,
+  KRAKOW_MAX_BOUNDS,
+  KRAKOW_ZOOM,
   MAP_STYLES,
-  POLAND_BOUNDS,
-  POLAND_FIT,
-  POLAND_LNG_LAT,
-  POLAND_MAX_BOUNDS,
-  POLAND_ZOOM,
 } from "@/lib/geo";
 import { useProgress } from "@/lib/progress";
 import { resolveTheme } from "@/lib/theme";
@@ -28,7 +28,8 @@ setWorkerUrl(maplibreWorkerUrl);
 
 type Props = {
   locale: Locale;
-  onSelect: (cityId: string) => void;
+  completed: string[];
+  onSelect: (storyId: string) => void;
 };
 
 function localeBag(locale: Locale): Record<string, string> {
@@ -46,7 +47,7 @@ function localeBag(locale: Locale): Record<string, string> {
   };
 }
 
-class PolandHomeControl implements IControl {
+class KrakowHomeControl implements IControl {
   private wrap?: HTMLDivElement;
 
   onAdd(map: MlMap) {
@@ -55,11 +56,11 @@ class PolandHomeControl implements IControl {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "op-map-home";
-    btn.setAttribute("aria-label", "Poland");
-    btn.title = "Poland";
-    btn.textContent = "PL";
+    btn.setAttribute("aria-label", "Kraków");
+    btn.title = "Kraków";
+    btn.textContent = "KR";
     btn.addEventListener("click", () => {
-      map.fitBounds(POLAND_BOUNDS, { ...POLAND_FIT, duration: 650 });
+      map.fitBounds(KRAKOW_BOUNDS, { ...KRAKOW_FIT, duration: 650 });
     });
     wrap.appendChild(btn);
     this.wrap = wrap;
@@ -72,27 +73,38 @@ class PolandHomeControl implements IControl {
   }
 }
 
-function placePins(map: MlMap, locale: Locale, onSelect: (id: string) => void) {
+function placePins(
+  map: MlMap,
+  locale: Locale,
+  completed: string[],
+  onSelect: (id: string) => void,
+) {
   const markers: Marker[] = [];
-  for (const city of cities) {
-    const label = city.unlocked
-      ? t(city.name, locale)
-      : `${t(city.name, locale)} — ${locale === "pl" ? "Wkrótce" : "Coming next"}`;
+  for (const story of krakowStories) {
+    const done = completed.includes(story.id);
+    const title = t(story.title, locale);
+    const place = t(story.place, locale);
+    const tip = `${title} · ${place}`;
     const el = document.createElement("button");
     el.type = "button";
-    el.className = `op-city-pin ${city.unlocked ? "is-open" : "is-locked"}${city.coords.lat > 53.2 ? " is-north" : ""}`;
-    el.setAttribute("aria-label", label);
-    el.innerHTML = `<span class="op-city-dot"></span><span class="op-city-tip">${label}</span>`;
+    el.className = `op-story-pin ${done ? "is-done" : "is-open"}`;
+    el.setAttribute("aria-label", tip);
+    const mark = done ? "✓" : story.id.slice(0, 1).toUpperCase();
+    el.innerHTML = `<span class="op-story-dot" aria-hidden="true">${mark}</span><span class="op-story-tip">${tip}</span>`;
     el.addEventListener("click", (event) => {
       event.stopPropagation();
-      onSelect(city.id);
+      onSelect(story.id);
     });
-    markers.push(new Marker({ element: el, anchor: "center" }).setLngLat([city.coords.lng, city.coords.lat]).addTo(map));
+    markers.push(
+      new Marker({ element: el, anchor: "center" })
+        .setLngLat([story.pin.lng, story.pin.lat])
+        .addTo(map),
+    );
   }
   return markers;
 }
 
-export function PolandLibre({ locale, onSelect }: Props) {
+export function KrakowLibre({ locale, completed, onSelect }: Props) {
   const storedTheme = useProgress((s) => s.theme);
   const theme = storedTheme === "light" || storedTheme === "dark" ? storedTheme : resolveTheme(storedTheme);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -100,9 +112,11 @@ export function PolandLibre({ locale, onSelect }: Props) {
   const markersRef = useRef<Marker[]>([]);
   const onSelectRef = useRef(onSelect);
   const localeRef = useRef(locale);
+  const completedRef = useRef(completed);
   const styleRef = useRef(MAP_STYLES[theme]);
   onSelectRef.current = onSelect;
   localeRef.current = locale;
+  completedRef.current = completed;
 
   useEffect(() => {
     const root = wrapRef.current;
@@ -111,11 +125,11 @@ export function PolandLibre({ locale, onSelect }: Props) {
     const map = new MlMap({
       container: root,
       style: styleRef.current,
-      center: POLAND_LNG_LAT,
-      zoom: POLAND_ZOOM,
-      minZoom: 4.4,
-      maxZoom: 12,
-      maxBounds: POLAND_MAX_BOUNDS,
+      center: KRAKOW_LNG_LAT,
+      zoom: KRAKOW_ZOOM,
+      minZoom: 12.8,
+      maxZoom: 17.5,
+      maxBounds: KRAKOW_MAX_BOUNDS,
       cooperativeGestures: true,
       attributionControl: { compact: true },
       locale: localeBag(localeRef.current),
@@ -124,15 +138,17 @@ export function PolandLibre({ locale, onSelect }: Props) {
     mapRef.current = map;
 
     map.addControl(new NavigationControl({ showCompass: false }), "top-left");
-    map.addControl(new PolandHomeControl(), "top-left");
-    map.addControl(new ScaleControl({ maxWidth: 180, unit: "metric" }), "bottom-left");
+    map.addControl(new KrakowHomeControl(), "top-left");
+    map.addControl(new ScaleControl({ maxWidth: 100, unit: "metric" }), "bottom-left");
 
     map.on("load", () => {
       map.resize();
-      map.fitBounds(POLAND_BOUNDS, { ...POLAND_FIT, duration: 0 });
+      map.fitBounds(KRAKOW_BOUNDS, { ...KRAKOW_FIT, duration: 0 });
       applyMapTone(map, theme);
       for (const marker of markersRef.current) marker.remove();
-      markersRef.current = placePins(map, localeRef.current, (id) => onSelectRef.current(id));
+      markersRef.current = placePins(map, localeRef.current, completedRef.current, (id) =>
+        onSelectRef.current(id),
+      );
     });
 
     const resize = () => map.resize();
@@ -159,7 +175,9 @@ export function PolandLibre({ locale, onSelect }: Props) {
     map.once("style.load", () => {
       applyMapTone(map, theme);
       for (const marker of markersRef.current) marker.remove();
-      markersRef.current = placePins(map, localeRef.current, (id) => onSelectRef.current(id));
+      markersRef.current = placePins(map, localeRef.current, completedRef.current, (id) =>
+        onSelectRef.current(id),
+      );
     });
   }, [theme]);
 
@@ -167,8 +185,13 @@ export function PolandLibre({ locale, onSelect }: Props) {
     const map = mapRef.current;
     if (!map) return;
     for (const marker of markersRef.current) marker.remove();
-    markersRef.current = placePins(map, locale, (id) => onSelectRef.current(id));
-  }, [locale]);
+    markersRef.current = placePins(map, locale, completed, (id) => onSelectRef.current(id));
+  }, [locale, completed]);
 
-  return <div ref={wrapRef} className={`op-map absolute inset-0 ${theme === "dark" ? "op-map-dark" : "op-map-light"}`} />;
+  return (
+    <div
+      ref={wrapRef}
+      className={`op-map absolute inset-0 ${theme === "dark" ? "op-map-dark" : "op-map-light"}`}
+    />
+  );
 }
