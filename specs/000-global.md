@@ -49,6 +49,7 @@ Honest delta so we do not “migrate” things that are already done.
 | Maps | **MapLibre + OpenFreeMap** (Poland), schematic Kraków | Kraków map in 003, still **no API key / no Mapbox** |
 | Story art | geometric SVG in `StoryArt.tsx` | Informative stills (generated 3D / editorial) |
 | Theme | light parchment only | **dark mode** |
+| Deploy | Grok sandbox → **Vercel** (`nitro({ preset: "vercel" })`). GitHub repo has **no** Pages, Actions, environments, or homepage URL | **Netlify** from GitHub (`main`) |
 
 There is **no Next.js**, **no react-router**, **no react-icons** in this app. Do not spend a child spec on those switches.
 
@@ -135,7 +136,7 @@ Replace the “Old Town” schematic on `/krakow`.
 
 Covered by P-01 and P-02. If hover is weak after those, file a polish bug instead of a fourth map spec.
 
-### P-04 — Story images
+### P-04 — Story images → 004
 
 `StoryArt` SVGs are not informative enough. Keep page chrome (fonts, borders, surfaces). Replace the header graphic.
 
@@ -167,7 +168,7 @@ Work **locally** (Cursor / Grok Build) unless a child explicitly says “this pr
 
 | Keep | Change | Skip (already true) |
 |---|---|---|
-| React 19 | Tailwind → **MUI v6/v7** with a custom theme (not default purple) | Next.js → React |
+| React 19 | Tailwind → **MUI v9** with a custom theme (not default purple) | Next.js → React |
 | TanStack Router | zustand → **React Context** | react-router → TanStack Router |
 | lucide-react | ESLint/Prettier → **oxlint** + **oxfmt** | react-icons → lucide |
 | Zod | add **TanStack Query** | |
@@ -214,6 +215,16 @@ TanStack Query + `fetch` + Zod parse on every response. Query keys: `['cities']`
 
 Move `cities` + `krakowStories` to SQLite (or JSON files loaded by Go). Same bilingual fields. Games stay in payload. Seed in migration. Child: **009**
 
+### S-06 — Deploy on Netlify
+
+GitHub `braniubojni/orbit-berry-palm-mountain` is not shipping anywhere today. The sandbox host is Vercel; that is not the product URL.
+
+- Connect this repo to **Netlify**, production from `main`.
+- SPA fallback so `/`, `/krakow`, `/krakow/$storyId` survive refresh (`netlify.toml` + `/* /index.html 200`).
+- No Mapbox keys, no auth env. Public site.
+- Do not add a Vercel project or GitHub Pages as a substitute.
+- Child: **010** when started; this ID is enough until then.
+
 ---
 
 ## Backend (detail for 007 / 009)
@@ -248,14 +259,15 @@ Do UI that users see before the rewrite, unless you are starting a fresh local r
 | 1 | 001 Dark mode | G-01 | done |
 | 2 | 002 Poland GeoJSON | P-01, P-03 | done |
 | 3 | 003 Kraków map (no key) | P-02, P-03 | done |
-| 4 | 004 Story images | P-04 | — |
+| 4 | 004 Story images | P-04 | done |
 | 5 | 005 Local web bootstrap | S-01 | — (new repo) |
 | 6 | 006 Context persist | S-02 | 005 |
 | 7 | 007 Go + SQLite | S-03 | 005 |
 | 8 | 008 Query + Zod | S-04 | 006, 007 |
 | 9 | 009 Content API | S-05 | 007, 008 |
+| 10 | 010 Netlify | S-06 | 004 (current app) or 005 (cleaner SPA) |
 
-If you stay in **this** Grok preview app: do **001–004** here (local maps + images + dark mode on the current Tailwind stack). Do **005–009** only in the local repo.
+If you stay in **this** Grok preview app: do **001–004** here (local maps + images + dark mode on the current Tailwind stack). Do **005–009** only in the local repo. **S-06** is the public host either way.
 
 ---
 
@@ -267,3 +279,4 @@ If you stay in **this** Grok preview app: do **001–004** here (local maps + im
 - Leaderboards, accounts, comments
 - Native apps
 - Changing the six Kraków stories’ facts/legend copy except for typos
+- Vercel / `*.grok.me` / GitHub Pages as the public product host (sandbox Vercel may stay)

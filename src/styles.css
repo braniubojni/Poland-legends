@@ -307,3 +307,40 @@
   opacity: 1;
 }
 
+.op-story-still-wrap {
+  position: relative;
+}
+
+.op-story-still {
+  display: block;
+  width: 100%;
+  height: 20rem;
+  object-fit: cover;
+  object-position: center 58%;
+}
+
+.op-story-still[data-story="hejnal"],
+.op-story-still[data-story="wieze"] {
+  object-position: center 38%;
+}
+
+.op-story-still[data-story="lajkonik"] {
+  object-position: 62% 70%;
+}
+
+.op-story-still[data-story="golebie"] {
+  object-position: center 72%;
+}
+
+.op-story-still[data-story="smok"] {
+  object-position: center 48%;
+}
+
+.dark .op-story-still-wrap:not(.is-paired)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--color-bg) 32%, transparent);
+}
+
