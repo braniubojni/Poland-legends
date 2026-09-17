@@ -1,5 +1,9 @@
 node_modules/
-.project_id
-.github_repo
+dist/
 .env
 .env.*
+.DS_Store
+*.log
+.vercel/
+.project_id
+.github_repo

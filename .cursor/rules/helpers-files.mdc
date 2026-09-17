@@ -1,0 +1,35 @@
+---
+description: Extract helpers and long effect setup into a colocated helpers.ts.
+alwaysApply: true
+---
+
+# Helpers live in helpers.ts
+
+Keep the component file as wiring + JSX. Move non-render logic to a **colocated** `helpers.ts` next to the component (e.g. `components/map/helpers.ts`). Do not pile a global `src/helpers.ts`.
+
+Extract:
+
+- Pure helpers (`localeBag`, `placePins`)
+- One-off controls/classes
+- Long `useEffect` bodies: mount, listeners, cleanup
+
+The component should call a named helper, not inline a 40-line effect.
+
+```ts
+// ❌ BAD — mount logic inside the component
+useEffect(() => {
+  const map = new MlMap({ container: root, /* ... */ });
+  map.addControl(/* ... */);
+  map.on("load", () => { /* pins, fitBounds, tone */ });
+  const ro = new ResizeObserver(() => map.resize());
+  return () => {
+    ro.disconnect();
+    map.remove();
+  };
+}, []);
+
+// ✅ GOOD — component wires; helpers.ts owns setup
+useEffect(() => mountKrakowMap({ root, mapRef, markersRef, /* ... */ }), []);
+```
+
+`mountKrakowMap` creates the map, controls, load handler, resize observer, and returns the cleanup.

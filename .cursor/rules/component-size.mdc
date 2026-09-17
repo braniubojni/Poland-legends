@@ -1,0 +1,16 @@
+---
+description: Keep React components short — about 100 lines, never over 150.
+alwaysApply: true
+---
+
+# Component size
+
+A component file stays around **100 lines**. **150 lines is the hard cap.**
+
+If a file is heading past that, split before adding more:
+
+- Move helpers and effect setup out (see helpers rule)
+- Extract a child component or a custom hook
+- Do not grow a “god component” with more JSX, effects, or local functions
+
+Count the whole file: imports, helpers, and the component. If helpers live in the same file, the file is already too big — move them.

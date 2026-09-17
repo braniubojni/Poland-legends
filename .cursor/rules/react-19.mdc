@@ -1,0 +1,33 @@
+---
+description: Use React 19 APIs — useEffectEvent, Activity, Suspense, use(), ref as prop.
+alwaysApply: true
+---
+
+# React 19 — use the new APIs
+
+This app is **React 19** (Vite SPA, no RSC). Prefer the 19 APIs instead of 18-era workarounds. Use them when the situation matches — do not ignore them.
+
+| Situation | Use |
+| --- | --- |
+| Effect needs a latest callback/prop without retriggering | `useEffectEvent` — **not** `fooRef.current = foo` |
+| Hide UI but keep state / skip work offscreen | `<Activity mode="visible" \| "hidden">` |
+| Lazy route, async child, or a waiting slot | `<Suspense fallback={...}>` |
+| Read a Promise or Context during render | `use()` |
+| Pass a ref to a function component | `ref` as a prop — **not** `forwardRef` |
+
+```ts
+// ❌ BAD
+const onSelectRef = useRef(onSelect);
+onSelectRef.current = onSelect;
+useEffect(() => {
+  map.on("click", (id) => onSelectRef.current(id));
+}, []);
+
+// ✅ GOOD
+const onSelectEvent = useEffectEvent(onSelect);
+useEffect(() => {
+  map.on("click", (id) => onSelectEvent(id));
+}, []);
+```
+
+Still no SSR. Do not add Server Components, `use server`, or `forwardRef`.
