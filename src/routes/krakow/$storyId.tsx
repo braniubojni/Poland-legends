@@ -37,7 +37,7 @@ function StoryPage() {
       <p className="mt-5 text-xs font-medium tracking-[0.18em] text-muted uppercase">{t(story.place, locale)}</p>
       <h1 className="mt-2 font-display text-4xl leading-tight tracking-tight">{t(story.title, locale)}</h1>
       <div className="mt-6">
-        <StoryArt id={story.id} />
+        <StoryArt story={story} locale={locale} />
       </div>
       {story.id === "hejnal" ? (
         <div className="mt-5">

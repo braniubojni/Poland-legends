@@ -10,11 +10,12 @@ Do not implement from this README. Split work only by creating a numbered child 
 | 001 | **done** | Dark mode |
 | 002 | **done** | Poland map (MapLibre + OpenFreeMap) |
 | 003 | **done** | Kraków map (OpenFreeMap + MapLibre) |
-| 004 | not written | Story images |
+| 004 | **done** | Story images |
 | 005 | not written | Local repo bootstrap (Vite + TanStack Router + MUI + oxlint/oxfmt + Vitest) |
 | 006 | not written | State: Context API + persist |
 | 007 | not written | Go API + SQLite + rate limit + logging |
 | 008 | not written | TanStack Query + fetch + Zod |
 | 009 | not written | Move story/city content behind the API |
+| 010 | not written | Deploy on Netlify |
 
 Child specs must include: Goal, Out of scope, Files, Done when (checkboxes). One child = one PR-sized change.

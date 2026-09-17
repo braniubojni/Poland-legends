@@ -28,12 +28,18 @@ export type Game =
   | { kind: "order"; prompt: Copy; steps: OrderStep[]; correct: string[] }
   | { kind: "towers"; prompt: Copy; explanation: Copy };
 
+export type StoryImage = {
+  light: string;
+  dark: string;
+};
+
 export type Story = {
   id: string;
   cityId: string;
   title: Copy;
   place: Copy;
   pin: { lat: number; lng: number };
+  image: StoryImage;
   legend: Copy;
   fact: Copy;
   seeToday: Copy;
