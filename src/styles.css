@@ -92,6 +92,14 @@
   }
 }
 
+.op-map-stage {
+  position: relative;
+  width: 100%;
+  height: min(32rem, 56dvh);
+  min-height: 20rem;
+  background: var(--color-map);
+}
+
 .op-map {
   position: absolute;
   inset: 0;

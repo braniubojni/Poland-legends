@@ -52,7 +52,7 @@ export function PolandMap() {
 
   return (
     <div className="overflow-hidden rounded-[var(--radius-xl)] border border-border bg-surface">
-      <div className="relative aspect-[4/5] w-full bg-map sm:aspect-[5/6]">
+      <div className="op-map-stage">
         {MapView ? (
           <MapView locale={locale} onSelect={onSelect} />
         ) : (

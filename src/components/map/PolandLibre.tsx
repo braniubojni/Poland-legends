@@ -1,12 +1,22 @@
 import { useEffect, useRef } from "react";
-import { Map as MlMap, Marker, NavigationControl, ScaleControl, type IControl } from "maplibre-gl";
+import {
+  Map as MlMap,
+  Marker,
+  NavigationControl,
+  ScaleControl,
+  setWorkerUrl,
+  type IControl,
+} from "maplibre-gl";
+import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { cities } from "@/data/cities";
 import type { Locale } from "@/data/types";
 import { t } from "@/lib/copy";
-import { MAP_STYLES, POLAND_LNG_LAT, POLAND_MAX_BOUNDS, POLAND_ZOOM } from "@/lib/geo";
+import { MAP_STYLES, POLAND_BOUNDS, POLAND_FIT, POLAND_LNG_LAT, POLAND_MAX_BOUNDS, POLAND_ZOOM } from "@/lib/geo";
 import { useProgress } from "@/lib/progress";
 import { resolveTheme } from "@/lib/theme";
+
+setWorkerUrl(maplibreWorkerUrl);
 
 type Props = {
   locale: Locale;
@@ -41,7 +51,7 @@ class PolandHomeControl implements IControl {
     btn.title = "Poland";
     btn.textContent = "PL";
     btn.addEventListener("click", () => {
-      map.easeTo({ center: POLAND_LNG_LAT, zoom: POLAND_ZOOM, bearing: 0, pitch: 0, duration: 650 });
+      map.fitBounds(POLAND_BOUNDS, { ...POLAND_FIT, duration: 650 });
     });
     wrap.appendChild(btn);
     this.wrap = wrap;
@@ -95,7 +105,7 @@ export function PolandLibre({ locale, onSelect }: Props) {
       style: styleRef.current,
       center: POLAND_LNG_LAT,
       zoom: POLAND_ZOOM,
-      minZoom: 4.8,
+      minZoom: 4.4,
       maxZoom: 12,
       maxBounds: POLAND_MAX_BOUNDS,
       cooperativeGestures: true,
@@ -111,7 +121,7 @@ export function PolandLibre({ locale, onSelect }: Props) {
 
     map.on("load", () => {
       map.resize();
-      map.jumpTo({ center: POLAND_LNG_LAT, zoom: POLAND_ZOOM, bearing: 0, pitch: 0 });
+      map.fitBounds(POLAND_BOUNDS, { ...POLAND_FIT, duration: 0 });
       for (const marker of markersRef.current) marker.remove();
       markersRef.current = placePins(map, localeRef.current, (id) => onSelectRef.current(id));
     });
