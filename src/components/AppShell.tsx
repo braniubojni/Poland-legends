@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import { useProgress } from "@/lib/progress";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { krakowStories } from "@/data/krakow";
+import { useProgress } from "@/lib/progress";
 import { cn } from "@/lib/utils";
 
 export function AppShell({ children }: { children: ReactNode }) {
@@ -43,6 +44,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 EN
               </button>
             </div>
+            <ThemeToggle />
           </div>
         </div>
       </header>

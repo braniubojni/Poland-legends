@@ -5,7 +5,7 @@ export const cities: City[] = [
     id: "krakow",
     name: { en: "Kraków", pl: "Kraków" },
     unlocked: true,
-    map: { x: 52, y: 72 },
+    coords: { lat: 50.0614, lng: 19.9373 },
     blurb: {
       en: "Six living stories. Open a pin, read the legend beside the record, then play.",
       pl: "Sześć żywych opowieści. Otwórz pinezkę, przeczytaj legendę obok faktu i zagraj.",
@@ -15,7 +15,7 @@ export const cities: City[] = [
     id: "warsaw",
     name: { en: "Warsaw", pl: "Warszawa" },
     unlocked: false,
-    map: { x: 62, y: 42 },
+    coords: { lat: 52.2297, lng: 21.0122 },
     blurb: {
       en: "Coming next.",
       pl: "Wkrótce.",
@@ -25,7 +25,7 @@ export const cities: City[] = [
     id: "gdansk",
     name: { en: "Gdańsk", pl: "Gdańsk" },
     unlocked: false,
-    map: { x: 48, y: 14 },
+    coords: { lat: 54.352, lng: 18.6466 },
     blurb: {
       en: "Coming next.",
       pl: "Wkrótce.",
@@ -35,7 +35,7 @@ export const cities: City[] = [
     id: "wroclaw",
     name: { en: "Wrocław", pl: "Wrocław" },
     unlocked: false,
-    map: { x: 28, y: 58 },
+    coords: { lat: 51.1079, lng: 17.0385 },
     blurb: {
       en: "Coming next.",
       pl: "Wkrótce.",
@@ -45,7 +45,7 @@ export const cities: City[] = [
     id: "poznan",
     name: { en: "Poznań", pl: "Poznań" },
     unlocked: false,
-    map: { x: 30, y: 40 },
+    coords: { lat: 52.4064, lng: 16.9252 },
     blurb: {
       en: "Coming next.",
       pl: "Wkrótce.",
@@ -55,10 +55,14 @@ export const cities: City[] = [
     id: "lublin",
     name: { en: "Lublin", pl: "Lublin" },
     unlocked: false,
-    map: { x: 76, y: 54 },
+    coords: { lat: 51.2465, lng: 22.5684 },
     blurb: {
       en: "Coming next.",
       pl: "Wkrótce.",
     },
   },
 ];
+
+export function cityById(id: string) {
+  return cities.find((city) => city.id === id);
+}

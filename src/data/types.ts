@@ -44,6 +44,6 @@ export type City = {
   id: string;
   name: Copy;
   unlocked: boolean;
-  map: { x: number; y: number };
+  coords: { lat: number; lng: number };
   blurb: Copy;
 };

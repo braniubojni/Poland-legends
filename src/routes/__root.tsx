@@ -2,6 +2,7 @@ import { createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-r
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { AppShell } from "@/components/AppShell";
+import { themeBootScript } from "@/lib/theme";
 import appCss from "../styles.css?url";
 
 const APP_NAME = "Opowieści";
@@ -12,7 +13,7 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: APP_NAME },
-      { name: "theme-color", content: "#9c1c2c" },
+      { name: "theme-color", content: "#f3eee6" },
       {
         name: "description",
         content: "Stories of Poland, starting in Kraków. Legend beside the record.",
@@ -38,6 +39,7 @@ export const Route = createRootRoute({
     <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
+        <script dangerouslySetInnerHTML={{ __html: themeBootScript }} />
       </head>
       <body>
         <PreviewHostBridge />

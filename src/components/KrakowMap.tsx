@@ -13,12 +13,12 @@ export function KrakowMap() {
     <div className="overflow-hidden rounded-[var(--radius-xl)] border border-border bg-surface">
       <div className="relative aspect-[4/5] w-full bg-bg">
         <svg viewBox="0 0 320 400" className="h-full w-full" aria-hidden="true">
-          <path d="M20 300 C 80 280 140 310 200 290 C 250 275 300 300 320 285 L 320 400 L 0 400 Z" fill="#d9cfc3" />
-          <ellipse cx="168" cy="168" rx="118" ry="96" fill="#ebe3d6" stroke="#1c1917" strokeWidth="1.2" />
-          <rect x="128" y="128" width="86" height="78" fill="#faf6f0" stroke="#1c1917" strokeWidth="1.2" />
-          <rect x="152" y="148" width="38" height="14" fill="#cfc4b6" />
-          <rect x="148" y="248" width="52" height="36" fill="#8a6a52" stroke="#1c1917" strokeWidth="1" />
-          <text x="24" y="28" fill="#6f6458" fontSize="11" fontFamily="Source Sans 3, sans-serif">
+          <path d="M20 300 C 80 280 140 310 200 290 C 250 275 300 300 320 285 L 320 400 L 0 400 Z" fill="var(--color-map-water)" />
+          <ellipse cx="168" cy="168" rx="118" ry="96" fill="var(--color-map)" stroke="var(--color-fg)" strokeWidth="1.2" />
+          <rect x="128" y="128" width="86" height="78" fill="var(--color-surface)" stroke="var(--color-fg)" strokeWidth="1.2" />
+          <rect x="152" y="148" width="38" height="14" fill="var(--color-map-built)" />
+          <rect x="148" y="248" width="52" height="36" fill="var(--color-map-earth)" stroke="var(--color-fg)" strokeWidth="1" />
+          <text x="24" y="28" fill="var(--color-muted)" fontSize="11" fontFamily="Source Sans 3, sans-serif">
             {locale === "pl" ? "Stare Miasto" : "Old Town"}
           </text>
         </svg>
