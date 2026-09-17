@@ -151,6 +151,11 @@ export default defineConfig(({ command, isPreview }) => ({
     port: 8080,
     strictPort: true,
   },
+  optimizeDeps: {
+    // MapLibre v6 worker is a sibling ESM file; Vite's dep optimizer
+    // looks for maplibre-gl-worker.mjs in .vite/deps and never copies it.
+    exclude: ["maplibre-gl"],
+  },
   preview: {
     host: "127.0.0.1",
     port: 8081,
