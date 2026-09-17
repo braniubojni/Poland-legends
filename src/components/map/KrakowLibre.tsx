@@ -13,6 +13,7 @@ import { krakowStories } from "@/data/krakow";
 import type { Locale } from "@/data/types";
 import { t } from "@/lib/copy";
 import {
+  applyMapTone,
   KRAKOW_BOUNDS,
   KRAKOW_FIT,
   KRAKOW_LNG_LAT,
@@ -143,6 +144,7 @@ export function KrakowLibre({ locale, completed, onSelect }: Props) {
     map.on("load", () => {
       map.resize();
       map.fitBounds(KRAKOW_BOUNDS, { ...KRAKOW_FIT, duration: 0 });
+      applyMapTone(map, theme);
       for (const marker of markersRef.current) marker.remove();
       markersRef.current = placePins(map, localeRef.current, completedRef.current, (id) =>
         onSelectRef.current(id),
@@ -171,6 +173,7 @@ export function KrakowLibre({ locale, completed, onSelect }: Props) {
     styleRef.current = next;
     map.setStyle(next, { diff: false });
     map.once("style.load", () => {
+      applyMapTone(map, theme);
       for (const marker of markersRef.current) marker.remove();
       markersRef.current = placePins(map, localeRef.current, completedRef.current, (id) =>
         onSelectRef.current(id),

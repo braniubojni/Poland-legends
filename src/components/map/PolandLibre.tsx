@@ -12,7 +12,15 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import { cities } from "@/data/cities";
 import type { Locale } from "@/data/types";
 import { t } from "@/lib/copy";
-import { MAP_STYLES, POLAND_BOUNDS, POLAND_FIT, POLAND_LNG_LAT, POLAND_MAX_BOUNDS, POLAND_ZOOM } from "@/lib/geo";
+import {
+  applyMapTone,
+  MAP_STYLES,
+  POLAND_BOUNDS,
+  POLAND_FIT,
+  POLAND_LNG_LAT,
+  POLAND_MAX_BOUNDS,
+  POLAND_ZOOM,
+} from "@/lib/geo";
 import { useProgress } from "@/lib/progress";
 import { resolveTheme } from "@/lib/theme";
 
@@ -122,6 +130,7 @@ export function PolandLibre({ locale, onSelect }: Props) {
     map.on("load", () => {
       map.resize();
       map.fitBounds(POLAND_BOUNDS, { ...POLAND_FIT, duration: 0 });
+      applyMapTone(map, theme);
       for (const marker of markersRef.current) marker.remove();
       markersRef.current = placePins(map, localeRef.current, (id) => onSelectRef.current(id));
     });
@@ -148,6 +157,7 @@ export function PolandLibre({ locale, onSelect }: Props) {
     styleRef.current = next;
     map.setStyle(next, { diff: false });
     map.once("style.load", () => {
+      applyMapTone(map, theme);
       for (const marker of markersRef.current) marker.remove();
       markersRef.current = placePins(map, localeRef.current, (id) => onSelectRef.current(id));
     });

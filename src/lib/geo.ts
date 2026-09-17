@@ -37,3 +37,47 @@ export const MAP_STYLES: Record<Theme, string> = {
   light: "https://tiles.openfreemap.org/styles/positron",
   dark: "https://tiles.openfreemap.org/styles/dark",
 };
+
+/** Paint overrides so Positron stays paper-warm but water / parks / blocks stay distinct. */
+type MapToneTarget = {
+  getLayer: (id: string) => unknown;
+  setPaintProperty: (layer: string, name: string, value: unknown) => unknown;
+};
+
+const MAP_TONE = {
+  light: {
+    background: "#f1ebe3",
+    water: "#b4c2c6",
+    waterway: "#8ea0a6",
+    park: "#cdd8c4",
+    wood: "#c0ceb8",
+    residential: "#ece4d8",
+    building: "#ddd0c2",
+    buildingOutline: "#c3b4a4",
+  },
+  dark: {
+    background: "#1c1815",
+    water: "#3a4a4f",
+    waterway: "#4d5f65",
+    park: "#2d3a2c",
+    wood: "#334133",
+    residential: "#26211c",
+    building: "#3a322b",
+    buildingOutline: "#52483e",
+  },
+} as const;
+
+export function applyMapTone(map: MapToneTarget, theme: Theme) {
+  const tone = MAP_TONE[theme];
+  const paint = (id: string, name: string, value: string) => {
+    if (map.getLayer(id)) map.setPaintProperty(id, name, value);
+  };
+  paint("background", "background-color", tone.background);
+  paint("water", "fill-color", tone.water);
+  paint("waterway", "line-color", tone.waterway);
+  paint("park", "fill-color", tone.park);
+  paint("landcover_wood", "fill-color", tone.wood);
+  paint("landuse_residential", "fill-color", tone.residential);
+  paint("building", "fill-color", tone.building);
+  paint("building", "fill-outline-color", tone.buildingOutline);
+}
