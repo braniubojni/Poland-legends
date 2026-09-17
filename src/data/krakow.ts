@@ -6,7 +6,7 @@ export const krakowStories: Story[] = [
     cityId: "krakow",
     title: { en: "The broken call", pl: "Urwany hejnał" },
     place: { en: "St Mary’s Basilica", pl: "Kościół Mariacki" },
-    pin: { x: 62, y: 32 },
+    pin: { lat: 50.0616, lng: 19.9394 },
     legend: {
       en: "During a Tatar raid a watchman on the taller tower sounded the alarm. An arrow struck his throat. The melody breaks off mid-phrase. The gates closed in time.",
       pl: "Podczas najazdu tatarskiego strażnik na wyższej wieży zagrał alarm. Strzała przeszyła mu gardło. Melodia urywa się w pół frazy. Bramy zdążono zamknąć.",
@@ -98,7 +98,7 @@ export const krakowStories: Story[] = [
     cityId: "krakow",
     title: { en: "The Wawel dragon", pl: "Smok wawelski" },
     place: { en: "Wawel Hill", pl: "Wzgórze wawelskie" },
-    pin: { x: 48, y: 70 },
+    pin: { lat: 50.0530, lng: 19.9334 },
     legend: {
       en: "A dragon lived under the hill and ate livestock — and, in darker tellings, people. Knights failed. A clever cobbler (Skuba) left a sulfur-stuffed skin. The beast drank the Vistula and burst. The city took the name of Krak.",
       pl: "Smok mieszkał pod wzgórzem i pożerał bydło — w mroczniejszych wersjach także ludzi. Rycerze nic nie wskórali. Sprytny szewczyk Skuba zostawił skórę wypchaną siarką. Bestia wypiła Wisłę i pękła. Miasto wzięło imię Kraka.",
@@ -131,7 +131,7 @@ export const krakowStories: Story[] = [
     cityId: "krakow",
     title: { en: "Two unequal towers", pl: "Dwie nierówne wieże" },
     place: { en: "St Mary’s towers", pl: "Wieże mariackie" },
-    pin: { x: 72, y: 40 },
+    pin: { lat: 50.06185, lng: 19.93975 },
     legend: {
       en: "Two brothers were hired to raise the towers. One murdered the other so his tower would stand taller. He finished the work, then killed himself with the same knife. The shorter tower is the unfinished guilt.",
       pl: "Dwóch braci miało wznieść wieże. Jeden zabił drugiego, by jego wieża była wyższa. Dokończył robotę i przebił się tym samym nożem. Niższa wieża to niedokończona wina.",
@@ -161,7 +161,7 @@ export const krakowStories: Story[] = [
     cityId: "krakow",
     title: { en: "The hobby-horse Tatar", pl: "Lajkonik" },
     place: { en: "Zwierzyniec to the Rynek", pl: "Zwierzyniec — Rynek" },
-    pin: { x: 18, y: 46 },
+    pin: { lat: 50.0545, lng: 19.9145 },
     legend: {
       en: "Tatars camped by the Vistula near Zwierzyniec. Raftsmen (włóczkowie) struck first, killed a commander, and rode into town in his clothes. The city was saved. The ride is repeated every year.",
       pl: "Tatarzy stanęli nad Wisłą koło Zwierzyńca. Włóczkowie uderzyli pierwsi, zabili wodza i wjechali do miasta w jego stroju. Grodu uratowano. Przejazd powtarza się co roku.",
@@ -194,7 +194,7 @@ export const krakowStories: Story[] = [
     cityId: "krakow",
     title: { en: "The square’s pigeons", pl: "Gołębie na Rynku" },
     place: { en: "Main Market Square", pl: "Rynek Główny" },
-    pin: { x: 54, y: 50 },
+    pin: { lat: 50.06135, lng: 19.9370 },
     legend: {
       en: "They are not ordinary birds. Knights who betrayed a duke were turned into pigeons by a witch and doomed to circle the square until a just king undid the spell.",
       pl: "To nie zwykłe ptaki. Rycerzy, którzy zdradzili księcia, wiedźma zamieniła w gołębie. Krążą po Rynku, aż sprawiedliwy król zdjąłby urok.",
@@ -269,7 +269,7 @@ export const krakowStories: Story[] = [
     cityId: "krakow",
     title: { en: "A city drawn with a ruler", pl: "Miasto od linijki" },
     place: { en: "Main Market Square", pl: "Rynek Główny" },
-    pin: { x: 38, y: 34 },
+    pin: { lat: 50.06155, lng: 19.9374 },
     legend: {
       en: "Kraków feels inevitable — as if the square had always been there. The founding stories prefer kings, dragons, and fate.",
       pl: "Kraków wydaje się oczywisty — jakby Rynek był tu od zawsze. Opowieści założycielskie wolą królów, smoki i przeznaczenie.",

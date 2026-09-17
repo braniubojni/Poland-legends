@@ -108,7 +108,7 @@ Replace the SVG blob on `/`.
 - Click locked → “Wkrótce / Coming next”.
 - Child: **002** (done)
 
-### P-02 — Kraków city map (no API key)
+### P-02 — Kraków city map (no API key) → 003
 
 Replace the “Old Town” schematic on `/krakow`.
 

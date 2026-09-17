@@ -9,7 +9,7 @@ Do not implement from this README. Split work only by creating a numbered child 
 | 000 | **locked** | Global todo (this folder) |
 | 001 | **done** | Dark mode |
 | 002 | **done** | Poland map (MapLibre + OpenFreeMap) |
-| 003 | not written | Kraków map (no tile CDN / no API key) |
+| 003 | **in-progress** | Kraków map (OpenFreeMap + MapLibre) |
 | 004 | not written | Story images |
 | 005 | not written | Local repo bootstrap (Vite + TanStack Router + MUI + oxlint/oxfmt + Vitest) |
 | 006 | not written | State: Context API + persist |
