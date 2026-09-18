@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import type { QuizQuestion } from "@/data/types";
 import { t } from "@/lib/copy";
-import { useProgress } from "@/lib/progress";
+import { useLocale } from "@/lib/progress";
 import { RADIUS } from "@/theme/tokens";
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 };
 
 export function QuizGame({ questions, onComplete }: Props) {
-  const locale = useProgress((s) => s.locale);
+  const locale = useLocale();
   const [index, setIndex] = useState(0);
   const [picked, setPicked] = useState<string | null>(null);
   const [score, setScore] = useState(0);

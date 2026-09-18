@@ -39,7 +39,7 @@ Honest delta so we do not “migrate” things that are already done.
 | Routing | **TanStack Router** (file routes) | TanStack Router — **keep** |
 | Icons | **lucide-react** | lucide-react — **keep** |
 | Styling | **MUI v9** custom parchment theme | MUI — **done (005)** |
-| State | zustand + persist (`opowiesci-v1`) | **React Context** (006) |
+| State | **React Context** persist (`opowiesci-v1`) | React Context — **done (006)** |
 | Data | static TS: `apps/web/src/data/` | Go API + SQLite later; same JSON shape |
 | Fetch | none | `fetch` + **TanStack Query** + **Zod** |
 | Tests | **Vitest v5** | Vitest v5 — **done (005)** |
@@ -51,6 +51,7 @@ Honest delta so we do not “migrate” things that are already done.
 | Theme | light parchment + dark ink | **dark mode** — **done (001)** |
 | Deploy | not shipping | **Netlify** from GitHub (`main`) |
 | Code style | mixed `function` declarations, large components, ref-stale callbacks | house rules in `.cursor/rules/` — **011** |
+| Unused code | none | **Knip** — unused files, exports, deps — **012** |
 
 There is **no Next.js**, **no react-router**, **no react-icons** in this app. Do not spend a child spec on those switches.
 
@@ -175,6 +176,7 @@ Work **locally** (Cursor / Grok Build) unless a child explicitly says “this pr
 | Zod | add **TanStack Query** | |
 | PL/EN copy shape | add **Vitest v5** | |
 | | `fetch` only (no axios) | |
+| | add **Knip** | |
 
 MUI must encode current tokens (see G-01). If MUI starts looking like a dashboard, the child has failed.
 
@@ -193,7 +195,7 @@ orbit-berry-palm-mountain/
 
 Vite, TanStack Router, MUI theme, oxlint, oxfmt, Vitest v5, path alias `@/`. Port existing routes: `/`, `/krakow`, `/krakow/$storyId`. Child: **005** (done)
 
-### S-02 — Context instead of zustand
+### S-02 — Context instead of zustand → 006 done
 
 `ProgressProvider`: `locale`, `theme`, `completed: string[]`, `markDone`, persist `localStorage` key `opowiesci-v1` (keep version + migrate). Child: **006**
 
@@ -247,6 +249,18 @@ Out of this ID: 006 Context, maps/content/copy changes, Go, Netlify.
 
 Child: **011** when started; this ID is enough until then.
 
+### S-08 — Knip (unused files, exports, dependencies)
+
+Wire **[Knip](https://github.com/webpro-nl/knip)** into `apps/web` so unused modules, exports, and package.json deps fail the same way lint does.
+
+- Add `knip` as a web **devDependency**. Script: `pnpm --filter web knip` (and a root alias if the other web scripts have one).
+- Config for this Vite SPA: entries `index.html` / `src/main.tsx`, TanStack file routes, Vitest. Ignore `.grok/`, `artifacts/`, `specs/`.
+- First pass: delete or wire up real dead code until Knip is clean. Do **not** delete things later specs still need (Zod stays until **008**).
+- Do not invent a second unused-code tool (ts-prune, depcheck, unimported).
+- No product/UI change.
+
+Child: **012** when started; this ID is enough until then.
+
 ---
 
 ## Backend (detail for 007 / 009)
@@ -283,14 +297,15 @@ Do UI that users see before the rewrite. **005** is this repo in place, not a se
 | 3 | 003 Kraków map (no key) | P-02, P-03 | done |
 | 4 | 004 Story images | P-04 | done |
 | 5 | 005 Local web bootstrap | S-01 | done |
-| 6 | 006 Context persist | S-02 | 005 |
+| 6 | 006 Context persist | S-02 | done |
 | 7 | 007 Go + SQLite | S-03 | 005 |
 | 8 | 008 Query + Zod | S-04 | 006, 007 |
 | 9 | 009 Content API | S-05 | 007, 008 |
 | 10 | 010 Netlify | S-06 | 004 (current app) or 005 (cleaner SPA) |
 | 11 | 011 House-style pass | S-07 | 005 |
+| 12 | 012 Knip | S-08 | 005 |
 
-**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006–009** follow in that tree. **S-06** is the public host. **S-07** can run anytime after **005**; it does not block 006–010.
+**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006** is done; **007–009** follow in that tree. **S-06** is the public host. **S-07** and **S-08** can run anytime after **005**; they do not block 007–010.
 
 ---
 

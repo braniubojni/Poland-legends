@@ -12,11 +12,12 @@ Do not implement from this README. Split work only by creating a numbered child 
 | 003 | **done** | Kraków map (OpenFreeMap + MapLibre) |
 | 004 | **done** | Story images |
 | 005 | **done** | Local web bootstrap (Vite SPA + MUI + oxlint/oxfmt + Vitest) |
-| 006 | not written | State: Context API + persist |
+| 006 | **done** | State: Context API + persist |
 | 007 | not written | Go API + SQLite + rate limit + logging |
 | 008 | not written | TanStack Query + fetch + Zod |
 | 009 | not written | Move story/city content behind the API |
 | 010 | not written | Deploy on Netlify |
 | 011 | not written | Align `apps/web` to house rules (expressions, size, helpers, React 19) |
+| 012 | not written | Knip (unused files, exports, dependencies) |
 
 Child specs must include: Goal, Out of scope, Files, Done when (checkboxes). One child = one PR-sized change.

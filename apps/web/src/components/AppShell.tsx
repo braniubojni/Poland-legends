@@ -7,13 +7,13 @@ import Typography from "@mui/material/Typography";
 import { AppLink } from "@/components/AppLink";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { krakowStories } from "@/data/krakow";
-import { useProgress } from "@/lib/progress";
+import { useCompleted, useLocale, useProgressActions } from "@/lib/progress";
 import { FONT_DISPLAY, RADIUS } from "@/theme/tokens";
 
 export function AppShell({ children }: { children: ReactNode }) {
-  const locale = useProgress((s) => s.locale);
-  const setLocale = useProgress((s) => s.setLocale);
-  const completed = useProgress((s) => s.completed);
+  const locale = useLocale();
+  const completed = useCompleted();
+  const { setLocale } = useProgressActions();
   const done = completed.filter((id) => krakowStories.some((s) => s.id === id)).length;
 
   return (

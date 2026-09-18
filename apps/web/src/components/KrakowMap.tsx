@@ -8,7 +8,7 @@ import { Check } from "lucide-react";
 import { krakowStories } from "@/data/krakow";
 import type { Locale } from "@/data/types";
 import { t } from "@/lib/copy";
-import { useProgress } from "@/lib/progress";
+import { useCompleted, useLocale } from "@/lib/progress";
 
 type KrakowMapView = ComponentType<{
   locale: Locale;
@@ -17,8 +17,8 @@ type KrakowMapView = ComponentType<{
 }>;
 
 export function KrakowMap() {
-  const locale = useProgress((s) => s.locale);
-  const completed = useProgress((s) => s.completed);
+  const locale = useLocale();
+  const completed = useCompleted();
   const navigate = useNavigate();
   const [MapView, setMapView] = useState<KrakowMapView | null>(null);
 

@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
-import { useProgress } from "@/lib/progress";
+import { useStoredTheme } from "@/lib/progress";
 import { resolveTheme, type Theme } from "@/lib/theme";
 import { createOpTheme } from "./opowiesci";
 
 export function OpThemeProvider({ children }: { children: ReactNode }) {
-  const stored = useProgress((s) => s.theme);
+  const stored = useStoredTheme();
   const [mode, setMode] = useState<Theme>(() => resolveTheme(stored));
 
   useEffect(() => {

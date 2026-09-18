@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import type { Locale, Story } from "@/data/types";
 import { t } from "@/lib/copy";
-import { useProgress } from "@/lib/progress";
+import { useStoredTheme } from "@/lib/progress";
 import { resolveTheme, type Theme } from "@/lib/theme";
 import { RADIUS } from "@/theme/tokens";
 
@@ -14,7 +14,7 @@ function plateTheme(stored: Theme | null): Theme {
 }
 
 export function StoryArt({ story, locale }: { story: Story; locale: Locale }) {
-  const storedTheme = useProgress((s) => s.theme);
+  const storedTheme = useStoredTheme();
   const theme = plateTheme(storedTheme);
   const src = story.image[theme];
   const paired = story.image.light !== story.image.dark;

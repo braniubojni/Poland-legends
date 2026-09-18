@@ -21,7 +21,7 @@ import {
   KRAKOW_ZOOM,
   MAP_STYLES,
 } from "@/lib/geo";
-import { useProgress } from "@/lib/progress";
+import { useStoredTheme } from "@/lib/progress";
 import { resolveTheme } from "@/lib/theme";
 
 setWorkerUrl(maplibreWorkerUrl);
@@ -106,7 +106,7 @@ function placePins(
 }
 
 export function KrakowLibre({ locale, completed, onSelect }: Props) {
-  const storedTheme = useProgress((s) => s.theme);
+  const storedTheme = useStoredTheme();
   const theme =
     storedTheme === "light" || storedTheme === "dark" ? storedTheme : resolveTheme(storedTheme);
   const wrapRef = useRef<HTMLDivElement>(null);

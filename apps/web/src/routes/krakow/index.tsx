@@ -5,13 +5,13 @@ import { ArrowLeft } from "lucide-react";
 import { AppLink } from "@/components/AppLink";
 import { KrakowMap } from "@/components/KrakowMap";
 import { krakowStories } from "@/data/krakow";
-import { useProgress } from "@/lib/progress";
+import { useCompleted, useLocale } from "@/lib/progress";
 
 export const Route = createFileRoute("/krakow/")({ component: KrakowPage });
 
 function KrakowPage() {
-  const locale = useProgress((s) => s.locale);
-  const completed = useProgress((s) => s.completed);
+  const locale = useLocale();
+  const completed = useCompleted();
   const done = completed.filter((id) => krakowStories.some((s) => s.id === id)).length;
 
   return (

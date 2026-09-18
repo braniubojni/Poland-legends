@@ -9,15 +9,15 @@ import { StoryArt } from "@/components/StoryArt";
 import { StoryGame } from "@/components/games/StoryGame";
 import { getStory, nextStoryId } from "@/data/krakow";
 import { t } from "@/lib/copy";
-import { useProgress } from "@/lib/progress";
+import { useLocale, useProgressActions } from "@/lib/progress";
 import { RADIUS } from "@/theme/tokens";
 
 export const Route = createFileRoute("/krakow/$storyId")({ component: StoryPage });
 
 function StoryPage() {
   const { storyId } = Route.useParams();
-  const locale = useProgress((s) => s.locale);
-  const markDone = useProgress((s) => s.markDone);
+  const locale = useLocale();
+  const { markDone } = useProgressActions();
   const navigate = useNavigate();
   const story = getStory(storyId);
   const nextId = nextStoryId(storyId);

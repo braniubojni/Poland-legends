@@ -23,7 +23,7 @@
           var r = localStorage.getItem("opowiesci-v1");
           if (r) {
             var p = JSON.parse(r);
-            t = p && p.state && p.state.theme;
+            t = (p && p.state && p.state.theme) || (p && p.theme);
           }
           if (t !== "light" && t !== "dark") {
             t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
