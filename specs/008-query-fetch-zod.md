@@ -21,7 +21,7 @@ Parent: [000-global.md](./000-global.md)
 ## Out of scope
 
 - Moving `cities`/`krakowStories` into SQLite as the source of truth, deleting `apps/web/src/data/` (that's 009)
-- Netlify (010)
+- Netlify Free prep (007c); Netlify Free publish (010)
 - Progress/completion storage — stays client-only (`ProgressProvider`, unchanged)
 - POSTing quiz/game answers
 - Suspense/`use()` adoption (011 house-style pass, not this spec)

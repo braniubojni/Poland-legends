@@ -9,7 +9,7 @@ Read `specs/000-global.md` before writing code. Implement **one** child spec at 
 - Web: Vite SPA in `apps/web` — React 19, TypeScript, TanStack Router, **MUI v9** (custom parchment theme), React Context persist `opowiesci-v1`.
 - No TanStack Start. No Next.js. No SSR. No auth.
 - Lint/format: **oxlint** + **oxfmt**. Tests: **Vitest v5**.
-- Go API (`apps/api`, Fiber + SQLite, spec 007, done) — the web app talks to it via `fetch` + TanStack Query + Zod (spec 008). `apps/web/src/data/` stays as 007's seed source and test fixture, not the app's data path. Do not invent a second Node API.
+- Go API (`apps/api`, Fiber + SQLite, spec 007, done) — local `pnpm dev:full` talks to it via `fetch` + TanStack Query + Zod (spec 008). Public host is **Netlify Free** static (007c / 010); do not wrap Fiber as a Function. `apps/web/src/data/` is 007's seed + 007c's production data path. Do not invent a second Node API.
 - Maps: MapLibre + OpenFreeMap. No Mapbox / CARTO / MapTiler keys.
 
 ## Commands
@@ -33,4 +33,4 @@ pnpm dev:full       # web + api together
 
 ## Out of scope until a spec exists
 
-Accounts, Postgres, other cities, Netlify (010), native apps.
+Accounts, Postgres, other cities, Netlify Free publish (010), native apps.
