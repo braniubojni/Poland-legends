@@ -16,7 +16,7 @@ zustand persist is the last piece of the old store. This spec keeps the same `op
 - TanStack Query + `fetch` + Zod (008)
 - Go API, SQLite, rate limit (007)
 - Content behind the API (009)
-- Netlify (010)
+- Netlify Free prep (007c); Netlify Free publish (010)
 - House-style retrofit of existing UI files (011)
 - New stories, copy, maps, or chrome
 

@@ -1,6 +1,6 @@
 import { queryOptions } from "@tanstack/react-query";
-import type { City, CityDetail, Story } from "@/data/types";
-import { fetchJson } from "./client";
+import { fetchJson, usesStaticContent } from "./client";
+import { loadCities, loadCity, loadStory } from "./helpers";
 import { cityDetailSchema, citySchema, storySchema } from "./schemas";
 
 export const queryKeys = {
@@ -12,18 +12,22 @@ export const queryKeys = {
 export const citiesQueryOptions = () =>
   queryOptions({
     queryKey: queryKeys.cities,
-    queryFn: (): Promise<City[]> => fetchJson("/v1/cities", citySchema.array()),
+    queryFn: () =>
+      usesStaticContent() ? loadCities() : fetchJson("/v1/cities", citySchema.array()),
   });
 
 export const cityQueryOptions = (id: string) =>
   queryOptions({
     queryKey: queryKeys.city(id),
-    queryFn: (): Promise<CityDetail> => fetchJson(`/v1/cities/${id}`, cityDetailSchema),
+    queryFn: () =>
+      usesStaticContent() ? loadCity(id) : fetchJson(`/v1/cities/${id}`, cityDetailSchema),
   });
 
 export const storyQueryOptions = (cityId: string, storyId: string) =>
   queryOptions({
     queryKey: queryKeys.story(cityId, storyId),
-    queryFn: (): Promise<Story> =>
-      fetchJson(`/v1/cities/${cityId}/stories/${storyId}`, storySchema),
+    queryFn: () =>
+      usesStaticContent()
+        ? loadStory(cityId, storyId)
+        : fetchJson(`/v1/cities/${cityId}/stories/${storyId}`, storySchema),
   });

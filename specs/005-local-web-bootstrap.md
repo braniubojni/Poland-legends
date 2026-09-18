@@ -17,7 +17,7 @@ The Grok/TanStack Start sandbox at the repo root is not the product stack. This 
 - Go API, SQLite, rate limit (007)
 - TanStack Query + `fetch` + Zod on responses (008)
 - Moving `cities` / `krakowStories` behind the API (009)
-- Netlify / `netlify.toml` (010)
+- Netlify Free prep (007c); Netlify Free publish (010)
 - New stories, copy changes, extra cities
 - Mapbox / CARTO / MapTiler / OSM raster keys
 - `apps/api/` and `packages/` — do not create empty placeholders

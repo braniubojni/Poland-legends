@@ -15,7 +15,8 @@ Stand up the backend. Static TS content stays where it is and stays wired to the
 
 - Any change to `apps/web` (no `fetch`, no TanStack Query, no Zod — that is 008)
 - Moving `cities`/`krakowStories` into SQLite as the source of truth (that is 009 — this spec seeds the same data for local dev/testing only)
-- Netlify / any deploy (010)
+- Netlify Free prep (007c)
+- Netlify Free publish (010)
 - Auth, accounts, Postgres
 - POSTing quiz/game answers — client keeps grading itself
 
@@ -65,3 +66,7 @@ Stand up the backend. Static TS content stays where it is and stays wired to the
 - [x] `apps/web` unchanged and still builds/tests green
 - [x] Go tests cover handlers (200s, 404s) and the migration/seed
 - [x] 000 / README mark 007 **done**
+
+## Follow-up
+
+This spec stays **done** as a local `go run` API. Netlify Free prep (static SPA, Go stays local) is child **007c** (S-09). Do not grow this file to cover that.

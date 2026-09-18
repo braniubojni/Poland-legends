@@ -18,6 +18,9 @@ export default defineConfig({
   preview: {
     port: 4173,
   },
+  build: {
+    sourcemap: false,
+  },
   test: {
     include: ["src/**/*.test.ts"],
   },

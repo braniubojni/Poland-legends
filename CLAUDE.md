@@ -8,20 +8,20 @@ Opowieści — map of Polish legends. Poland map → city → story pin → lege
 
 ## Spec-driven workflow — read before coding
 
-`specs/000-global.md` is the locked backlog + architecture lock; it is **not** an implementation spec. Real work happens in numbered child specs (`specs/001-…md` … `specs/006-…md`, see `specs/README.md` for status). Rules:
+`specs/000-global.md` is the locked backlog + architecture lock; it is **not** an implementation spec. Real work happens in numbered child specs (`specs/001-…md` … `specs/012-…md`, plus `007c`, see `specs/README.md` for status). Rules:
 
 - Implement **one** child spec at a time. No drive-by stack rewrites, no features outside the active spec.
 - If a child spec would conflict with `000-global.md`, stop and amend 000 first — don't just diverge in code.
 - After implementing a spec, tick its Done checkboxes and update the status table in `specs/README.md` / `000-global.md`.
 - Keep the six Kraków stories' facts/legend copy unchanged except for typos (explicit non-goal to alter them).
-- Out of scope until a spec exists: accounts, Postgres, other cities, Netlify deploy, native apps, react-router, axios, react-icons, Next.js.
+- Out of scope until a spec exists: accounts, Postgres, other cities, Netlify Free publish (010), native apps, react-router, axios, react-icons, Next.js.
 
 ## Stack lock (do not swap without a spec amendment)
 
 - Vite SPA at `apps/web` — React 19, TypeScript, TanStack Router (file-based routes), MUI v9 (custom parchment theme — must not look like a default dashboard: no Roboto, no purple, no elevated AppBar).
 - State: React Context (`ProgressProvider`), persisted to `localStorage` key `opowiesci-v1` (versioned, with migration).
 - Maps: MapLibre + OpenFreeMap public styles only — no Mapbox/CARTO/MapTiler keys, ever.
-- Data is static TS in `apps/web/src/data/` until specs 007–009 (Go + SQLite API); do not invent a Node API in the meantime.
+- Data: `apps/web/src/data/` is 007's seed and 007c's production path; local `pnpm dev:full` talks to `apps/api` (008). Public host is Netlify Free static — do not wrap Fiber as a Function. Do not invent a Node API.
 - Lint/format: oxlint + oxfmt. Tests: Vitest v5.
 - No SSR, no auth, no TanStack Start, no Next.js.
 

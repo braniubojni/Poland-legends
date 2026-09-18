@@ -41,15 +41,15 @@ Honest delta so we do not “migrate” things that are already done.
 | Styling | **MUI v9** custom parchment theme | MUI — **done (005)** |
 | State | **React Context** persist (`opowiesci-v1`) | React Context — **done (006)** |
 | Data | static TS: `apps/web/src/data/` (007's API seed + test fixture) | Go API + SQLite later; same JSON shape |
-| Fetch | **`fetch` + TanStack Query + Zod, wired to `apps/api`** — done (008) | `fetch` + **TanStack Query** + **Zod** |
+| Fetch | **`fetch` + TanStack Query + Zod** — API in dev (008), static TS in prod (**007c** done) | `fetch` + **TanStack Query** + **Zod** |
 | Tests | **Vitest v5** | Vitest v5 — **done (005)** |
 | Lint/format | **oxlint** + **oxfmt** | oxlint + oxfmt — **done (005)** |
-| Backend | **Go** (Fiber) + **SQLite** at `apps/api`, unused by the web app | Go + SQLite — **done (007)** |
+| Backend | **Go** (Fiber) + **SQLite** at `apps/api` (local) | Go + SQLite — **done (007)**; local only on the public host (**007c** done) |
 | Auth | off | **none** |
 | Maps | **MapLibre + OpenFreeMap** (Poland + Kraków) | still **no API key / no Mapbox** |
 | Story art | WebP stills in `apps/web/public/stories/` | Informative stills — **done (004)** |
 | Theme | light parchment + dark ink | **dark mode** — **done (001)** |
-| Deploy | not shipping | **Netlify** from GitHub (`main`) |
+| Deploy | prep done (**007c**); not publishing yet | **Netlify Free Legacy** (static `apps/web/dist`) — publish **010** |
 | Code style | mixed `function` declarations, large components, ref-stale callbacks | house rules in `.cursor/rules/` — **011** |
 | Unused code | none | **Knip** — unused files, exports, deps — **012** |
 
@@ -209,6 +209,7 @@ Vite, TanStack Router, MUI theme, oxlint, oxfmt, Vitest v5, path alias `@/`. Por
 - Health: `GET /healthz`.
 - CORS: web origin only.
 - Child: **007**
+- Netlify Free prep (static SPA, Go stays local): **007c** (S-09). Do not grow 007.
 
 ### S-04 — Client data layer → 008 done
 
@@ -218,15 +219,25 @@ TanStack Query + `fetch` + Zod parse on every response. Query keys: `['cities']`
 
 Move `cities` + `krakowStories` to SQLite (or JSON files loaded by Go). Same bilingual fields. Games stay in payload. Seed in migration. Child: **009**
 
-### S-06 — Deploy on Netlify
+### S-09 — Netlify Free prep → 007c done
+
+008's production `fetch` defaults to `http://localhost:8080`. Netlify cannot run Fiber + SQLite.
+
+- Ship the **static** Vite SPA. Go stays local (`pnpm dev:api`). Do not wrap Fiber as a Netlify Function.
+- Team `braniubojni` — **Free + Legacy**. No payment card. No paid add-ons.
+- `netlify.toml` SPA fallback. No functions. Prod `queryFn`s read `cities.ts` / `krakow.ts`; dev still hits the API.
+- Child: **007c**
+
+### S-06 — Deploy on Netlify Free
 
 GitHub `braniubojni/orbit-berry-palm-mountain` is not shipping anywhere today. The sandbox host is Vercel; that is not the product URL.
 
-- Connect this repo to **Netlify**, production from `main`.
-- SPA fallback so `/`, `/krakow`, `/krakow/$storyId` survive refresh (`netlify.toml` + `/* /index.html 200`).
-- No Mapbox keys, no auth env. Public site.
+- Connect this repo to **Netlify**, production from `main`, team `braniubojni` (**Free + Legacy**, no card).
+- SPA fallback so `/`, `/krakow`, `/krakow/$storyId` survive refresh (`netlify.toml` from **007c**).
+- No Mapbox keys, no auth env. Public site. Static assets only — no Fiber, no SQLite, no Netlify Functions as the data path.
 - Do not add a Vercel project or GitHub Pages as a substitute.
-- Child: **010** when started; this ID is enough until then.
+- Do not add a payment method or paid Netlify add-ons.
+- Prep: **007c**. Publish: child **010** when started; this ID is enough until then.
 
 ### S-07 — Align `apps/web` to house rules
 
@@ -245,7 +256,7 @@ Known first file: `apps/web/src/components/map/KrakowLibre.tsx` (already over th
 
 Then the rest of `apps/web/src` the same way. Split oversized files; do not “fix” by deleting blank lines.
 
-Out of this ID: 006 Context, maps/content/copy changes, Go, Netlify.
+Out of this ID: 006 Context, maps/content/copy changes, Go, 007c, 010.
 
 Child: **011** when started; this ID is enough until then.
 
@@ -301,11 +312,12 @@ Do UI that users see before the rewrite. **005** is this repo in place, not a se
 | 7 | 007 Go + SQLite | S-03 | 005 (done) |
 | 8 | 008 Query + Zod | S-04 | 006, 007 (done) |
 | 9 | 009 Content API | S-05 | 007, 008 |
-| 10 | 010 Netlify | S-06 | 004 (current app) or 005 (cleaner SPA) |
-| 11 | 011 House-style pass | S-07 | 005 |
-| 12 | 012 Knip | S-08 | 005 |
+| 10 | 007c Netlify Free prep | S-09 | 008 |
+| 11 | 010 Netlify Free publish | S-06 | 007c |
+| 12 | 011 House-style pass | S-07 | 005 |
+| 13 | 012 Knip | S-08 | 005 |
 
-**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, and **008** are done; **009** follows. **S-06** is the public host. **S-07** and **S-08** can run anytime after **005**; they do not block 007–010.
+**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, and **008** are done; **009** can run next. **S-06 / 010** waits on **007c** (done). **S-07** and **S-08** can run anytime after **005**.
 
 ---
 
@@ -318,3 +330,4 @@ Do UI that users see before the rewrite. **005** is this repo in place, not a se
 - Native apps
 - Changing the six Kraków stories’ facts/legend copy except for typos
 - Vercel / `*.grok.me` / GitHub Pages as the public product host (sandbox Vercel may stay)
+- Paid Netlify plans, a payment card, wrapping Fiber as a Netlify Function, persistent SQLite on Netlify
