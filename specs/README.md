@@ -16,8 +16,8 @@ Do not implement from this README. Split work only by creating a numbered child 
 | 007 | **done** | Go API + SQLite + rate limit + logging |
 | 007c | **done** | Netlify Free prep (static SPA, Go stays local) |
 | 008 | **done** | TanStack Query + fetch + Zod |
-| 009 | not written | Move story/city content behind the API |
-| 010 | not written | Netlify Free publish (depends on 007c) |
+| 009 | not written | Content API: SQLite SoT for local `pnpm dev:api` only; prod keeps 007c static queryFn |
+| 010 | **implementing** | Netlify Free publish (depends on 007c) |
 | 011 | not written | Align `apps/web` to house rules (expressions, size, helpers, React 19) |
 | 012 | not written | Knip (unused files, exports, dependencies) |
 
