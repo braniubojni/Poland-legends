@@ -8,7 +8,7 @@ import { Lock } from "lucide-react";
 import { cities, cityById } from "@/data/cities";
 import type { Copy, Locale } from "@/data/types";
 import { t } from "@/lib/copy";
-import { useProgress } from "@/lib/progress";
+import { useLocale } from "@/lib/progress";
 import { RADIUS } from "@/theme/tokens";
 
 type PolandMapView = ComponentType<{
@@ -17,7 +17,7 @@ type PolandMapView = ComponentType<{
 }>;
 
 export function PolandMap() {
-  const locale = useProgress((s) => s.locale);
+  const locale = useLocale();
   const navigate = useNavigate();
   const [MapView, setMapView] = useState<PolandMapView | null>(null);
   const [notice, setNotice] = useState<Copy | null>(null);

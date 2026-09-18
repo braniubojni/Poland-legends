@@ -21,7 +21,7 @@ import {
   POLAND_MAX_BOUNDS,
   POLAND_ZOOM,
 } from "@/lib/geo";
-import { useProgress } from "@/lib/progress";
+import { useStoredTheme } from "@/lib/progress";
 import { resolveTheme } from "@/lib/theme";
 
 setWorkerUrl(maplibreWorkerUrl);
@@ -98,7 +98,7 @@ function placePins(map: MlMap, locale: Locale, onSelect: (id: string) => void) {
 }
 
 export function PolandLibre({ locale, onSelect }: Props) {
-  const storedTheme = useProgress((s) => s.theme);
+  const storedTheme = useStoredTheme();
   const theme =
     storedTheme === "light" || storedTheme === "dark" ? storedTheme : resolveTheme(storedTheme);
   const wrapRef = useRef<HTMLDivElement>(null);

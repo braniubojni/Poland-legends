@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { Copy } from "@/data/types";
 import { t } from "@/lib/copy";
-import { useProgress } from "@/lib/progress";
+import { useLocale } from "@/lib/progress";
 import { RADIUS } from "@/theme/tokens";
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 };
 
 export function TowersGame({ prompt, explanation, onComplete }: Props) {
-  const locale = useProgress((s) => s.locale);
+  const locale = useLocale();
   const [pick, setPick] = useState<"tall" | "short" | null>(null);
 
   function choose(which: "tall" | "short") {

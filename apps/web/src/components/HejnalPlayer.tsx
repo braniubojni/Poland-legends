@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Volume2 } from "lucide-react";
-import { useProgress } from "@/lib/progress";
+import { useLocale } from "@/lib/progress";
 import { RADIUS } from "@/theme/tokens";
 
 function playHejnal(ctx: AudioContext) {
@@ -38,7 +38,7 @@ function playHejnal(ctx: AudioContext) {
 }
 
 export function HejnalPlayer() {
-  const locale = useProgress((s) => s.locale);
+  const locale = useLocale();
   const ctxRef = useRef<AudioContext | null>(null);
   const [playing, setPlaying] = useState(false);
 

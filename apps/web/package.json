@@ -22,8 +22,7 @@
     "maplibre-gl": "^6.10.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "zod": "^4.6.5",
-    "zustand": "^5.0.15"
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@tanstack/router-plugin": "^1.168.38",

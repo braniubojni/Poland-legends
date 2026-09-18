@@ -2,12 +2,12 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { createFileRoute } from "@tanstack/react-router";
 import { PolandMap } from "@/components/PolandMap";
-import { useProgress } from "@/lib/progress";
+import { useLocale } from "@/lib/progress";
 
 export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
-  const locale = useProgress((s) => s.locale);
+  const locale = useLocale();
 
   return (
     <Box component="main">

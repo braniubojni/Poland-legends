@@ -6,7 +6,7 @@ Read `specs/000-global.md` before writing code. Implement **one** child spec at 
 
 ## Stack lock
 
-- Web: Vite SPA in `apps/web` — React 19, TypeScript, TanStack Router, **MUI v9** (custom parchment theme), zustand persist `opowiesci-v1`.
+- Web: Vite SPA in `apps/web` — React 19, TypeScript, TanStack Router, **MUI v9** (custom parchment theme), React Context persist `opowiesci-v1`.
 - No TanStack Start. No Next.js. No SSR. No auth.
 - Lint/format: **oxlint** + **oxfmt**. Tests: **Vitest v5**.
 - Data is static TS until spec 008/009. Go API is spec 007 — do not invent a Node API.

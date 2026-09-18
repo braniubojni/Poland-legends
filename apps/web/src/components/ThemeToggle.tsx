@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import { Moon, Sun } from "lucide-react";
-import { useProgress } from "@/lib/progress";
+import { useLocale, useProgressActions, useStoredTheme } from "@/lib/progress";
 import { applyTheme, resolveTheme } from "@/lib/theme";
 
 export function ThemeToggle() {
-  const locale = useProgress((s) => s.locale);
-  const theme = useProgress((s) => s.theme);
-  const setTheme = useProgress((s) => s.setTheme);
+  const locale = useLocale();
+  const theme = useStoredTheme();
+  const { setTheme } = useProgressActions();
   const [ready, setReady] = useState(false);
   const [resolved, setResolved] = useState<"light" | "dark">("light");
 

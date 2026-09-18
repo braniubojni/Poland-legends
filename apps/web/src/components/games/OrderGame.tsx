@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import type { Copy, OrderStep } from "@/data/types";
 import { t } from "@/lib/copy";
-import { useProgress } from "@/lib/progress";
+import { useLocale } from "@/lib/progress";
 import { RADIUS } from "@/theme/tokens";
 
 type Props = {
@@ -28,7 +28,7 @@ function shuffle<T>(items: T[]) {
 }
 
 export function OrderGame({ prompt, steps, correct, onComplete }: Props) {
-  const locale = useProgress((s) => s.locale);
+  const locale = useLocale();
   const pool = useMemo(() => shuffle(steps), [steps]);
   const [picked, setPicked] = useState<string[]>([]);
   const [status, setStatus] = useState<"play" | "wrong" | "right">("play");
