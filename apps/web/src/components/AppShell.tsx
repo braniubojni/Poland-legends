@@ -4,9 +4,10 @@ import Stack from "@mui/material/Stack";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Typography from "@mui/material/Typography";
+import { useQuery } from "@tanstack/react-query";
 import { AppLink } from "@/components/AppLink";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { krakowStories } from "@/data/krakow";
+import { cityQueryOptions } from "@/lib/api";
 import { useCompleted, useLocale, useProgressActions } from "@/lib/progress";
 import { FONT_DISPLAY, RADIUS } from "@/theme/tokens";
 
@@ -14,7 +15,9 @@ export function AppShell({ children }: { children: ReactNode }) {
   const locale = useLocale();
   const completed = useCompleted();
   const { setLocale } = useProgressActions();
-  const done = completed.filter((id) => krakowStories.some((s) => s.id === id)).length;
+  const { data: city } = useQuery(cityQueryOptions("krakow"));
+  const stories = city?.stories ?? [];
+  const done = completed.filter((id) => stories.some((s) => s.id === id)).length;
 
   return (
     <Box sx={{ minHeight: "100dvh", bgcolor: "background.default", color: "text.primary" }}>
@@ -58,7 +61,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               color="text.secondary"
               sx={{ display: { xs: "none", sm: "block" }, fontVariantNumeric: "tabular-nums" }}
             >
-              {done}/{krakowStories.length}
+              {done}/{stories.length}
             </Typography>
             <ToggleButtonGroup
               exclusive

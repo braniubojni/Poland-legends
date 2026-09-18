@@ -40,11 +40,11 @@ Honest delta so we do not “migrate” things that are already done.
 | Icons | **lucide-react** | lucide-react — **keep** |
 | Styling | **MUI v9** custom parchment theme | MUI — **done (005)** |
 | State | **React Context** persist (`opowiesci-v1`) | React Context — **done (006)** |
-| Data | static TS: `apps/web/src/data/` | Go API + SQLite later; same JSON shape |
-| Fetch | none | `fetch` + **TanStack Query** + **Zod** |
+| Data | static TS: `apps/web/src/data/` (007's API seed + test fixture) | Go API + SQLite later; same JSON shape |
+| Fetch | **`fetch` + TanStack Query + Zod, wired to `apps/api`** — done (008) | `fetch` + **TanStack Query** + **Zod** |
 | Tests | **Vitest v5** | Vitest v5 — **done (005)** |
 | Lint/format | **oxlint** + **oxfmt** | oxlint + oxfmt — **done (005)** |
-| Backend | none | **Go** (Fiber *or* Gin — lock in 007) + **SQLite** |
+| Backend | **Go** (Fiber) + **SQLite** at `apps/api`, unused by the web app | Go + SQLite — **done (007)** |
 | Auth | off | **none** |
 | Maps | **MapLibre + OpenFreeMap** (Poland + Kraków) | still **no API key / no Mapbox** |
 | Story art | WebP stills in `apps/web/public/stories/` | Informative stills — **done (004)** |
@@ -199,9 +199,9 @@ Vite, TanStack Router, MUI theme, oxlint, oxfmt, Vitest v5, path alias `@/`. Por
 
 `ProgressProvider`: `locale`, `theme`, `completed: string[]`, `markDone`, persist `localStorage` key `opowiesci-v1` (keep version + migrate). Child: **006**
 
-### S-03 — Go API
+### S-03 — Go API → 007 done
 
-- Fiber **or** Gin — pick one in 007 and do not mention the other again.
+- **Fiber** locked. Do not mention Gin again.
 - SQLite (modernc.org/sqlite or glebarez — no CGO if we can help it).
 - **No authentication.**
 - Rate limit: per IP, conservative (e.g. 60 req/min JSON). 429 + `Retry-After`.
@@ -210,7 +210,7 @@ Vite, TanStack Router, MUI theme, oxlint, oxfmt, Vitest v5, path alias `@/`. Por
 - CORS: web origin only.
 - Child: **007**
 
-### S-04 — Client data layer
+### S-04 — Client data layer → 008 done
 
 TanStack Query + `fetch` + Zod parse on every response. Query keys: `['cities']`, `['city', id]`, `['story', cityId, storyId]`. Progress stays client-only until we decide otherwise. Child: **008**
 
@@ -298,14 +298,14 @@ Do UI that users see before the rewrite. **005** is this repo in place, not a se
 | 4 | 004 Story images | P-04 | done |
 | 5 | 005 Local web bootstrap | S-01 | done |
 | 6 | 006 Context persist | S-02 | done |
-| 7 | 007 Go + SQLite | S-03 | 005 |
-| 8 | 008 Query + Zod | S-04 | 006, 007 |
+| 7 | 007 Go + SQLite | S-03 | 005 (done) |
+| 8 | 008 Query + Zod | S-04 | 006, 007 (done) |
 | 9 | 009 Content API | S-05 | 007, 008 |
 | 10 | 010 Netlify | S-06 | 004 (current app) or 005 (cleaner SPA) |
 | 11 | 011 House-style pass | S-07 | 005 |
 | 12 | 012 Knip | S-08 | 005 |
 
-**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006** is done; **007–009** follow in that tree. **S-06** is the public host. **S-07** and **S-08** can run anytime after **005**; they do not block 007–010.
+**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, and **008** are done; **009** follows. **S-06** is the public host. **S-07** and **S-08** can run anytime after **005**; they do not block 007–010.
 
 ---
 

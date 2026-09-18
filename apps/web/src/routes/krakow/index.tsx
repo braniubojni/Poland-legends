@@ -1,10 +1,11 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { AppLink } from "@/components/AppLink";
 import { KrakowMap } from "@/components/KrakowMap";
-import { krakowStories } from "@/data/krakow";
+import { cityQueryOptions } from "@/lib/api";
 import { useCompleted, useLocale } from "@/lib/progress";
 
 export const Route = createFileRoute("/krakow/")({ component: KrakowPage });
@@ -12,7 +13,9 @@ export const Route = createFileRoute("/krakow/")({ component: KrakowPage });
 function KrakowPage() {
   const locale = useLocale();
   const completed = useCompleted();
-  const done = completed.filter((id) => krakowStories.some((s) => s.id === id)).length;
+  const { data: city } = useQuery(cityQueryOptions("krakow"));
+  const stories = city?.stories ?? [];
+  const done = completed.filter((id) => stories.some((s) => s.id === id)).length;
 
   return (
     <Box component="main">
@@ -43,7 +46,7 @@ function KrakowPage() {
         color="text.secondary"
         sx={{ mt: 1, fontVariantNumeric: "tabular-nums" }}
       >
-        {done}/{krakowStories.length}
+        {done}/{stories.length}
       </Typography>
       <Box sx={{ mt: 3 }}>
         <KrakowMap />

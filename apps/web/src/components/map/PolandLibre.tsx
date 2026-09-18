@@ -9,8 +9,7 @@ import {
 } from "maplibre-gl";
 import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { cities } from "@/data/cities";
-import type { Locale } from "@/data/types";
+import type { City, Locale } from "@/data/types";
 import { t } from "@/lib/copy";
 import {
   applyMapTone,
@@ -28,6 +27,7 @@ setWorkerUrl(maplibreWorkerUrl);
 
 type Props = {
   locale: Locale;
+  cities: City[];
   onSelect: (cityId: string) => void;
 };
 
@@ -73,7 +73,7 @@ class PolandHomeControl implements IControl {
   }
 }
 
-function placePins(map: MlMap, locale: Locale, onSelect: (id: string) => void) {
+function placePins(map: MlMap, locale: Locale, cities: City[], onSelect: (id: string) => void) {
   const markers: Marker[] = [];
   for (const city of cities) {
     const label = city.unlocked
@@ -97,7 +97,7 @@ function placePins(map: MlMap, locale: Locale, onSelect: (id: string) => void) {
   return markers;
 }
 
-export function PolandLibre({ locale, onSelect }: Props) {
+export function PolandLibre({ locale, cities, onSelect }: Props) {
   const storedTheme = useStoredTheme();
   const theme =
     storedTheme === "light" || storedTheme === "dark" ? storedTheme : resolveTheme(storedTheme);
@@ -106,9 +106,11 @@ export function PolandLibre({ locale, onSelect }: Props) {
   const markersRef = useRef<Marker[]>([]);
   const onSelectRef = useRef(onSelect);
   const localeRef = useRef(locale);
+  const citiesRef = useRef(cities);
   const styleRef = useRef(MAP_STYLES[theme]);
   onSelectRef.current = onSelect;
   localeRef.current = locale;
+  citiesRef.current = cities;
 
   useEffect(() => {
     const root = wrapRef.current;
@@ -138,7 +140,9 @@ export function PolandLibre({ locale, onSelect }: Props) {
       map.fitBounds(POLAND_BOUNDS, { ...POLAND_FIT, duration: 0 });
       applyMapTone(map, theme);
       for (const marker of markersRef.current) marker.remove();
-      markersRef.current = placePins(map, localeRef.current, (id) => onSelectRef.current(id));
+      markersRef.current = placePins(map, localeRef.current, citiesRef.current, (id) =>
+        onSelectRef.current(id),
+      );
     });
 
     const resize = () => map.resize();
@@ -165,7 +169,9 @@ export function PolandLibre({ locale, onSelect }: Props) {
     map.once("style.load", () => {
       applyMapTone(map, theme);
       for (const marker of markersRef.current) marker.remove();
-      markersRef.current = placePins(map, localeRef.current, (id) => onSelectRef.current(id));
+      markersRef.current = placePins(map, localeRef.current, citiesRef.current, (id) =>
+        onSelectRef.current(id),
+      );
     });
   }, [theme]);
 
@@ -173,8 +179,8 @@ export function PolandLibre({ locale, onSelect }: Props) {
     const map = mapRef.current;
     if (!map) return;
     for (const marker of markersRef.current) marker.remove();
-    markersRef.current = placePins(map, locale, (id) => onSelectRef.current(id));
-  }, [locale]);
+    markersRef.current = placePins(map, locale, cities, (id) => onSelectRef.current(id));
+  }, [locale, cities]);
 
   return (
     <div ref={wrapRef} className={`op-map ${theme === "dark" ? "op-map-dark" : "op-map-light"}`} />

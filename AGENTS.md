@@ -9,7 +9,7 @@ Read `specs/000-global.md` before writing code. Implement **one** child spec at 
 - Web: Vite SPA in `apps/web` — React 19, TypeScript, TanStack Router, **MUI v9** (custom parchment theme), React Context persist `opowiesci-v1`.
 - No TanStack Start. No Next.js. No SSR. No auth.
 - Lint/format: **oxlint** + **oxfmt**. Tests: **Vitest v5**.
-- Data is static TS until spec 008/009. Go API is spec 007 — do not invent a Node API.
+- Go API (`apps/api`, Fiber + SQLite, spec 007, done) — the web app talks to it via `fetch` + TanStack Query + Zod (spec 008). `apps/web/src/data/` stays as 007's seed source and test fixture, not the app's data path. Do not invent a second Node API.
 - Maps: MapLibre + OpenFreeMap. No Mapbox / CARTO / MapTiler keys.
 
 ## Commands
@@ -20,6 +20,8 @@ pnpm --filter web test
 pnpm --filter web typecheck
 pnpm --filter web lint
 pnpm --filter web fmt:check
+pnpm dev:api        # cd apps/api && go run .
+pnpm dev:full       # web + api together
 ```
 
 ## Rules

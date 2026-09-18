@@ -2,16 +2,18 @@ import { useCallback, useEffect, useState, type ComponentType } from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { AppLink } from "@/components/AppLink";
 import { Check } from "lucide-react";
-import { krakowStories } from "@/data/krakow";
-import type { Locale } from "@/data/types";
+import type { Locale, StorySummary } from "@/data/types";
+import { cityQueryOptions } from "@/lib/api";
 import { t } from "@/lib/copy";
 import { useCompleted, useLocale } from "@/lib/progress";
 
 type KrakowMapView = ComponentType<{
   locale: Locale;
+  stories: StorySummary[];
   completed: string[];
   onSelect: (storyId: string) => void;
 }>;
@@ -20,6 +22,8 @@ export function KrakowMap() {
   const locale = useLocale();
   const completed = useCompleted();
   const navigate = useNavigate();
+  const { data: city } = useQuery(cityQueryOptions("krakow"));
+  const stories = city?.stories ?? [];
   const [MapView, setMapView] = useState<KrakowMapView | null>(null);
 
   useEffect(() => {
@@ -43,13 +47,13 @@ export function KrakowMap() {
     <Paper sx={{ overflow: "hidden" }}>
       <Box className="op-map-stage">
         {MapView ? (
-          <MapView locale={locale} completed={completed} onSelect={onSelect} />
+          <MapView locale={locale} stories={stories} completed={completed} onSelect={onSelect} />
         ) : (
           <Box className="op-map-fallback" aria-hidden />
         )}
       </Box>
       <Box component="ul" sx={{ m: 0, p: 0, listStyle: "none" }}>
-        {krakowStories.map((story) => {
+        {stories.map((story) => {
           const done = completed.includes(story.id);
           return (
             <Box component="li" key={story.id} sx={{ borderTop: 1, borderColor: "divider" }}>
