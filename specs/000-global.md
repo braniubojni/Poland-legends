@@ -40,7 +40,7 @@ Honest delta so we do not “migrate” things that are already done.
 | Icons | **lucide-react** | lucide-react — **keep** |
 | Styling | **MUI v9** custom parchment theme | MUI — **done (005)** |
 | State | **React Context** persist (`opowiesci-v1`) | React Context — **done (006)** |
-| Data | static TS: `apps/web/src/data/` (007's API seed + test fixture) | Go API + SQLite later; same JSON shape |
+| Data | static TS: `apps/web/src/data/` (007's API seed + 007c prod path) | 009 later: SQLite SoT for local `pnpm dev:api` only; prod keeps static `queryFn` |
 | Fetch | **`fetch` + TanStack Query + Zod** — API in dev (008), static TS in prod (**007c** done) | `fetch` + **TanStack Query** + **Zod** |
 | Tests | **Vitest v5** | Vitest v5 — **done (005)** |
 | Lint/format | **oxlint** + **oxfmt** | oxlint + oxfmt — **done (005)** |
@@ -49,7 +49,7 @@ Honest delta so we do not “migrate” things that are already done.
 | Maps | **MapLibre + OpenFreeMap** (Poland + Kraków) | still **no API key / no Mapbox** |
 | Story art | WebP stills in `apps/web/public/stories/` | Informative stills — **done (004)** |
 | Theme | light parchment + dark ink | **dark mode** — **done (001)** |
-| Deploy | prep done (**007c**); not publishing yet | **Netlify Free Legacy** (static `apps/web/dist`) — publish **010** |
+| Deploy | files done (**010** implementing); human publishes | **Netlify Free Legacy** (static `apps/web/dist`) — **010** |
 | Code style | mixed `function` declarations, large components, ref-stale callbacks | house rules in `.cursor/rules/` — **011** |
 | Unused code | none | **Knip** — unused files, exports, deps — **012** |
 
@@ -217,7 +217,9 @@ TanStack Query + `fetch` + Zod parse on every response. Query keys: `['cities']`
 
 ### S-05 — Content API
 
-Move `cities` + `krakowStories` to SQLite (or JSON files loaded by Go). Same bilingual fields. Games stay in payload. Seed in migration. Child: **009**
+Move `cities` + `krakowStories` to SQLite (or JSON files loaded by Go). Same bilingual fields. Games stay in payload. Seed in migration. Child: **009** (not written).
+
+When 009 is written: production on Netlify **must** keep the 007c static `queryFn` path (`cities.ts` / `krakow.ts`). 009 may make SQLite the source of truth for local `pnpm dev:api` only. Do not wrap Fiber as a Netlify Function.
 
 ### S-09 — Netlify Free prep → 007c done
 
@@ -228,16 +230,16 @@ Move `cities` + `krakowStories` to SQLite (or JSON files loaded by Go). Same bil
 - `netlify.toml` SPA fallback. No functions. Prod `queryFn`s read `cities.ts` / `krakow.ts`; dev still hits the API.
 - Child: **007c**
 
-### S-06 — Deploy on Netlify Free
+### S-06 — Deploy on Netlify Free → 010
 
-GitHub `braniubojni/orbit-berry-palm-mountain` is not shipping anywhere today. The sandbox host is Vercel; that is not the product URL.
+GitHub `braniubojni/Poland-legends` is not shipping anywhere today. The sandbox host is Vercel; that is not the product URL.
 
 - Connect this repo to **Netlify**, production from `main`, team `braniubojni` (**Free + Legacy**, no card).
 - SPA fallback so `/`, `/krakow`, `/krakow/$storyId` survive refresh (`netlify.toml` from **007c**).
 - No Mapbox keys, no auth env. Public site. Static assets only — no Fiber, no SQLite, no Netlify Functions as the data path.
 - Do not add a Vercel project or GitHub Pages as a substitute.
 - Do not add a payment method or paid Netlify add-ons.
-- Prep: **007c**. Publish: child **010** when started; this ID is enough until then.
+- Prep: **007c** (done). Publish: child **010**.
 
 ### S-07 — Align `apps/web` to house rules
 
@@ -317,7 +319,7 @@ Do UI that users see before the rewrite. **005** is this repo in place, not a se
 | 12 | 011 House-style pass | S-07 | 005 |
 | 13 | 012 Knip | S-08 | 005 |
 
-**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, and **008** are done; **009** can run next. **S-06 / 010** waits on **007c** (done). **S-07** and **S-08** can run anytime after **005**.
+**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, and **008** are done. **010** is implementing (human publishes). **009** is not written; when it is, production on Netlify must keep the 007c static `queryFn` path (SQLite SoT for local `pnpm dev:api` only). **S-07** and **S-08** can run anytime after **005**.
 
 ---
 
