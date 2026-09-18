@@ -9,8 +9,7 @@ import {
 } from "maplibre-gl";
 import maplibreWorkerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { krakowStories } from "@/data/krakow";
-import type { Locale } from "@/data/types";
+import type { Locale, StorySummary } from "@/data/types";
 import { t } from "@/lib/copy";
 import {
   applyMapTone,
@@ -28,6 +27,7 @@ setWorkerUrl(maplibreWorkerUrl);
 
 type Props = {
   locale: Locale;
+  stories: StorySummary[];
   completed: string[];
   onSelect: (storyId: string) => void;
 };
@@ -77,11 +77,12 @@ class KrakowHomeControl implements IControl {
 function placePins(
   map: MlMap,
   locale: Locale,
+  stories: StorySummary[],
   completed: string[],
   onSelect: (id: string) => void,
 ) {
   const markers: Marker[] = [];
-  for (const story of krakowStories) {
+  for (const story of stories) {
     const done = completed.includes(story.id);
     const title = t(story.title, locale);
     const place = t(story.place, locale);
@@ -105,7 +106,7 @@ function placePins(
   return markers;
 }
 
-export function KrakowLibre({ locale, completed, onSelect }: Props) {
+export function KrakowLibre({ locale, stories, completed, onSelect }: Props) {
   const storedTheme = useStoredTheme();
   const theme =
     storedTheme === "light" || storedTheme === "dark" ? storedTheme : resolveTheme(storedTheme);
@@ -114,10 +115,12 @@ export function KrakowLibre({ locale, completed, onSelect }: Props) {
   const markersRef = useRef<Marker[]>([]);
   const onSelectRef = useRef(onSelect);
   const localeRef = useRef(locale);
+  const storiesRef = useRef(stories);
   const completedRef = useRef(completed);
   const styleRef = useRef(MAP_STYLES[theme]);
   onSelectRef.current = onSelect;
   localeRef.current = locale;
+  storiesRef.current = stories;
   completedRef.current = completed;
 
   useEffect(() => {
@@ -148,8 +151,12 @@ export function KrakowLibre({ locale, completed, onSelect }: Props) {
       map.fitBounds(KRAKOW_BOUNDS, { ...KRAKOW_FIT, duration: 0 });
       applyMapTone(map, theme);
       for (const marker of markersRef.current) marker.remove();
-      markersRef.current = placePins(map, localeRef.current, completedRef.current, (id) =>
-        onSelectRef.current(id),
+      markersRef.current = placePins(
+        map,
+        localeRef.current,
+        storiesRef.current,
+        completedRef.current,
+        (id) => onSelectRef.current(id),
       );
     });
 
@@ -177,8 +184,12 @@ export function KrakowLibre({ locale, completed, onSelect }: Props) {
     map.once("style.load", () => {
       applyMapTone(map, theme);
       for (const marker of markersRef.current) marker.remove();
-      markersRef.current = placePins(map, localeRef.current, completedRef.current, (id) =>
-        onSelectRef.current(id),
+      markersRef.current = placePins(
+        map,
+        localeRef.current,
+        storiesRef.current,
+        completedRef.current,
+        (id) => onSelectRef.current(id),
       );
     });
   }, [theme]);
@@ -187,8 +198,10 @@ export function KrakowLibre({ locale, completed, onSelect }: Props) {
     const map = mapRef.current;
     if (!map) return;
     for (const marker of markersRef.current) marker.remove();
-    markersRef.current = placePins(map, locale, completed, (id) => onSelectRef.current(id));
-  }, [locale, completed]);
+    markersRef.current = placePins(map, locale, stories, completed, (id) =>
+      onSelectRef.current(id),
+    );
+  }, [locale, stories, completed]);
 
   return (
     <div ref={wrapRef} className={`op-map ${theme === "dark" ? "op-map-dark" : "op-map-light"}`} />

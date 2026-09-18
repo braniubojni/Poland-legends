@@ -2,23 +2,26 @@ import { useCallback, useEffect, useState, type ComponentType } from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { AppLink } from "@/components/AppLink";
 import { Lock } from "lucide-react";
-import { cities, cityById } from "@/data/cities";
-import type { Copy, Locale } from "@/data/types";
+import type { City, Copy, Locale } from "@/data/types";
+import { citiesQueryOptions } from "@/lib/api";
 import { t } from "@/lib/copy";
 import { useLocale } from "@/lib/progress";
 import { RADIUS } from "@/theme/tokens";
 
 type PolandMapView = ComponentType<{
   locale: Locale;
+  cities: City[];
   onSelect: (cityId: string) => void;
 }>;
 
 export function PolandMap() {
   const locale = useLocale();
   const navigate = useNavigate();
+  const { data: cities } = useQuery(citiesQueryOptions());
   const [MapView, setMapView] = useState<PolandMapView | null>(null);
   const [notice, setNotice] = useState<Copy | null>(null);
 
@@ -40,7 +43,7 @@ export function PolandMap() {
 
   const onSelect = useCallback(
     (cityId: string) => {
-      const city = cityById(cityId);
+      const city = cities?.find((c) => c.id === cityId);
       if (!city) return;
       if (city.unlocked) {
         void navigate({ to: "/krakow" });
@@ -51,14 +54,14 @@ export function PolandMap() {
         pl: `${city.name.pl} — Wkrótce.`,
       });
     },
-    [navigate],
+    [cities, navigate],
   );
 
   return (
     <Paper sx={{ overflow: "hidden" }}>
       <Box className="op-map-stage">
         {MapView ? (
-          <MapView locale={locale} onSelect={onSelect} />
+          <MapView locale={locale} cities={cities ?? []} onSelect={onSelect} />
         ) : (
           <Box className="op-map-fallback" aria-hidden />
         )}
@@ -95,7 +98,7 @@ export function PolandMap() {
           gridTemplateColumns: { sm: "1fr 1fr" },
         }}
       >
-        {cities.map((city) => (
+        {(cities ?? []).map((city) => (
           <Box component="li" key={city.id}>
             {city.unlocked ? (
               <AppLink to="/krakow" style={{ display: "block" }}>

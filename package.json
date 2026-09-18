@@ -10,6 +10,8 @@
     "lint": "pnpm --filter web lint",
     "fmt": "pnpm --filter web fmt",
     "fmt:check": "pnpm --filter web fmt:check",
-    "test": "pnpm --filter web test"
+    "test": "pnpm --filter web test",
+    "dev:api": "cd apps/api && go run .",
+    "dev:full": "pnpm dev & pnpm dev:api & wait"
   }
 }

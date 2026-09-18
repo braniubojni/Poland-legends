@@ -1,16 +1,19 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
 import { AppLink } from "@/components/AppLink";
 import { HejnalPlayer } from "@/components/HejnalPlayer";
 import { StoryArt } from "@/components/StoryArt";
+import { StoryStatus } from "@/components/StoryStatus";
 import { StoryGame } from "@/components/games/StoryGame";
-import { getStory, nextStoryId } from "@/data/krakow";
+import { cityQueryOptions, NotFoundError, storyQueryOptions } from "@/lib/api";
 import { t } from "@/lib/copy";
 import { useLocale, useProgressActions } from "@/lib/progress";
 import { RADIUS } from "@/theme/tokens";
+import { nextStoryId } from "./-helpers";
 
 export const Route = createFileRoute("/krakow/$storyId")({ component: StoryPage });
 
@@ -19,22 +22,18 @@ function StoryPage() {
   const locale = useLocale();
   const { markDone } = useProgressActions();
   const navigate = useNavigate();
-  const story = getStory(storyId);
-  const nextId = nextStoryId(storyId);
+  const storyResult = useQuery(storyQueryOptions("krakow", storyId));
+  const cityResult = useQuery(cityQueryOptions("krakow"));
+  const story = storyResult.data;
+  const nextId = nextStoryId(cityResult.data?.stories ?? [], storyId);
 
-  if (!story) {
-    return (
-      <Box component="main">
-        <Typography>{locale === "pl" ? "Nie ma takiej opowieści." : "No such story."}</Typography>
-        <AppLink
-          to="/krakow"
-          style={{ marginTop: 16, display: "inline-flex", color: "var(--op-primary)" }}
-        >
-          Kraków
-        </AppLink>
-      </Box>
-    );
+  if (storyResult.error instanceof NotFoundError) {
+    return <StoryStatus kind="not-found" locale={locale} />;
   }
+  if (storyResult.error) {
+    return <StoryStatus kind="error" locale={locale} />;
+  }
+  if (!story) return null;
 
   return (
     <Box component="article">

@@ -53,3 +53,14 @@ export type City = {
   coords: { lat: number; lng: number };
   blurb: Copy;
 };
+
+export type StorySummary = {
+  id: string;
+  title: Copy;
+  place: Copy;
+  pin: { lat: number; lng: number };
+};
+
+export type CityDetail = City & {
+  stories: StorySummary[];
+};
