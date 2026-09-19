@@ -52,12 +52,6 @@ body,
   background: var(--op-map);
 }
 
-.op-map-fallback {
-  position: absolute;
-  inset: 0;
-  background: var(--op-map);
-}
-
 .op-map {
   position: absolute;
   inset: 0;
@@ -120,6 +114,10 @@ body,
 
 .op-map .maplibregl-ctrl-attrib a {
   color: var(--op-muted);
+}
+
+.op-map .maplibregl-ctrl-attrib-button {
+  display: none;
 }
 
 .op-map .op-map-home {

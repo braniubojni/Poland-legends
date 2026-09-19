@@ -1,6 +1,6 @@
 # SPEC 013 — Map loaders
 
-Status: **written** (not implemented)
+Status: **done**
 Covers: **P-05**
 Depends on: 002, 003, 008
 Parent: [000-global.md](./000-global.md)
@@ -43,13 +43,13 @@ Both map pages show a parchment-themed loader until the map is actually painted,
 
 ## Done when
 
-- [ ] `/` map stage shows a parchment loader until MapLibre `load`
-- [ ] `/krakow` map stage does the same
-- [ ] Loader returns during theme `setStyle` restyle and dismisses when that style loads
-- [ ] Progress uses theme crimson, not default MUI purple
-- [ ] Stage is `aria-busy` with bilingual status while loading
-- [ ] `prefers-reduced-motion` stops the spin
-- [ ] City list and story list show skeleton rows only while the query is pending
-- [ ] Tests cover ≥70% of this spec’s new behaviour (aim 80%): overlay visibility (suspense / pre-load / loaded / restyle) and list skeleton vs pending/error
-- [ ] typecheck / lint / fmt pass
-- [ ] 000 / README mark 013 **done**
+- [x] `/` map stage shows a parchment loader until MapLibre `load`
+- [x] `/krakow` map stage does the same
+- [x] Loader returns during theme `setStyle` restyle and dismisses when that style loads
+- [x] Progress uses theme crimson, not default MUI purple
+- [x] Stage is `aria-busy` with bilingual status while loading
+- [x] `prefers-reduced-motion` stops the spin
+- [x] City list and story list show skeleton rows only while the query is pending
+- [x] Tests cover ≥70% of this spec’s new behaviour (aim 80%): overlay visibility (suspense / pre-load / loaded / restyle) and list skeleton vs pending/error
+- [x] typecheck / lint / fmt pass
+- [x] 000 / README mark 013 **done**

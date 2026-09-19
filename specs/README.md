@@ -20,11 +20,12 @@ Do not implement from this README. Split work only by creating a numbered child 
 | 010 | **done** | Netlify Free publish (depends on 007c) |
 | 011 | **done** | Align `apps/web` to house rules (expressions, size, helpers, React 19) |
 | 012 | **done** | Knip (unused files, exports, dependencies) |
-| 013 | written | Map loaders (overlay + list skeletons) |
-| 014 | written | Hide compact attribution “i” |
+| 013 | **done** | Map loaders (overlay + list skeletons) |
+| 014 | **done** | Hide compact attribution “i” |
 | 015 | written | Poland + Kraków playable borders |
 | 016 | **done**, superseded by 018 | Standard Go layout (`cmd/api` + `internal/app`) (removed) |
 | 017 | written | Richer six-story prose |
 | 018 | **done** | Remove Go/SQLite backend (static-only content) + TypeScript 7 |
+| 019 | written | Story image loaders |
 
 Child specs must include: Goal, Out of scope, Files, Done when (checkboxes, including tests covering ≥70% of the new behaviour, aim 80%). One child = one PR-sized change.

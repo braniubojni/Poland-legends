@@ -10,6 +10,13 @@ import { useChrome } from "@/lib/chrome";
 import { t } from "@/lib/copy";
 import { useLocale } from "@/lib/progress";
 import { RADIUS } from "@/theme/tokens";
+import MapLoadingOverlay from "./map/MapLoadingOverlay";
+import {
+  nextMapLoadState,
+  shouldShowSkeleton,
+  type MapLoadEvent,
+  type MapLoadState,
+} from "./map/loading-helpers";
 
 const PolandLibre = lazy(() => import("./map/PolandLibre"));
 
@@ -18,8 +25,13 @@ const PolandMap = () => {
   const c = useChrome();
   const lockedLabel = c("city.locked");
   const navigate = useNavigate();
-  const { data: cities } = useQuery(citiesQueryOptions());
+  const { data: cities, isPending, isError } = useQuery(citiesQueryOptions());
   const [notice, setNotice] = useState<string | null>(null);
+  const [loadState, setLoadState] = useState<MapLoadState>("loading");
+  const onLoadEvent = useCallback(
+    (event: MapLoadEvent) => setLoadState(nextMapLoadState(event)),
+    [],
+  );
 
   useEffect(() => {
     if (!notice) return;
@@ -43,10 +55,16 @@ const PolandMap = () => {
 
   return (
     <Paper sx={{ overflow: "hidden" }}>
-      <Box className="op-map-stage">
-        <Suspense fallback={<Box className="op-map-fallback" aria-hidden />}>
-          <PolandLibre locale={locale} cities={cities ?? []} onSelect={onSelect} />
+      <Box className="op-map-stage" aria-busy={loadState === "loading"}>
+        <Suspense fallback={null}>
+          <PolandLibre
+            locale={locale}
+            cities={cities ?? []}
+            onSelect={onSelect}
+            onLoadEvent={onLoadEvent}
+          />
         </Suspense>
+        {loadState === "loading" ? <MapLoadingOverlay label={c("map.loading")} /> : null}
         {notice ? (
           <Typography
             role="status"
@@ -69,7 +87,12 @@ const PolandMap = () => {
           </Typography>
         ) : null}
       </Box>
-      <PolandCityList cities={cities ?? []} locale={locale} onSelect={onSelect} />
+      <PolandCityList
+        cities={cities ?? []}
+        locale={locale}
+        onSelect={onSelect}
+        showSkeleton={shouldShowSkeleton(isPending, isError)}
+      />
     </Paper>
   );
 };

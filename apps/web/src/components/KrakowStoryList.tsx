@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import Skeleton from "@mui/material/Skeleton";
 import Typography from "@mui/material/Typography";
 import { AppLink } from "@/components/AppLink";
 import { Check } from "lucide-react";
@@ -6,14 +7,29 @@ import type { Locale, StorySummary } from "@/data/types";
 import { useChrome } from "@/lib/chrome";
 import { t } from "@/lib/copy";
 
+const SKELETON_ROWS = 6;
+
 type Props = {
   stories: StorySummary[];
   completed: string[];
   locale: Locale;
+  showSkeleton: boolean;
 };
 
-const KrakowStoryList = ({ stories, completed, locale }: Props) => {
+const KrakowStoryList = ({ stories, completed, locale, showSkeleton }: Props) => {
   const c = useChrome();
+  if (showSkeleton) {
+    return (
+      <Box component="ul" sx={{ m: 0, p: 0, listStyle: "none" }}>
+        {Array.from({ length: SKELETON_ROWS }, (_, i) => (
+          <Box component="li" key={i} sx={{ borderTop: 1, borderColor: "divider", px: 2, py: 1.5 }}>
+            <Skeleton variant="text" width="60%" height={24} />
+            <Skeleton variant="text" width="35%" height={20} />
+          </Box>
+        ))}
+      </Box>
+    );
+  }
   return (
     <Box component="ul" sx={{ m: 0, p: 0, listStyle: "none" }}>
       {stories.map((story) => {

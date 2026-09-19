@@ -20,7 +20,9 @@ import {
   POLAND_ZOOM,
 } from "@/lib/geo";
 import type { Theme } from "@/lib/theme";
+import { OP_MAP_ATTRIBUTION_CONTROL } from "./attribution";
 import { localeBag } from "./localeBag";
+import type { MapLoadEvent } from "./loading-helpers";
 
 setWorkerUrl(maplibreWorkerUrl);
 
@@ -30,6 +32,7 @@ export type PolandPinState = {
   onSelect: (id: string) => void;
   theme: Theme;
   lockedLabel: string;
+  onLoadEvent: (event: MapLoadEvent) => void;
 };
 
 class PolandHomeControl implements IControl {
@@ -123,11 +126,12 @@ export const mountPolandMap = ({
     maxZoom: 12,
     maxBounds: POLAND_MAX_BOUNDS,
     cooperativeGestures: true,
-    attributionControl: { compact: true },
+    attributionControl: OP_MAP_ATTRIBUTION_CONTROL,
     locale: localeBag(latest().locale),
     fadeDuration: 0,
   });
   mapRef.current = map;
+  latest().onLoadEvent("mount");
 
   map.addControl(new NavigationControl({ showCompass: false }), "top-left");
   map.addControl(new PolandHomeControl(), "top-left");
@@ -139,6 +143,7 @@ export const mountPolandMap = ({
     const state = latest();
     applyMapTone(map, state.theme);
     replacePolandPins(map, markersRef, state);
+    state.onLoadEvent("load");
   });
 
   const resize = () => map.resize();
@@ -162,10 +167,12 @@ export const restylePolandMap = (
   styleUrl: string,
   latest: () => PolandPinState,
 ) => {
+  latest().onLoadEvent("restyle");
   map.setStyle(styleUrl, { diff: false });
   map.once("style.load", () => {
     const state = latest();
     applyMapTone(map, state.theme);
     replacePolandPins(map, markersRef, state);
+    state.onLoadEvent("style-load");
   });
 };

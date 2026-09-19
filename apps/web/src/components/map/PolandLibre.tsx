@@ -5,15 +5,17 @@ import { useChrome } from "@/lib/chrome";
 import { MAP_STYLES } from "@/lib/geo";
 import { useStoredTheme } from "@/lib/progress";
 import { resolveTheme } from "@/lib/theme";
+import type { MapLoadEvent } from "./loading-helpers";
 import { mountPolandMap, replacePolandPins, restylePolandMap } from "./poland-helpers";
 
 type Props = {
   locale: Locale;
   cities: City[];
   onSelect: (cityId: string) => void;
+  onLoadEvent: (event: MapLoadEvent) => void;
 };
 
-const PolandLibre = ({ locale, cities, onSelect }: Props) => {
+const PolandLibre = ({ locale, cities, onSelect, onLoadEvent }: Props) => {
   const c = useChrome();
   const lockedLabel = c("city.locked");
   const storedTheme = useStoredTheme();
@@ -24,7 +26,14 @@ const PolandLibre = ({ locale, cities, onSelect }: Props) => {
   const markersRef = useRef<Marker[]>([]);
   const styleRef = useRef(MAP_STYLES[theme]);
 
-  const latest = useEffectEvent(() => ({ locale, cities, onSelect, theme, lockedLabel }));
+  const latest = useEffectEvent(() => ({
+    locale,
+    cities,
+    onSelect,
+    theme,
+    lockedLabel,
+    onLoadEvent,
+  }));
 
   useEffect(() => {
     const root = wrapRef.current;

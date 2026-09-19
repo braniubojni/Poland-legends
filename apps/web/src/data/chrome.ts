@@ -63,6 +63,10 @@ export const chrome = {
     en: "Coming next",
     pl: "Wkrótce",
   },
+  "map.loading": {
+    en: "Loading the map…",
+    pl: "Wczytywanie mapy…",
+  },
   "theme.toLight": {
     en: "Light mode",
     pl: "Tryb jasny",

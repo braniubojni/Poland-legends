@@ -1,6 +1,6 @@
 # SPEC 014 — Hide compact attribution “i”
 
-Status: **written** (not implemented)
+Status: **done**
 Covers: **P-06**
 Depends on: 002, 003
 Parent: [000-global.md](./000-global.md)
@@ -38,12 +38,12 @@ Keep existing `.maplibregl-ctrl-attrib` parchment styling. Credit links stay rea
 
 ## Done when
 
-- [ ] Both maps use `{ compact: false }` (not `true`)
-- [ ] Compact “i” is not visible on `/` and `/krakow`
-- [ ] Attribution **text** remains visible (OpenFreeMap / OpenMapTiles / OSM)
-- [ ] `attributionControl` is not `false` without a replacement
-- [ ] CSS fallback hides `.maplibregl-ctrl-attrib-button` if the library still renders it
-- [ ] Existing attrib parchment styling still applies
-- [ ] Tests cover ≥70% of this spec’s new behaviour (aim 80%): shared options are `compact: false` and not a disabled control. Skip live MapLibre tile/DOM clicks.
-- [ ] typecheck / lint / fmt pass
-- [ ] 000 / README mark 014 **done**
+- [x] Both maps use `{ compact: false }` (not `true`)
+- [x] Compact “i” is not visible on `/` and `/krakow`
+- [x] Attribution **text** remains visible (OpenFreeMap / OpenMapTiles / OSM)
+- [x] `attributionControl` is not `false` without a replacement
+- [x] CSS fallback hides `.maplibregl-ctrl-attrib-button` if the library still renders it
+- [x] Existing attrib parchment styling still applies
+- [x] Tests cover ≥70% of this spec’s new behaviour (aim 80%): shared options are `compact: false` and not a disabled control. Skip live MapLibre tile/DOM clicks.
+- [x] typecheck / lint / fmt pass
+- [x] 000 / README mark 014 **done**

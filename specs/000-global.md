@@ -168,7 +168,7 @@ Parchment-themed overlay while the MapLibre chunk and style load. Same treatment
 - Overlay on the map stage until MapLibre `load`. Dismiss on load; show again if `setStyle` restyle starts.
 - `aria-busy` + bilingual status. Honor `prefers-reduced-motion`.
 - Home/city lists: skeleton rows while `useQuery` is pending (not error).
-- Child: **013** (written, not implemented)
+- Child: **013** (done)
 
 ### P-06 — Hide compact attribution “i” → 014
 
@@ -177,7 +177,7 @@ Keep OSM / OpenFreeMap / OpenMapTiles credit text visible (license). Hide the in
 - MapLibre has no “hide the i button” flag. Use `{ compact: false }` first.
 - Fallback if the button still shows: CSS `display: none` on `.maplibregl-ctrl-attrib-button`.
 - Do not set `attributionControl: false` without a visible replacement.
-- Child: **014** (written, not implemented)
+- Child: **014** (done)
 
 ### P-07 — Highlight Poland and the Kraków playable area → 015
 
@@ -193,6 +193,14 @@ Same six Kraków IDs. Lengthen legend / fact / see-today (and quiz explanations 
 
 - Edit the **009** seed (`content/seed.json`, relocated by **018**), then regenerate via `pnpm gen:content`. Do not hand-edit prod TS as a second SoT.
 - Child: **017** (written, not implemented)
+
+### P-09 — Story image loaders → 019
+
+`StoryArt.tsx` shows a plain `<img>` for the story still (WebP, not SVG) with no loading state; on a slow connection the figure box sits blank until it downloads. **013** explicitly scoped this out.
+
+- Parchment placeholder inside the existing figure box until the still decodes, matching 013's loader chrome (crimson on parchment, no MUI default purple).
+- No layout shift; static fallback with alt text on error, no stuck spinner. Honor `prefers-reduced-motion`.
+- Child: **019** (written, not implemented)
 
 ---
 
@@ -415,8 +423,9 @@ Do UI that users see before the rewrite. **005** is this repo in place, not a se
 | 18 | 015 Map borders | P-07 | 002, 003 |
 | 19 | 017 Richer copy | P-08 | 009 |
 | 20 | 018 Remove Go/SQLite + TS7 | S-11 | 009 |
+| 21 | 019 Story image loaders | P-09 | 004, 013 |
 
-**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, **008**, **009**, **010**, **011**, **012**, **016**, and **018** are done. **013–015** and **017** are written, not implemented. Implement **one** child at a time in this sequence: **013–015** (map polish) → **017** (richer six-story prose). **018** has landed: production and dev both read the generated static path (`pnpm gen:content` from `content/seed.json`/`chrome.json`); there is no live backend anywhere, and 007/007c/S-09's "SQLite is SoT for local `pnpm dev:api`" no longer applies.
+**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, **008**, **009**, **010**, **011**, **012**, **013**, **014**, **016**, and **018** are done. **015**, **017**, and **019** are written, not implemented. Implement **one** child at a time in this sequence: **015** (map polish) → **017** (richer six-story prose) → **019** (story image loaders). **018** has landed: production and dev both read the generated static path (`pnpm gen:content` from `content/seed.json`/`chrome.json`); there is no live backend anywhere, and 007/007c/S-09's "SQLite is SoT for local `pnpm dev:api`" no longer applies.
 
 ---
 
