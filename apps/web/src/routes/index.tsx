@@ -4,9 +4,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PolandMap } from "@/components/PolandMap";
 import { useLocale } from "@/lib/progress";
 
-export const Route = createFileRoute("/")({ component: Home });
-
-function Home() {
+const Home = () => {
   const locale = useLocale();
 
   return (
@@ -27,4 +25,6 @@ function Home() {
       </Box>
     </Box>
   );
-}
+};
+
+export const Route = createFileRoute("/")({ component: Home });

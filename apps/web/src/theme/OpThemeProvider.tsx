@@ -5,7 +5,7 @@ import { useStoredTheme } from "@/lib/progress";
 import { resolveTheme, type Theme } from "@/lib/theme";
 import { createOpTheme } from "./opowiesci";
 
-export function OpThemeProvider({ children }: { children: ReactNode }) {
+const OpThemeProvider = ({ children }: { children: ReactNode }) => {
   const stored = useStoredTheme();
   const [mode, setMode] = useState<Theme>(() => resolveTheme(stored));
 
@@ -35,4 +35,6 @@ export function OpThemeProvider({ children }: { children: ReactNode }) {
       {children}
     </ThemeProvider>
   );
-}
+};
+
+export { OpThemeProvider };

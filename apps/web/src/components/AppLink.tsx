@@ -3,14 +3,14 @@ import { Link, type LinkProps } from "@tanstack/react-router";
 
 const base: CSSProperties = { textDecoration: "none", color: "inherit" };
 
-export function AppLink({
+const AppLink = ({
   style,
   children,
   ...props
-}: LinkProps & { style?: CSSProperties; children?: ReactNode }) {
-  return (
-    <Link {...props} style={{ ...base, ...style }}>
-      {children}
-    </Link>
-  );
-}
+}: LinkProps & { style?: CSSProperties; children?: ReactNode }) => (
+  <Link {...props} style={{ ...base, ...style }}>
+    {children}
+  </Link>
+);
+
+export { AppLink };

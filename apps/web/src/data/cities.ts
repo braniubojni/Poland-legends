@@ -62,7 +62,3 @@ export const cities: City[] = [
     },
   },
 ];
-
-export function cityById(id: string) {
-  return cities.find((city) => city.id === id);
-}

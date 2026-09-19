@@ -8,9 +8,7 @@ import { KrakowMap } from "@/components/KrakowMap";
 import { cityQueryOptions } from "@/lib/api";
 import { useCompleted, useLocale } from "@/lib/progress";
 
-export const Route = createFileRoute("/krakow/")({ component: KrakowPage });
-
-function KrakowPage() {
+const KrakowPage = () => {
   const locale = useLocale();
   const completed = useCompleted();
   const { data: city } = useQuery(cityQueryOptions("krakow"));
@@ -53,4 +51,6 @@ function KrakowPage() {
       </Box>
     </Box>
   );
-}
+};
+
+export const Route = createFileRoute("/krakow/")({ component: KrakowPage });

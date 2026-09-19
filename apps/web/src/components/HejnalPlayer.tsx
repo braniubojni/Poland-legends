@@ -5,44 +5,14 @@ import Typography from "@mui/material/Typography";
 import { Volume2 } from "lucide-react";
 import { useLocale } from "@/lib/progress";
 import { RADIUS } from "@/theme/tokens";
+import { playHejnal } from "./hejnal-helpers";
 
-function playHejnal(ctx: AudioContext) {
-  const notes = [349.23, 440, 523.25, 587.33, 523.25, 440, 392];
-  const start = ctx.currentTime + 0.05;
-  notes.forEach((freq, i) => {
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.type = "sawtooth";
-    osc.frequency.value = freq;
-    const filter = ctx.createBiquadFilter();
-    filter.type = "lowpass";
-    filter.frequency.value = 1400;
-    osc.connect(filter);
-    filter.connect(gain);
-    gain.connect(ctx.destination);
-    const t0 = start + i * 0.28;
-    const t1 = t0 + 0.22;
-    gain.gain.setValueAtTime(0, t0);
-    gain.gain.linearRampToValueAtTime(0.08, t0 + 0.03);
-    if (i === notes.length - 1) {
-      gain.gain.linearRampToValueAtTime(0.08, t0 + 0.08);
-      gain.gain.setValueAtTime(0, t0 + 0.09);
-      osc.start(t0);
-      osc.stop(t0 + 0.12);
-    } else {
-      gain.gain.linearRampToValueAtTime(0.001, t1);
-      osc.start(t0);
-      osc.stop(t1 + 0.02);
-    }
-  });
-}
-
-export function HejnalPlayer() {
+const HejnalPlayer = () => {
   const locale = useLocale();
   const ctxRef = useRef<AudioContext | null>(null);
   const [playing, setPlaying] = useState(false);
 
-  function onPlay() {
+  const onPlay = () => {
     const AC =
       window.AudioContext ||
       (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
@@ -52,7 +22,7 @@ export function HejnalPlayer() {
     playHejnal(ctx);
     setPlaying(true);
     window.setTimeout(() => setPlaying(false), 2200);
-  }
+  };
 
   return (
     <Box
@@ -92,4 +62,6 @@ export function HejnalPlayer() {
       </Typography>
     </Box>
   );
-}
+};
+
+export { HejnalPlayer };

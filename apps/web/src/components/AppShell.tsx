@@ -11,7 +11,7 @@ import { cityQueryOptions } from "@/lib/api";
 import { useCompleted, useLocale, useProgressActions } from "@/lib/progress";
 import { FONT_DISPLAY, RADIUS } from "@/theme/tokens";
 
-export function AppShell({ children }: { children: ReactNode }) {
+const AppShell = ({ children }: { children: ReactNode }) => {
   const locale = useLocale();
   const completed = useCompleted();
   const { setLocale } = useProgressActions();
@@ -93,4 +93,6 @@ export function AppShell({ children }: { children: ReactNode }) {
       <Box sx={{ mx: "auto", maxWidth: 768, px: 2, py: 3 }}>{children}</Box>
     </Box>
   );
-}
+};
+
+export { AppShell };

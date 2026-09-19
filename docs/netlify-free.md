@@ -39,4 +39,4 @@ netlify deploy --prod --dir=apps/web/dist
 
 First-time: `netlify login` then `netlify init` or `netlify link`. Drag-and-drop of `apps/web/dist` in the UI also uses 0 build minutes.
 
-Git “build on push” uses the 300-minute pool. Spec **010** is the first publish.
+Git “build on push” uses the 300-minute pool. Spec **010** (done) is the first publish.

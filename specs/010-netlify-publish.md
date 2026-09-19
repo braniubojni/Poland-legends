@@ -1,6 +1,6 @@
 # SPEC 010 — Netlify Free publish
 
-Status: **implementing**
+Status: **done**
 Covers: **S-06**
 Depends on: 007c
 Parent: [000-global.md](./000-global.md)
@@ -49,7 +49,7 @@ Document and harden the first publish of the **static** Vite SPA on Netlify team
 - `netlify.toml` (`PNPM_FLAGS`; keep command / publish / redirects)
 - `pnpm-workspace.yaml` (exclude Go `apps/api`)
 - `specs/000-global.md` (S-06 → 010; S-05 / 009 prod-static note)
-- `specs/README.md` (010 implementing; 009 keep-007c-path note)
+- `specs/README.md` (010 done; 009 keep-007c-path note)
 
 ## Done when
 
@@ -57,10 +57,10 @@ Document and harden the first publish of the **static** Vite SPA on Netlify team
 - [x] `netlify.toml` keeps 007c command / publish / SPA redirect; adds `NODE_VERSION` + `PNPM_FLAGS`; no `[functions]`, no `go build`, no plugins
 - [x] `pnpm-workspace.yaml` keeps `apps/web` and excludes `apps/api` (no fake API `package.json`)
 - [x] `specs/000-global.md` S-06 points at `braniubojni/Poland-legends` and **→ 010**; S-05 notes that later 009 must keep the 007c prod static `queryFn` path
-- [x] `specs/README.md` marks 010 **implementing**; 009 stays not written with the prod-static constraint
-- [ ] Live `*.netlify.app` URL serves `/`, `/krakow`, and refresh on `/krakow/hejnal`; dark mode and map work; Network tab has no `localhost`
+- [x] `specs/README.md` marks 010 **done**; 009 stays not written with the prod-static constraint
+- [x] Live `*.netlify.app` URL serves `/`, `/krakow`, and refresh on `/krakow/hejnal`; dark mode and map work; Network tab has no `localhost`
 
-The live URL checkbox stays unchecked until the human publishes.
+Human published; last checkbox ticked 2026-09-19.
 
 ## Out of scope
 

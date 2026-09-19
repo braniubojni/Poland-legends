@@ -11,7 +11,8 @@
     "lint": "oxlint .",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
-    "test": "vitest run"
+    "test": "vitest run",
+    "knip": "knip"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -27,9 +28,11 @@
   },
   "devDependencies": {
     "@tanstack/router-plugin": "^1.168.38",
+    "@types/node": "^26.6.1",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.1",
+    "knip": "^6.36.0",
     "oxfmt": "^0.68.0",
     "oxlint": "^1.83.0",
     "typescript": "^5.9.3",
