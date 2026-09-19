@@ -21,10 +21,15 @@ import {
 } from "@/lib/geo";
 import type { Theme } from "@/lib/theme";
 import { OP_MAP_ATTRIBUTION_CONTROL } from "./attribution";
+import { addBorderOverlay, type BorderFeature } from "./border-helpers";
 import { localeBag } from "./localeBag";
 import type { MapLoadEvent } from "./loading-helpers";
+import polandBorderJson from "./poland-border.json";
 
 setWorkerUrl(maplibreWorkerUrl);
+
+const POLAND_BORDER_ID = "poland-border";
+const polandBorder = polandBorderJson as BorderFeature;
 
 export type PolandPinState = {
   locale: Locale;
@@ -142,6 +147,7 @@ export const mountPolandMap = ({
     map.fitBounds(POLAND_BOUNDS, { ...POLAND_FIT, duration: 0 });
     const state = latest();
     applyMapTone(map, state.theme);
+    addBorderOverlay(map, POLAND_BORDER_ID, polandBorder, state.theme);
     replacePolandPins(map, markersRef, state);
     state.onLoadEvent("load");
   });
@@ -172,6 +178,7 @@ export const restylePolandMap = (
   map.once("style.load", () => {
     const state = latest();
     applyMapTone(map, state.theme);
+    addBorderOverlay(map, POLAND_BORDER_ID, polandBorder, state.theme);
     replacePolandPins(map, markersRef, state);
     state.onLoadEvent("style-load");
   });

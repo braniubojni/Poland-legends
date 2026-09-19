@@ -1,6 +1,6 @@
 # SPEC 015 — Poland and Kraków playable borders
 
-Status: **written** (not implemented)
+Status: **done**
 Covers: **P-07**
 Depends on: 002, 003
 Parent: [000-global.md](./000-global.md)
@@ -40,13 +40,13 @@ Home map: a visible outline of **Poland only**. City map: a visible outline of t
 
 ## Done when
 
-- [ ] Home map shows a Poland-only outline (neighbours are not the same highlight)
-- [ ] Kraków map shows the playable `KRAKOW_BOUNDS` rectangle, visible at today’s camera
-- [ ] Outline uses theme primary in light and dark
-- [ ] Overlay survives theme `setStyle` restyle
-- [ ] Stroke is not clipped off the viewport
-- [ ] Cameras / bounds / pins unchanged from 002 / 003
-- [ ] No new map API key; GeoJSON is vendored
-- [ ] Tests cover ≥70% of this spec’s new behaviour (aim 80%): GeoJSON matches `KRAKOW_BOUNDS`, Poland feature is a single polygon (not all countries), overlay helper adds/re-adds source + layer ids. Skip live tile rendering.
-- [ ] typecheck / lint / fmt pass
-- [ ] 000 / README mark 015 **done**
+- [x] Home map shows a Poland-only outline (neighbours are not the same highlight)
+- [x] Kraków map shows the playable `KRAKOW_BOUNDS` rectangle, visible at today’s camera
+- [x] Outline uses theme primary in light and dark
+- [x] Overlay survives theme `setStyle` restyle
+- [x] Stroke is not clipped off the viewport
+- [x] Cameras / bounds / pins unchanged from 002 / 003
+- [x] No new map API key; GeoJSON is vendored
+- [x] Tests cover ≥70% of this spec’s new behaviour (aim 80%): GeoJSON matches `KRAKOW_BOUNDS`, Poland feature is a single polygon (not all countries), overlay helper adds/re-adds source + layer ids. Skip live tile rendering.
+- [x] typecheck / lint / fmt pass
+- [x] 000 / README mark 015 **done**

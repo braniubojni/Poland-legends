@@ -185,7 +185,7 @@ Home: Poland country outline only (not every neighbour). City: outline of the ex
 
 - Vendor two small GeoJSON polygons. No tile CDN, no new map key.
 - Line layer in theme primary. Stroke inside the viewport so it is not clipped.
-- Child: **015** (written, not implemented)
+- Child: **015** (done)
 
 ### P-08 — Richer six-story prose → 017
 
@@ -425,7 +425,7 @@ Do UI that users see before the rewrite. **005** is this repo in place, not a se
 | 20 | 018 Remove Go/SQLite + TS7 | S-11 | 009 |
 | 21 | 019 Story image loaders | P-09 | 004, 013 |
 
-**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, **008**, **009**, **010**, **011**, **012**, **013**, **014**, **016**, and **018** are done. **015**, **017**, and **019** are written, not implemented. Implement **one** child at a time in this sequence: **015** (map polish) → **017** (richer six-story prose) → **019** (story image loaders). **018** has landed: production and dev both read the generated static path (`pnpm gen:content` from `content/seed.json`/`chrome.json`); there is no live backend anywhere, and 007/007c/S-09's "SQLite is SoT for local `pnpm dev:api`" no longer applies.
+**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, **008**, **009**, **010**, **011**, **012**, **013**, **014**, **015**, **016**, and **018** are done. **017** and **019** are written, not implemented. Implement **one** child at a time in this sequence: **017** (richer six-story prose) → **019** (story image loaders). **018** has landed: production and dev both read the generated static path (`pnpm gen:content` from `content/seed.json`/`chrome.json`); there is no live backend anywhere, and 007/007c/S-09's "SQLite is SoT for local `pnpm dev:api`" no longer applies.
 
 ---
 

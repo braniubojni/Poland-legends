@@ -21,10 +21,14 @@ import {
 } from "@/lib/geo";
 import type { Theme } from "@/lib/theme";
 import { OP_MAP_ATTRIBUTION_CONTROL } from "./attribution";
+import { addBorderOverlay, rectangleFeature } from "./border-helpers";
 import { localeBag } from "./localeBag";
 import type { MapLoadEvent } from "./loading-helpers";
 
 setWorkerUrl(maplibreWorkerUrl);
+
+const KRAKOW_BORDER_ID = "krakow-border";
+const krakowBorder = rectangleFeature(KRAKOW_BOUNDS);
 
 export type KrakowPinState = {
   locale: Locale;
@@ -140,6 +144,7 @@ export const mountKrakowMap = ({
     map.fitBounds(KRAKOW_BOUNDS, { ...KRAKOW_FIT, duration: 0 });
     const state = latest();
     applyMapTone(map, state.theme);
+    addBorderOverlay(map, KRAKOW_BORDER_ID, krakowBorder, state.theme);
     replaceKrakowPins(map, markersRef, state);
     state.onLoadEvent("load");
   });
@@ -170,6 +175,7 @@ export const restyleKrakowMap = (
   map.once("style.load", () => {
     const state = latest();
     applyMapTone(map, state.theme);
+    addBorderOverlay(map, KRAKOW_BORDER_ID, krakowBorder, state.theme);
     replaceKrakowPins(map, markersRef, state);
     state.onLoadEvent("style-load");
   });

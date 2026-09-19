@@ -22,7 +22,7 @@ Do not implement from this README. Split work only by creating a numbered child 
 | 012 | **done** | Knip (unused files, exports, dependencies) |
 | 013 | **done** | Map loaders (overlay + list skeletons) |
 | 014 | **done** | Hide compact attribution “i” |
-| 015 | written | Poland + Kraków playable borders |
+| 015 | **done** | Poland + Kraków playable borders |
 | 016 | **done**, superseded by 018 | Standard Go layout (`cmd/api` + `internal/app`) (removed) |
 | 017 | written | Richer six-story prose |
 | 018 | **done** | Remove Go/SQLite backend (static-only content) + TypeScript 7 |
