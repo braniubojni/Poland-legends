@@ -323,7 +323,7 @@ apps/api/
   internal/middleware/
 ```
 
-`pnpm dev:api` points at `./cmd/api`. No new framework, no new routes. Do this **before** growing 009 so chrome/schema land in the new tree. Child: **016** (written, not implemented)
+`pnpm dev:api` points at `./cmd/api`. No new framework, no new routes. Do this **before** growing 009 so chrome/schema land in the new tree. Child: **016** (done)
 
 ---
 

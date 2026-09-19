@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"time"
 
+	"opowiesci/api/internal/app"
 	"opowiesci/api/internal/db"
 )
 
@@ -37,7 +38,7 @@ func main() {
 		log.Fatalf("seed: %v", err)
 	}
 
-	app := NewApp(sqlDB, Config{
+	fiberApp := app.NewApp(sqlDB, app.Config{
 		WebOrigin:       getenv("WEB_ORIGIN", "http://localhost:5173"),
 		RateLimitMax:    60,
 		RateLimitWindow: time.Minute,
@@ -45,7 +46,7 @@ func main() {
 
 	port := getenv("PORT", "8080")
 	log.Printf("opowiesci api listening on :%s", port)
-	if err := app.Listen(":" + port); err != nil {
+	if err := fiberApp.Listen(":" + port); err != nil {
 		log.Fatalf("listen: %v", err)
 	}
 }

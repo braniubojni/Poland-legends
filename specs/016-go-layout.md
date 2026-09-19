@@ -1,6 +1,6 @@
 # SPEC 016 — Standard Go layout
 
-Status: **written** (not implemented)
+Status: **done**
 Covers: **S-10**
 Depends on: 007
 Parent: [000-global.md](./000-global.md)
@@ -49,10 +49,10 @@ apps/api/
 
 ## Done when
 
-- [ ] `go run ./cmd/api` (via `pnpm dev:api`) serves the same 007 routes
-- [ ] No `package main` left at `apps/api/*.go` except under `cmd/`
-- [ ] No `pkg/`, `api/`, or `configs/` directories added
-- [ ] Docs and scripts point at `./cmd/api`
-- [ ] Tests cover ≥70% of this spec’s new behaviour (aim 80%): `NewApp` still in `internal/app` (200/404/healthz). Skip live listen if existing tests already construct `NewApp`.
-- [ ] `go test ./...` from `apps/api` passes
-- [ ] 000 / README mark 016 **done**
+- [x] `go run ./cmd/api` (via `pnpm dev:api`) serves the same 007 routes
+- [x] No `package main` left at `apps/api/*.go` except under `cmd/`
+- [x] No `pkg/`, `api/`, or `configs/` directories added
+- [x] Docs and scripts point at `./cmd/api`
+- [x] Tests cover ≥70% of this spec’s new behaviour (aim 80%): `NewApp` still in `internal/app` (200/404/healthz). Skip live listen if existing tests already construct `NewApp`.
+- [x] `go test ./...` from `apps/api` passes
+- [x] 000 / README mark 016 **done**

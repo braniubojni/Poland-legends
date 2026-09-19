@@ -40,7 +40,7 @@ pnpm --filter web fmt:check    # oxfmt --check
 pnpm --filter web test         # vitest run
 pnpm --filter web knip         # unused files / exports / deps
 
-pnpm dev:api                    # cd apps/api && go run . (spec 007, not wired to the web app yet)
+pnpm dev:api                    # cd apps/api && go run ./cmd/api (spec 007, not wired to the web app yet)
 pnpm dev:full                   # web + api together
 ```
 

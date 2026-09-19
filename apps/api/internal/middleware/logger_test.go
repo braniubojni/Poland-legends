@@ -49,3 +49,48 @@ func TestRequestLoggerHashesIPAndPassesThroughStatus(t *testing.T) {
 		t.Fatalf("log line leaked raw IP: %q", line)
 	}
 }
+
+func TestShouldLogSkipsMetrics(t *testing.T) {
+	if shouldLog("/metrics") {
+		t.Fatal("want /metrics skipped")
+	}
+	if !shouldLog("/healthz") {
+		t.Fatal("want /healthz logged")
+	}
+	if !shouldLog("/v1/cities") {
+		t.Fatal("want /v1/cities logged")
+	}
+}
+
+func TestRequestLoggerOmitsMetricsLine(t *testing.T) {
+	var buf bytes.Buffer
+	prevOut := log.Writer()
+	prevFlags := log.Flags()
+	log.SetOutput(&buf)
+	log.SetFlags(0)
+	t.Cleanup(func() {
+		log.SetOutput(prevOut)
+		log.SetFlags(prevFlags)
+	})
+
+	app := fiber.New()
+	app.Use(RequestLogger())
+	app.Get("/healthz", func(c *fiber.Ctx) error {
+		return c.JSON(fiber.Map{"status": "ok"})
+	})
+
+	if _, err := app.Test(httptest.NewRequest("GET", "/metrics", nil)); err != nil {
+		t.Fatalf("metrics: %v", err)
+	}
+	if _, err := app.Test(httptest.NewRequest("GET", "/healthz", nil)); err != nil {
+		t.Fatalf("healthz: %v", err)
+	}
+
+	out := buf.String()
+	if strings.Contains(out, "/metrics") {
+		t.Fatalf("metrics probe was logged: %q", out)
+	}
+	if !strings.Contains(out, "/healthz") {
+		t.Fatalf("healthz missing from log: %q", out)
+	}
+}

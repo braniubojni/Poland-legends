@@ -13,7 +13,7 @@
     "fmt:check": "pnpm --filter web fmt:check",
     "test": "pnpm --filter web test",
     "knip": "pnpm --filter web knip",
-    "dev:api": "cd apps/api && go run .",
+    "dev:api": "cd apps/api && go run ./cmd/api",
     "dev:full": "pnpm dev & pnpm dev:api & wait"
   }
 }

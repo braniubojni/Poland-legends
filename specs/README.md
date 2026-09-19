@@ -23,7 +23,7 @@ Do not implement from this README. Split work only by creating a numbered child 
 | 013 | written | Map loaders (overlay + list skeletons) |
 | 014 | written | Hide compact attribution “i” |
 | 015 | written | Poland + Kraków playable borders |
-| 016 | written | Standard Go layout (`cmd/api` + `internal/app`) |
+| 016 | **done** | Standard Go layout (`cmd/api` + `internal/app`) |
 | 017 | written | Richer six-story prose |
 
 Child specs must include: Goal, Out of scope, Files, Done when (checkboxes, including tests covering ≥70% of the new behaviour, aim 80%). One child = one PR-sized change.

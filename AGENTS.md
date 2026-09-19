@@ -21,7 +21,7 @@ pnpm --filter web typecheck
 pnpm --filter web lint
 pnpm --filter web fmt:check
 pnpm --filter web knip
-pnpm dev:api        # cd apps/api && go run .
+pnpm dev:api        # cd apps/api && go run ./cmd/api
 pnpm dev:full       # web + api together
 ```
 
