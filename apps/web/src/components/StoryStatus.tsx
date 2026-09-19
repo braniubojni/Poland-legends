@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import { AppLink } from "@/components/AppLink";
 import type { Locale } from "@/data/types";
 
-export function StoryStatus({ kind, locale }: { kind: "not-found" | "error"; locale: Locale }) {
+const StoryStatus = ({ kind, locale }: { kind: "not-found" | "error"; locale: Locale }) => {
   if (kind === "not-found") {
     return (
       <Box component="main">
@@ -24,4 +24,6 @@ export function StoryStatus({ kind, locale }: { kind: "not-found" | "error"; loc
       </Typography>
     </Box>
   );
-}
+};
+
+export { StoryStatus };

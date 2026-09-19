@@ -5,15 +5,15 @@ import { useStoredTheme } from "@/lib/progress";
 import { resolveTheme, type Theme } from "@/lib/theme";
 import { RADIUS } from "@/theme/tokens";
 
-function plateTheme(stored: Theme | null): Theme {
+const plateTheme = (stored: Theme | null): Theme => {
   if (stored === "light" || stored === "dark") return stored;
   if (typeof document !== "undefined") {
     return document.documentElement.classList.contains("dark") ? "dark" : "light";
   }
   return resolveTheme(stored);
-}
+};
 
-export function StoryArt({ story, locale }: { story: Story; locale: Locale }) {
+const StoryArt = ({ story, locale }: { story: Story; locale: Locale }) => {
   const storedTheme = useStoredTheme();
   const theme = plateTheme(storedTheme);
   const src = story.image[theme];
@@ -43,4 +43,6 @@ export function StoryArt({ story, locale }: { story: Story; locale: Locale }) {
       />
     </Box>
   );
-}
+};
+
+export { StoryArt };

@@ -12,9 +12,9 @@ Opowieści — map of Polish legends. Poland map → city → story pin → lege
 
 - Implement **one** child spec at a time. No drive-by stack rewrites, no features outside the active spec.
 - If a child spec would conflict with `000-global.md`, stop and amend 000 first — don't just diverge in code.
-- After implementing a spec, tick its Done checkboxes and update the status table in `specs/README.md` / `000-global.md`.
+- After implementing a spec, cover **at least 70%** of the new behaviour with tests (aim **80%**), tick its Done checkboxes, and update the status table in `specs/README.md` / `000-global.md`.
 - Keep the six Kraków stories' facts/legend copy unchanged except for typos (explicit non-goal to alter them).
-- Out of scope until a spec exists: accounts, Postgres, other cities, Netlify Free publish (010), native apps, react-router, axios, react-icons, Next.js.
+- Out of scope until a spec exists: accounts, Postgres, other cities, native apps, react-router, axios, react-icons, Next.js.
 
 ## Stack lock (do not swap without a spec amendment)
 
@@ -22,7 +22,7 @@ Opowieści — map of Polish legends. Poland map → city → story pin → lege
 - State: React Context (`ProgressProvider`), persisted to `localStorage` key `opowiesci-v1` (versioned, with migration).
 - Maps: MapLibre + OpenFreeMap public styles only — no Mapbox/CARTO/MapTiler keys, ever.
 - Data: `apps/web/src/data/` is 007's seed and 007c's production path; local `pnpm dev:full` talks to `apps/api` (008). Public host is Netlify Free static — do not wrap Fiber as a Function. Do not invent a Node API.
-- Lint/format: oxlint + oxfmt. Tests: Vitest v5.
+- Lint/format: oxlint + oxfmt. Unused code: Knip. Tests: Vitest v5.
 - No SSR, no auth, no TanStack Start, no Next.js.
 
 ## Commands
@@ -38,11 +38,13 @@ pnpm --filter web lint         # oxlint .
 pnpm --filter web fmt          # oxfmt (write)
 pnpm --filter web fmt:check    # oxfmt --check
 pnpm --filter web test         # vitest run
+pnpm --filter web knip         # unused files / exports / deps
+
 pnpm dev:api                    # cd apps/api && go run . (spec 007, not wired to the web app yet)
 pnpm dev:full                   # web + api together
 ```
 
-Root `package.json` scripts (`dev`/`build`/`typecheck`/`lint`/`fmt`/`test`) just forward to the same `--filter web` commands. To run a single test file: `pnpm --filter web test <path-or-pattern>` (Vitest picks up args after `run`).
+Root `package.json` scripts (`dev`/`build`/`typecheck`/`lint`/`fmt`/`test`/`knip`) just forward to the same `--filter web` commands. To run a single test file: `pnpm --filter web test <path-or-pattern>` (Vitest picks up args after `run`).
 
 ## House code-style rules (`.cursor/rules/`, always-on for new code)
 
@@ -51,7 +53,9 @@ Root `package.json` scripts (`dev`/`build`/`typecheck`/`lint`/`fmt`/`test`) just
 - **Colocated helpers**: pure helpers, one-off controls/classes, and long `useEffect` bodies (mount/listeners/cleanup) live in a `helpers.ts` next to the component (e.g. `components/map/helpers.ts`), not a global `src/helpers.ts`. The component file should be wiring + JSX calling a named helper.
 - **React 19 APIs**: use `useEffectEvent` instead of the `ref.current = value` stale-callback pattern, `<Activity>` for offscreen-but-alive UI, `<Suspense>` for async boundaries, `use()` for reading a Promise/Context in render, and `ref` as a plain prop instead of `forwardRef`. No RSC, no `use server`.
 
-Note: existing older files (e.g. `components/map/KrakowLibre.tsx`) may still violate these — spec 011 is the retrofit pass; don't "fix" unrelated files as a side effect of an unrelated change.
+- **Spec tests**: cover **at least 70%** of a child spec’s new behaviour before marking it done (aim **80%**). Vitest next to helpers; Go `go test`. See `.cursor/rules/spec-test-coverage.mdc`.
+
+Note: spec 011 retrofitted `apps/web` to these rules. Don't "fix" unrelated files as a side effect of an unrelated change.
 
 ## Architecture
 

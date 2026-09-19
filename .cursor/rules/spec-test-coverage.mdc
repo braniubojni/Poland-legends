@@ -1,0 +1,24 @@
+---
+description: After each spec, cover at least 70% of the new feature with tests (aim 80%).
+alwaysApply: true
+---
+
+# Spec test coverage
+
+A child spec is not done until tests cover **at least 70%** of **that spec’s new behavior** (aim **80%**). Count Done-when / behaviour bullets of the new work — not whole-repo line coverage.
+
+- Web: Vitest, colocated `*.test.ts` next to the helpers (see `lib/progress/helpers.test.ts`).
+- Go: `go test` beside the package.
+- Do not tick Done or mark 000 / README **done** without a tests checkbox that passed.
+- Skip only what cannot be automated: Netlify UI clicks, MapLibre tiles, generated files, story copy.
+
+```ts
+// ❌ BAD — spec lands parse/migrate with no tests
+export const parseSnapshot = (raw: string | null): Snapshot => { /* ... */ };
+
+// ✅ GOOD — same helpers, cases for the new behaviour
+describe("parseSnapshot", () => {
+  it("unwraps a zustand persist blob", () => { /* ... */ });
+  it("accepts a flat snapshot", () => { /* ... */ });
+});
+```

@@ -6,13 +6,14 @@ import type { QuizQuestion } from "@/data/types";
 import { t } from "@/lib/copy";
 import { useLocale } from "@/lib/progress";
 import { RADIUS } from "@/theme/tokens";
+import QuizOption from "./QuizOption";
 
 type Props = {
   questions: QuizQuestion[];
   onComplete: () => void;
 };
 
-export function QuizGame({ questions, onComplete }: Props) {
+const QuizGame = ({ questions, onComplete }: Props) => {
   const locale = useLocale();
   const [index, setIndex] = useState(0);
   const [picked, setPicked] = useState<string | null>(null);
@@ -25,13 +26,13 @@ export function QuizGame({ questions, onComplete }: Props) {
   const revealed = picked !== null;
   const correct = picked === q.correctId;
 
-  function choose(id: string) {
+  const choose = (id: string) => {
     if (picked) return;
     setPicked(id);
     if (id === q.correctId) setScore((s) => s + 1);
-  }
+  };
 
-  function next() {
+  const next = () => {
     if (index + 1 >= questions.length) {
       setDone(true);
       onComplete();
@@ -39,7 +40,7 @@ export function QuizGame({ questions, onComplete }: Props) {
     }
     setIndex((i) => i + 1);
     setPicked(null);
-  }
+  };
 
   if (done) {
     return (
@@ -88,52 +89,17 @@ export function QuizGame({ questions, onComplete }: Props) {
           gap: 1,
         }}
       >
-        {q.options.map((opt) => {
-          const isCorrect = opt.id === q.correctId;
-          const isPick = opt.id === picked;
-          let borderColor = "divider";
-          let bgcolor = "background.default";
-          let color = "text.primary";
-          if (revealed && isCorrect) {
-            borderColor = "success.main";
-            bgcolor = "color-mix(in srgb, var(--op-success) 10%, transparent)";
-          } else if (revealed && isPick && !isCorrect) {
-            borderColor = "primary.main";
-            bgcolor = "color-mix(in srgb, var(--op-primary) 10%, transparent)";
-          } else if (revealed && !isCorrect && !isPick) {
-            color = "text.secondary";
-          }
-          return (
-            <Box component="li" key={opt.id}>
-              <Box
-                component="button"
-                type="button"
-                onClick={() => choose(opt.id)}
-                sx={{
-                  display: "flex",
-                  minHeight: 48,
-                  width: "100%",
-                  alignItems: "center",
-                  px: 2,
-                  py: 1.5,
-                  borderRadius: `${RADIUS.sm}px`,
-                  border: 1,
-                  borderColor,
-                  bgcolor,
-                  color,
-                  textAlign: "left",
-                  fontSize: "0.875rem",
-                  fontFamily: "inherit",
-                  "&:hover": revealed
-                    ? undefined
-                    : { borderColor: "color-mix(in srgb, var(--op-fg) 30%, transparent)" },
-                }}
-              >
-                {t(opt.label, locale)}
-              </Box>
-            </Box>
-          );
-        })}
+        {q.options.map((opt) => (
+          <QuizOption
+            key={opt.id}
+            label={opt.label}
+            locale={locale}
+            revealed={revealed}
+            isCorrect={opt.id === q.correctId}
+            isPick={opt.id === picked}
+            onChoose={() => choose(opt.id)}
+          />
+        ))}
       </Box>
       {revealed ? (
         <Box sx={{ mt: 2 }}>
@@ -160,4 +126,6 @@ export function QuizGame({ questions, onComplete }: Props) {
       ) : null}
     </Box>
   );
-}
+};
+
+export { QuizGame };

@@ -2,7 +2,7 @@ import { createTheme, type Shadows } from "@mui/material/styles";
 import type { Theme } from "@/lib/theme";
 import { FONT_DISPLAY, FONT_SANS, RADIUS, TOKENS } from "./tokens";
 
-export function createOpTheme(mode: Theme) {
+export const createOpTheme = (mode: Theme) => {
   const t = TOKENS[mode];
   return createTheme({
     palette: {
@@ -125,4 +125,4 @@ export function createOpTheme(mode: Theme) {
       },
     },
   });
-}
+};

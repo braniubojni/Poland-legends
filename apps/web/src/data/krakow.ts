@@ -416,13 +416,3 @@ export const krakowStories: Story[] = [
 ];
 
 export const storyOrder = krakowStories.map((s) => s.id);
-
-export function getStory(id: string) {
-  return krakowStories.find((s) => s.id === id);
-}
-
-export function nextStoryId(id: string) {
-  const i = storyOrder.indexOf(id);
-  if (i < 0 || i === storyOrder.length - 1) return null;
-  return storyOrder[i + 1] ?? null;
-}

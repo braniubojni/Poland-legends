@@ -14,6 +14,7 @@ This is not an implementation spec. It is the backlog + architecture lock so lat
 2. When you start work, copy **one** `G-xx` / `P-xx` / `S-xx` / `B-xx` block into a new `specs/00N-….md`.
 3. Mark the ID here as `→ 00N`.
 4. Implement only that child. No drive-by stack rewrites.
+5. Cover **at least 70%** of that child’s new behaviour with tests (aim **80%**) before marking it done. See `.cursor/rules/spec-test-coverage.mdc`.
 
 If a child conflicts with this file, **stop and amend 000** first.
 
@@ -40,7 +41,7 @@ Honest delta so we do not “migrate” things that are already done.
 | Icons | **lucide-react** | lucide-react — **keep** |
 | Styling | **MUI v9** custom parchment theme | MUI — **done (005)** |
 | State | **React Context** persist (`opowiesci-v1`) | React Context — **done (006)** |
-| Data | static TS: `apps/web/src/data/` (007's API seed + 007c prod path) | 009 later: SQLite SoT for local `pnpm dev:api` only; prod keeps static `queryFn` |
+| Data | static TS: `apps/web/src/data/` (007's API seed + 007c prod path) | **009** (written): SQLite SoT for local `pnpm dev:api`; prod keeps a generated static dump |
 | Fetch | **`fetch` + TanStack Query + Zod** — API in dev (008), static TS in prod (**007c** done) | `fetch` + **TanStack Query** + **Zod** |
 | Tests | **Vitest v5** | Vitest v5 — **done (005)** |
 | Lint/format | **oxlint** + **oxfmt** | oxlint + oxfmt — **done (005)** |
@@ -49,9 +50,9 @@ Honest delta so we do not “migrate” things that are already done.
 | Maps | **MapLibre + OpenFreeMap** (Poland + Kraków) | still **no API key / no Mapbox** |
 | Story art | WebP stills in `apps/web/public/stories/` | Informative stills — **done (004)** |
 | Theme | light parchment + dark ink | **dark mode** — **done (001)** |
-| Deploy | files done (**010** implementing); human publishes | **Netlify Free Legacy** (static `apps/web/dist`) — **010** |
-| Code style | mixed `function` declarations, large components, ref-stale callbacks | house rules in `.cursor/rules/` — **011** |
-| Unused code | none | **Knip** — unused files, exports, deps — **012** |
+| Deploy | **Netlify Free Legacy** (static `apps/web/dist`) | **done (010)** |
+| Code style | house rules in `.cursor/rules/` | **done (011)** |
+| Unused code | **Knip** on `apps/web` | **Knip** — unused files, exports, deps — **done (012)** |
 
 There is **no Next.js**, **no react-router**, **no react-icons** in this app. Do not spend a child spec on those switches.
 
@@ -160,6 +161,39 @@ Covered by P-01 and P-02. If hover is weak after those, file a polish bug instea
 - Alt text from `place` / `title`. Width full, height ~240–320px, `object-fit: cover`.
 - Child: **004**
 
+### P-05 — Map loaders → 013
+
+Parchment-themed overlay while the MapLibre chunk and style load. Same treatment on `/` and `/krakow`. List rows on those pages get a short skeleton while the query is pending. Not a default MUI purple spinner.
+
+- Overlay on the map stage until MapLibre `load`. Dismiss on load; show again if `setStyle` restyle starts.
+- `aria-busy` + bilingual status. Honor `prefers-reduced-motion`.
+- Home/city lists: skeleton rows while `useQuery` is pending (not error).
+- Child: **013** (written, not implemented)
+
+### P-06 — Hide compact attribution “i” → 014
+
+Keep OSM / OpenFreeMap / OpenMapTiles credit text visible (license). Hide the info toggle.
+
+- MapLibre has no “hide the i button” flag. Use `{ compact: false }` first.
+- Fallback if the button still shows: CSS `display: none` on `.maplibregl-ctrl-attrib-button`.
+- Do not set `attributionControl: false` without a visible replacement.
+- Child: **014** (written, not implemented)
+
+### P-07 — Highlight Poland and the Kraków playable area → 015
+
+Home: Poland country outline only (not every neighbour). City: outline of the existing playable box (`KRAKOW_BOUNDS` — Stare Miasto + Wawel + Zwierzyniec). Do not zoom out to the municipality. Do not restyle all OpenFreeMap `admin_level=2` lines (that would paint Germany/Czechia/etc. the same).
+
+- Vendor two small GeoJSON polygons. No tile CDN, no new map key.
+- Line layer in theme primary. Stroke inside the viewport so it is not clipped.
+- Child: **015** (written, not implemented)
+
+### P-08 — Richer six-story prose → 017
+
+Same six Kraków IDs. Lengthen legend / fact / see-today (and quiz explanations only if a fact sentence must stay consistent). Editorial voice, sources, dates — still “legend beside the record”. No new stories, no new cities.
+
+- Edit the **009** seed (SQLite), then regenerate the 007c static dump. Do not hand-edit prod TS as a second SoT.
+- Child: **017** (written, not implemented)
+
 ---
 
 ## Tech stack changes
@@ -215,11 +249,13 @@ Vite, TanStack Router, MUI theme, oxlint, oxfmt, Vitest v5, path alias `@/`. Por
 
 TanStack Query + `fetch` + Zod parse on every response. Query keys: `['cities']`, `['city', id]`, `['story', cityId, storyId]`. Progress stays client-only until we decide otherwise. Child: **008**
 
-### S-05 — Content API
+### S-05 — Content API → 009
 
-Move `cities` + `krakowStories` to SQLite (or JSON files loaded by Go). Same bilingual fields. Games stay in payload. Seed in migration. Child: **009** (not written).
+SQLite is the source of truth for **local** `pnpm dev:api`. Same bilingual city/story/game fields as today. Also store **UI chrome** (page titles, section headers, game chrome, errors, “Coming next”, theme toggle) as bilingual `Copy` keys — not only cities/stories.
 
-When 009 is written: production on Netlify **must** keep the 007c static `queryFn` path (`cities.ts` / `krakow.ts`). 009 may make SQLite the source of truth for local `pnpm dev:api` only. Do not wrap Fiber as a Netlify Function.
+- Seed in migration. First pass is 1:1 with today’s copy; **017** is the prose pass.
+- Prod keeps **007c**: a **generated** static dump (`cities.ts` / `krakow.ts` / `chrome.ts`) from the same seed. No live SQLite on Netlify. Do not wrap Fiber as a Netlify Function.
+- Child: **009** (written, not implemented)
 
 ### S-09 — Netlify Free prep → 007c done
 
@@ -230,18 +266,18 @@ When 009 is written: production on Netlify **must** keep the 007c static `queryF
 - `netlify.toml` SPA fallback. No functions. Prod `queryFn`s read `cities.ts` / `krakow.ts`; dev still hits the API.
 - Child: **007c**
 
-### S-06 — Deploy on Netlify Free → 010
+### S-06 — Deploy on Netlify Free → 010 done
 
-GitHub `braniubojni/Poland-legends` is not shipping anywhere today. The sandbox host is Vercel; that is not the product URL.
+GitHub `braniubojni/Poland-legends` ships on Netlify team `braniubojni` (**Free + Legacy**). The sandbox host is Vercel; that is not the product URL.
 
 - Connect this repo to **Netlify**, production from `main`, team `braniubojni` (**Free + Legacy**, no card).
 - SPA fallback so `/`, `/krakow`, `/krakow/$storyId` survive refresh (`netlify.toml` from **007c**).
 - No Mapbox keys, no auth env. Public site. Static assets only — no Fiber, no SQLite, no Netlify Functions as the data path.
 - Do not add a Vercel project or GitHub Pages as a substitute.
 - Do not add a payment method or paid Netlify add-ons.
-- Prep: **007c** (done). Publish: child **010**.
+- Prep: **007c** (done). Publish: child **010** (done).
 
-### S-07 — Align `apps/web` to house rules
+### S-07 — Align `apps/web` to house rules → 011
 
 One-day pass over existing UI code. **No new features, no stack rewrite.** Behaviour, copy, and visual language stay as they are. Source of truth is `.cursor/rules/` (already always-on for new work); this spec is the backlog to retrofit old files.
 
@@ -260,19 +296,34 @@ Then the rest of `apps/web/src` the same way. Split oversized files; do not “f
 
 Out of this ID: 006 Context, maps/content/copy changes, Go, 007c, 010.
 
-Child: **011** when started; this ID is enough until then.
+Child: **011** (done).
 
-### S-08 — Knip (unused files, exports, dependencies)
+### S-08 — Knip (unused files, exports, dependencies) → 012
 
 Wire **[Knip](https://github.com/webpro-nl/knip)** into `apps/web` so unused modules, exports, and package.json deps fail the same way lint does.
 
 - Add `knip` as a web **devDependency**. Script: `pnpm --filter web knip` (and a root alias if the other web scripts have one).
 - Config for this Vite SPA: entries `index.html` / `src/main.tsx`, TanStack file routes, Vitest. Ignore `.grok/`, `artifacts/`, `specs/`.
-- First pass: delete or wire up real dead code until Knip is clean. Do **not** delete things later specs still need (Zod stays until **008**).
+- First pass: delete or wire up real dead code until Knip is clean. Do **not** delete things later specs still need (`data/cities.ts` / `krakow.ts` stay for 007c prod + 009).
 - Do not invent a second unused-code tool (ts-prune, depcheck, unimported).
 - No product/UI change.
 
-Child: **012** when started; this ID is enough until then.
+Child: **012** (done)
+
+### S-10 — Standard Go layout → 016
+
+Lean official layout (`cmd/` + `internal/`). Not the kitchen-sink `golang-standards/project-layout` — no `pkg/`, no `api/`, no `configs/`.
+
+```
+apps/api/
+  cmd/api/main.go      # go run ./cmd/api
+  internal/app/        # NewApp, Fiber wiring (today’s app.go)
+  internal/db/
+  internal/handlers/
+  internal/middleware/
+```
+
+`pnpm dev:api` points at `./cmd/api`. No new framework, no new routes. Do this **before** growing 009 so chrome/schema land in the new tree. Child: **016** (written, not implemented)
 
 ---
 
@@ -288,6 +339,7 @@ Minimum routes:
 | GET | `/v1/cities` | list + unlocked |
 | GET | `/v1/cities/:id` | city + story summaries (no full game) |
 | GET | `/v1/cities/:id/stories/:storyId` | full story + game |
+| GET | `/v1/chrome` | bilingual UI chrome keys (**009**) |
 
 Do not POST answers to the server in v1 (client grades quizzes).
 
@@ -295,7 +347,33 @@ Do not POST answers to the server in v1 (client grades quizzes).
 
 ## Others
 
-_Empty._ Parking lot for later: more Kraków pins (Wanda, Wit Stwosz, Kazimierz), other cities, accounts, sound of a real hejnał recording, i18n files instead of inline `Copy`.
+Parking lot — **no child numbers yet**. Fits the current product (Poland → city → pin → legend + fact + one game + see it today). Does not fight Netlify-static / no-auth.
+
+**Same Kraków, more depth**
+
+- More pins already named here: Wanda, Wit Stwosz, Kazimierz
+- Suggested walking order / a short trail between the six (and later more)
+- Structured “see it today”: hours, season, indoor/outdoor — still no booking
+- Sources / bibliography under facts (the product is legend vs record)
+- Real hejnał recording
+- End-of-Kraków screen when `completed` has all six
+- Story OG / share cards (004 already allowed a second crop)
+
+**Chrome and map**
+
+- OpenFreeMap **label language** PL when locale is `pl`
+- About page: what Opowieści is, no accounts, how legend vs fact works
+- Glossary of Polish terms (hejnał, Sukiennice, Lajkonik)
+- PWA / offline cache of the static SPA
+
+**Later cities (already visible, locked)**
+
+- Warsaw, Gdańsk, Wrocław, Poznań, Lublin — one city spec each, same pin recipe
+
+**Stay out until listed above**
+
+- Accounts, comments, leaderboards, Postgres
+- Native apps, a second public host, paid Netlify, wrapping Fiber as a Function
 
 ---
 
@@ -313,13 +391,18 @@ Do UI that users see before the rewrite. **005** is this repo in place, not a se
 | 6 | 006 Context persist | S-02 | done |
 | 7 | 007 Go + SQLite | S-03 | 005 (done) |
 | 8 | 008 Query + Zod | S-04 | 006, 007 (done) |
-| 9 | 009 Content API | S-05 | 007, 008 |
 | 10 | 007c Netlify Free prep | S-09 | 008 |
 | 11 | 010 Netlify Free publish | S-06 | 007c |
 | 12 | 011 House-style pass | S-07 | 005 |
-| 13 | 012 Knip | S-08 | 005 |
+| 13 | 012 Knip | S-08 | 005 (done) |
+| 14 | 016 Go layout | S-10 | 007 |
+| 15 | 009 Content API | S-05 | 007, 008, 016 |
+| 16 | 013 Map loaders | P-05 | 002, 003, 008 |
+| 17 | 014 Map attribution | P-06 | 002, 003 |
+| 18 | 015 Map borders | P-07 | 002, 003 |
+| 19 | 017 Richer copy | P-08 | 009 |
 
-**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, and **008** are done. **010** is implementing (human publishes). **009** is not written; when it is, production on Netlify must keep the 007c static `queryFn` path (SQLite SoT for local `pnpm dev:api` only). **S-07** and **S-08** can run anytime after **005**.
+**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, **008**, **010**, **011**, and **012** are done. **009**, **013–017** are written, not implemented. Implement **one** child at a time in this sequence: **016** (Go layout) → **009** (SQLite SoT + chrome + 007c dump) → **013–015** (map polish) → **017** (richer six-story prose). Production on Netlify keeps the generated static `queryFn` path; SQLite is SoT for local `pnpm dev:api` only.
 
 ---
 
@@ -330,6 +413,6 @@ Do UI that users see before the rewrite. **005** is this repo in place, not a se
 - Authentication, Postgres, Redis
 - Leaderboards, accounts, comments
 - Native apps
-- Changing the six Kraków stories’ facts/legend copy except for typos
+- Changing the six Kraków stories’ facts/legend copy except **017** (and typos)
 - Vercel / `*.grok.me` / GitHub Pages as the public product host (sandbox Vercel may stay)
 - Paid Netlify plans, a payment card, wrapping Fiber as a Netlify Function, persistent SQLite on Netlify

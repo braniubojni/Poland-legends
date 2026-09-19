@@ -63,7 +63,7 @@ const MAP_TONE = {
   },
 } as const;
 
-export function applyMapTone(map: MapLibreMap, theme: Theme) {
+export const applyMapTone = (map: MapLibreMap, theme: Theme) => {
   const tone = MAP_TONE[theme];
   const paint = (id: string, name: string, value: string) => {
     if (!map.getLayer(id)) return;
@@ -77,4 +77,4 @@ export function applyMapTone(map: MapLibreMap, theme: Theme) {
   paint("landuse_residential", "fill-color", tone.residential);
   paint("building", "fill-color", tone.building);
   paint("building", "fill-outline-color", tone.buildingOutline);
-}
+};

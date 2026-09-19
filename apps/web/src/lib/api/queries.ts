@@ -3,7 +3,7 @@ import { fetchJson, usesStaticContent } from "./client";
 import { loadCities, loadCity, loadStory } from "./helpers";
 import { cityDetailSchema, citySchema, storySchema } from "./schemas";
 
-export const queryKeys = {
+const queryKeys = {
   cities: ["cities"] as const,
   city: (id: string) => ["city", id] as const,
   story: (cityId: string, storyId: string) => ["story", cityId, storyId] as const,

@@ -4,7 +4,7 @@ import { Moon, Sun } from "lucide-react";
 import { useLocale, useProgressActions, useStoredTheme } from "@/lib/progress";
 import { applyTheme, resolveTheme } from "@/lib/theme";
 
-export function ThemeToggle() {
+const ThemeToggle = () => {
   const locale = useLocale();
   const theme = useStoredTheme();
   const { setTheme } = useProgressActions();
@@ -45,4 +45,6 @@ export function ThemeToggle() {
       {dark ? <Sun size={16} /> : <Moon size={16} />}
     </IconButton>
   );
-}
+};
+
+export { ThemeToggle };

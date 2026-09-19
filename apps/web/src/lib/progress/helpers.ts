@@ -1,8 +1,8 @@
 import type { Locale } from "../../data/types";
 import type { Theme } from "../theme";
 
-export const STORAGE_KEY = "opowiesci-v1";
-export const SAVE_VERSION = 1;
+const STORAGE_KEY = "opowiesci-v1";
+const SAVE_VERSION = 1;
 
 export type Snapshot = {
   version: number;

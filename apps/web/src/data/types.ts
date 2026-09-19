@@ -5,7 +5,7 @@ export type Copy = {
   pl: string;
 };
 
-export type QuizOption = {
+type QuizOption = {
   id: string;
   label: Copy;
 };
@@ -28,7 +28,7 @@ export type Game =
   | { kind: "order"; prompt: Copy; steps: OrderStep[]; correct: string[] }
   | { kind: "towers"; prompt: Copy; explanation: Copy };
 
-export type StoryImage = {
+type StoryImage = {
   light: string;
   dark: string;
 };

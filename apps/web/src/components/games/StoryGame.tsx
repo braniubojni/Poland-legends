@@ -3,7 +3,7 @@ import { OrderGame } from "./OrderGame";
 import { QuizGame } from "./QuizGame";
 import { TowersGame } from "./TowersGame";
 
-export function StoryGame({ game, onComplete }: { game: Game; onComplete: () => void }) {
+const StoryGame = ({ game, onComplete }: { game: Game; onComplete: () => void }) => {
   if (game.kind === "quiz") {
     return <QuizGame questions={game.questions} onComplete={onComplete} />;
   }
@@ -18,4 +18,6 @@ export function StoryGame({ game, onComplete }: { game: Game; onComplete: () => 
     );
   }
   return <TowersGame prompt={game.prompt} explanation={game.explanation} onComplete={onComplete} />;
-}
+};
+
+export { StoryGame };
