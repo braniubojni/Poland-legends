@@ -5,8 +5,8 @@ import Typography from "@mui/material/Typography";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import PolandCityList from "@/components/PolandCityList";
-import type { Copy } from "@/data/types";
 import { citiesQueryOptions } from "@/lib/api";
+import { useChrome } from "@/lib/chrome";
 import { t } from "@/lib/copy";
 import { useLocale } from "@/lib/progress";
 import { RADIUS } from "@/theme/tokens";
@@ -15,9 +15,11 @@ const PolandLibre = lazy(() => import("./map/PolandLibre"));
 
 const PolandMap = () => {
   const locale = useLocale();
+  const c = useChrome();
+  const lockedLabel = c("city.locked");
   const navigate = useNavigate();
   const { data: cities } = useQuery(citiesQueryOptions());
-  const [notice, setNotice] = useState<Copy | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
 
   useEffect(() => {
     if (!notice) return;
@@ -27,18 +29,16 @@ const PolandMap = () => {
 
   const onSelect = useCallback(
     (cityId: string) => {
-      const city = cities?.find((c) => c.id === cityId);
+      const city = cities?.find((item) => item.id === cityId);
       if (!city) return;
       if (city.unlocked) {
         void navigate({ to: "/krakow" });
         return;
       }
-      setNotice({
-        en: `${city.name.en} — Coming next.`,
-        pl: `${city.name.pl} — Wkrótce.`,
-      });
+      // Matches the pre-009 notice copy exactly: "<name> — Coming next."
+      setNotice(`${t(city.name, locale)} — ${lockedLabel}.`);
     },
-    [cities, navigate],
+    [cities, navigate, locale, lockedLabel],
   );
 
   return (
@@ -65,7 +65,7 @@ const PolandMap = () => {
               fontSize: "0.875rem",
             }}
           >
-            {t(notice, locale)}
+            {notice}
           </Typography>
         ) : null}
       </Box>

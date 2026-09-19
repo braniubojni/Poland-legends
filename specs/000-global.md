@@ -41,11 +41,11 @@ Honest delta so we do not “migrate” things that are already done.
 | Icons | **lucide-react** | lucide-react — **keep** |
 | Styling | **MUI v9** custom parchment theme | MUI — **done (005)** |
 | State | **React Context** persist (`opowiesci-v1`) | React Context — **done (006)** |
-| Data | static TS: `apps/web/src/data/` (007's API seed + 007c prod path) | **009** (written): SQLite SoT for local `pnpm dev:api`; prod keeps a generated static dump |
-| Fetch | **`fetch` + TanStack Query + Zod** — API in dev (008), static TS in prod (**007c** done) | `fetch` + **TanStack Query** + **Zod** |
+| Data | `content/{seed,chrome}.json` SoT (relocated by 018); `apps/web/src/data/{cities,krakow,chrome}.ts` generated via `pnpm gen:content` | SQLite SoT + generated static dump — **done (009)**, relocated to plain JSON by **018** |
+| Fetch | **`fetch`-free** — TanStack Query + Zod over the static loaders, dev and prod alike (**018**) | `fetch` + **TanStack Query** + **Zod** |
 | Tests | **Vitest v5** | Vitest v5 — **done (005)** |
 | Lint/format | **oxlint** + **oxfmt** | oxlint + oxfmt — **done (005)** |
-| Backend | **Go** (Fiber) + **SQLite** at `apps/api` (local) | Go + SQLite — **done (007)**; local only on the public host (**007c** done) |
+| Backend | none — static content only, generated via `pnpm gen:content` from `content/seed.json`/`chrome.json` | Go (Fiber) + SQLite at `apps/api` — **done (007)**, **superseded by 018** (removed; was local-only, never on the public host) |
 | Auth | off | **none** |
 | Maps | **MapLibre + OpenFreeMap** (Poland + Kraków) | still **no API key / no Mapbox** |
 | Story art | WebP stills in `apps/web/public/stories/` | Informative stills — **done (004)** |
@@ -56,7 +56,7 @@ Honest delta so we do not “migrate” things that are already done.
 
 There is **no Next.js**, **no react-router**, **no react-icons** in this app. Do not spend a child spec on those switches.
 
-**005** turned this repo into a Vite SPA at `apps/web` (MUI, oxlint/oxfmt, Vitest). Later talks to the Go API.
+**005** turned this repo into a Vite SPA at `apps/web` (MUI, oxlint/oxfmt, Vitest). It talked to the Go API from 007 until **018** removed it in favor of static-only content.
 
 ---
 
@@ -191,7 +191,7 @@ Home: Poland country outline only (not every neighbour). City: outline of the ex
 
 Same six Kraków IDs. Lengthen legend / fact / see-today (and quiz explanations only if a fact sentence must stay consistent). Editorial voice, sources, dates — still “legend beside the record”. No new stories, no new cities.
 
-- Edit the **009** seed (SQLite), then regenerate the 007c static dump. Do not hand-edit prod TS as a second SoT.
+- Edit the **009** seed (`content/seed.json`, relocated by **018**), then regenerate via `pnpm gen:content`. Do not hand-edit prod TS as a second SoT.
 - Child: **017** (written, not implemented)
 
 ---
@@ -219,11 +219,12 @@ Suggested local layout (child **005**):
 ```
 orbit-berry-palm-mountain/
   apps/web/          # Vite + React + TanStack Router + MUI
-  apps/api/          # Go (007)
-  packages/content/  # optional: shared Zod schemas
+  content/           # seed.json / chrome.json — SoT, no backend attached (018)
   specs/
   AGENTS.md
 ```
+
+(`apps/api/` — Go (007) — existed until **018** removed it; see the S-11 entry below.)
 
 ### S-01 — Repo bootstrap (web) → 005
 
@@ -233,7 +234,7 @@ Vite, TanStack Router, MUI theme, oxlint, oxfmt, Vitest v5, path alias `@/`. Por
 
 `ProgressProvider`: `locale`, `theme`, `completed: string[]`, `markDone`, persist `localStorage` key `opowiesci-v1` (keep version + migrate). Child: **006**
 
-### S-03 — Go API → 007 done
+### S-03 — Go API → 007 done, **superseded by 018**
 
 - **Fiber** locked. Do not mention Gin again.
 - SQLite (modernc.org/sqlite or glebarez — no CGO if we can help it).
@@ -242,22 +243,24 @@ Vite, TanStack Router, MUI theme, oxlint, oxfmt, Vitest v5, path alias `@/`. Por
 - Logging: method, path, status, duration, IP hash. No story-answer bodies in logs.
 - Health: `GET /healthz`.
 - CORS: web origin only.
-- Child: **007**
+- Child: **007** (done)
 - Netlify Free prep (static SPA, Go stays local): **007c** (S-09). Do not grow 007.
+- **018 removes this entirely** — Go/SQLite bought dev a live-network path prod never used and no feature needed. Kept here for history; see [018-remove-go-sqlite.md](./018-remove-go-sqlite.md).
 
 ### S-04 — Client data layer → 008 done
 
 TanStack Query + `fetch` + Zod parse on every response. Query keys: `['cities']`, `['city', id]`, `['story', cityId, storyId]`. Progress stays client-only until we decide otherwise. Child: **008**
 
-### S-05 — Content API → 009
+### S-05 — Content API → 009, content pipeline kept / serving layer superseded by 018
 
-SQLite is the source of truth for **local** `pnpm dev:api`. Same bilingual city/story/game fields as today. Also store **UI chrome** (page titles, section headers, game chrome, errors, “Coming next”, theme toggle) as bilingual `Copy` keys — not only cities/stories.
+SQLite was the source of truth for **local** `pnpm dev:api`. Same bilingual city/story/game fields as today. Also stores **UI chrome** (page titles, section headers, game chrome, errors, “Coming next”, theme toggle) as bilingual `Copy` keys — not only cities/stories.
 
 - Seed in migration. First pass is 1:1 with today’s copy; **017** is the prose pass.
 - Prod keeps **007c**: a **generated** static dump (`cities.ts` / `krakow.ts` / `chrome.ts`) from the same seed. No live SQLite on Netlify. Do not wrap Fiber as a Netlify Function.
-- Child: **009** (written, not implemented)
+- Child: **009** (done)
+- **018** relocates `seed.json`/`chrome.json` from `apps/api/internal/db/` to `content/` and deletes the Go/SQLite layer that served them locally. `pnpm gen:content` and the JSON-as-source design are unchanged.
 
-### S-09 — Netlify Free prep → 007c done
+### S-09 — Netlify Free prep → 007c done, **superseded by 018**
 
 008's production `fetch` defaults to `http://localhost:8080`. Netlify cannot run Fiber + SQLite.
 
@@ -323,11 +326,21 @@ apps/api/
   internal/middleware/
 ```
 
-`pnpm dev:api` points at `./cmd/api`. No new framework, no new routes. Do this **before** growing 009 so chrome/schema land in the new tree. Child: **016** (done)
+`pnpm dev:api` points at `./cmd/api`. No new framework, no new routes. Do this **before** growing 009 so chrome/schema land in the new tree. Child: **016** (done), **superseded by 018** (the whole tree it laid out is deleted)
+
+### S-11 — Remove Go/SQLite; static-only content; TypeScript 7 → 018
+
+Netlify never runs `apps/api` (007c/010, locked) — production has always been 100% static. Dev-only value of the Go+SQLite layer (a live-network path to exercise) is not worth a second toolchain once nothing ships through it.
+
+- Delete `apps/api/` entirely. `pnpm dev:api` / `dev:full` removed; `pnpm dev` is the only local run command.
+- `apps/web/src/lib/api/client.ts` loses `usesStaticContent()` / `fetchJson` / `API_BASE` — no dev/prod branch left, both read the static loaders directly.
+- 009's content pipeline (`seed.json`, `chrome.json`, `pnpm gen:content`) is **kept**, only relocated to `content/` at the repo root since its old home (`apps/api/internal/db/`) goes away with the Go module.
+- While touching tooling: bump `apps/web`'s `typescript` to `^7.0.0` (stable since July 2026, drop-in `tsc`, ~10x faster typecheck). Unrelated to the backend removal but same spirit; rides along in one spec instead of two.
+- Child: **018** (done)
 
 ---
 
-## Backend (detail for 007 / 009)
+## Backend (detail for 007 / 009) — historical, removed by 018
 
 No auth. SQLite. Rate limit. Request logs.
 
@@ -401,8 +414,9 @@ Do UI that users see before the rewrite. **005** is this repo in place, not a se
 | 17 | 014 Map attribution | P-06 | 002, 003 |
 | 18 | 015 Map borders | P-07 | 002, 003 |
 | 19 | 017 Richer copy | P-08 | 009 |
+| 20 | 018 Remove Go/SQLite + TS7 | S-11 | 009 |
 
-**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, **008**, **010**, **011**, and **012** are done. **009**, **013–017** are written, not implemented. Implement **one** child at a time in this sequence: **016** (Go layout) → **009** (SQLite SoT + chrome + 007c dump) → **013–015** (map polish) → **017** (richer six-story prose). Production on Netlify keeps the generated static `queryFn` path; SQLite is SoT for local `pnpm dev:api` only.
+**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, **008**, **009**, **010**, **011**, **012**, **016**, and **018** are done. **013–015** and **017** are written, not implemented. Implement **one** child at a time in this sequence: **013–015** (map polish) → **017** (richer six-story prose). **018** has landed: production and dev both read the generated static path (`pnpm gen:content` from `content/seed.json`/`chrome.json`); there is no live backend anywhere, and 007/007c/S-09's "SQLite is SoT for local `pnpm dev:api`" no longer applies.
 
 ---
 

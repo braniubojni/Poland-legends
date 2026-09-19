@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import { Moon, Sun } from "lucide-react";
-import { useLocale, useProgressActions, useStoredTheme } from "@/lib/progress";
+import { useChrome } from "@/lib/chrome";
+import { useProgressActions, useStoredTheme } from "@/lib/progress";
 import { applyTheme, resolveTheme } from "@/lib/theme";
 
 const ThemeToggle = () => {
-  const locale = useLocale();
+  const c = useChrome();
   const theme = useStoredTheme();
   const { setTheme } = useProgressActions();
   const [ready, setReady] = useState(false);
@@ -36,9 +37,7 @@ const ThemeToggle = () => {
   return (
     <IconButton
       type="button"
-      aria-label={
-        locale === "pl" ? (dark ? "Tryb jasny" : "Tryb ciemny") : dark ? "Light mode" : "Dark mode"
-      }
+      aria-label={dark ? c("theme.toLight") : c("theme.toDark")}
       aria-pressed={dark}
       onClick={() => setTheme(dark ? "light" : "dark")}
     >

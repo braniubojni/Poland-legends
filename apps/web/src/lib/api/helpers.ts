@@ -1,8 +1,10 @@
+import { chrome } from "@/data/chrome";
 import { cities } from "@/data/cities";
 import { krakowStories } from "@/data/krakow";
-import type { City, CityDetail, Story } from "@/data/types";
-import { NotFoundError } from "./client";
-import { cityDetailSchema, citySchema, storySchema } from "./schemas";
+import type { City, CityDetail, Copy, Story } from "@/data/types";
+import { chromeSchema, cityDetailSchema, citySchema, storySchema } from "./schemas";
+
+export class NotFoundError extends Error {}
 
 const toSummary = (story: Story) => ({
   id: story.id,
@@ -12,6 +14,8 @@ const toSummary = (story: Story) => ({
 });
 
 export const loadCities = (): City[] => citySchema.array().parse(cities);
+
+export const loadChrome = (): Record<string, Copy> => chromeSchema.parse(chrome);
 
 export const loadCity = (id: string): CityDetail => {
   const city = cities.find((item) => item.id === id);

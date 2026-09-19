@@ -1,6 +1,7 @@
 import { useEffect, useEffectEvent, useRef } from "react";
 import { Map as MlMap, Marker } from "maplibre-gl";
 import type { City, Locale } from "@/data/types";
+import { useChrome } from "@/lib/chrome";
 import { MAP_STYLES } from "@/lib/geo";
 import { useStoredTheme } from "@/lib/progress";
 import { resolveTheme } from "@/lib/theme";
@@ -13,6 +14,8 @@ type Props = {
 };
 
 const PolandLibre = ({ locale, cities, onSelect }: Props) => {
+  const c = useChrome();
+  const lockedLabel = c("city.locked");
   const storedTheme = useStoredTheme();
   const theme =
     storedTheme === "light" || storedTheme === "dark" ? storedTheme : resolveTheme(storedTheme);
@@ -21,7 +24,7 @@ const PolandLibre = ({ locale, cities, onSelect }: Props) => {
   const markersRef = useRef<Marker[]>([]);
   const styleRef = useRef(MAP_STYLES[theme]);
 
-  const latest = useEffectEvent(() => ({ locale, cities, onSelect, theme }));
+  const latest = useEffectEvent(() => ({ locale, cities, onSelect, theme, lockedLabel }));
 
   useEffect(() => {
     const root = wrapRef.current;
@@ -47,7 +50,7 @@ const PolandLibre = ({ locale, cities, onSelect }: Props) => {
     const map = mapRef.current;
     if (!map) return;
     replacePolandPins(map, markersRef, latest());
-  }, [locale, cities]);
+  }, [locale, cities, lockedLabel]);
 
   return (
     <div ref={wrapRef} className={`op-map ${theme === "dark" ? "op-map-dark" : "op-map-light"}`} />

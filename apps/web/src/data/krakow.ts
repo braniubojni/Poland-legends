@@ -1,13 +1,27 @@
+// GENERATED FILE — do not hand-edit.
+// Source of truth: content/. Regenerate with `pnpm gen:content`.
 import type { Story } from "./types";
 
 export const krakowStories: Story[] = [
   {
     id: "hejnal",
     cityId: "krakow",
-    title: { en: "The broken call", pl: "Urwany hejnał" },
-    place: { en: "St Mary’s Basilica", pl: "Kościół Mariacki" },
-    pin: { lat: 50.0616, lng: 19.9394 },
-    image: { light: "/stories/hejnal.webp", dark: "/stories/hejnal-dark.webp" },
+    title: {
+      en: "The broken call",
+      pl: "Urwany hejnał",
+    },
+    place: {
+      en: "St Mary’s Basilica",
+      pl: "Kościół Mariacki",
+    },
+    pin: {
+      lat: 50.0616,
+      lng: 19.9394,
+    },
+    image: {
+      light: "/stories/hejnal.webp",
+      dark: "/stories/hejnal-dark.webp",
+    },
     legend: {
       en: "During a Tatar raid a watchman on the taller tower sounded the alarm. An arrow struck his throat. The melody breaks off mid-phrase. The gates closed in time.",
       pl: "Podczas najazdu tatarskiego strażnik na wyższej wieży zagrał alarm. Strzała przeszyła mu gardło. Melodia urywa się w pół frazy. Bramy zdążono zamknąć.",
@@ -39,9 +53,18 @@ export const krakowStories: Story[] = [
             },
             {
               id: "b",
-              label: { en: "1392, in city pay records", pl: "1392, w miejskich rachunkach" },
+              label: {
+                en: "1392, in city pay records",
+                pl: "1392, w miejskich rachunkach",
+              },
             },
-            { id: "c", label: { en: "1928, in Kelly’s novel", pl: "1928, w powieści Kelly’ego" } },
+            {
+              id: "c",
+              label: {
+                en: "1928, in Kelly’s novel",
+                pl: "1928, w powieści Kelly’ego",
+              },
+            },
           ],
           correctId: "b",
           explanation: {
@@ -56,11 +79,26 @@ export const krakowStories: Story[] = [
             pl: "Skąd pochodzi słowo hejnał?",
           },
           options: [
-            { id: "a", label: { en: "Hungarian hajnal, “dawn”", pl: "Węgierskie hajnal, „świt”" } },
-            { id: "b", label: { en: "Latin hymnus", pl: "Łacińskie hymnus" } },
+            {
+              id: "a",
+              label: {
+                en: "Hungarian hajnal, “dawn”",
+                pl: "Węgierskie hajnal, „świt”",
+              },
+            },
+            {
+              id: "b",
+              label: {
+                en: "Latin hymnus",
+                pl: "Łacińskie hymnus",
+              },
+            },
             {
               id: "c",
-              label: { en: "Old Polish for “arrow”", pl: "Staropolskie słowo na „strzałę”" },
+              label: {
+                en: "Old Polish for “arrow”",
+                pl: "Staropolskie słowo na „strzałę”",
+              },
             },
           ],
           correctId: "a",
@@ -76,9 +114,27 @@ export const krakowStories: Story[] = [
             pl: "Kto dziś gra hejnał?",
           },
           options: [
-            { id: "a", label: { en: "The cathedral choir", pl: "Chór katedralny" } },
-            { id: "b", label: { en: "City firefighters", pl: "Strażacy miejscy" } },
-            { id: "c", label: { en: "A military band", pl: "Orkiestra wojskowa" } },
+            {
+              id: "a",
+              label: {
+                en: "The cathedral choir",
+                pl: "Chór katedralny",
+              },
+            },
+            {
+              id: "b",
+              label: {
+                en: "City firefighters",
+                pl: "Strażacy miejscy",
+              },
+            },
+            {
+              id: "c",
+              label: {
+                en: "A military band",
+                pl: "Orkiestra wojskowa",
+              },
+            },
           ],
           correctId: "b",
           explanation: {
@@ -93,14 +149,26 @@ export const krakowStories: Story[] = [
             pl: "Historię o tatarskiej strzale, jaką słyszą turyści, spopularyzowano w…",
           },
           options: [
-            { id: "a", label: { en: "A 13th-century chronicle", pl: "Kronice z XIII wieku" } },
+            {
+              id: "a",
+              label: {
+                en: "A 13th-century chronicle",
+                pl: "Kronice z XIII wieku",
+              },
+            },
             {
               id: "b",
-              label: { en: "A 1928 American novel", pl: "Amerykańskiej powieści z 1928 roku" },
+              label: {
+                en: "A 1928 American novel",
+                pl: "Amerykańskiej powieści z 1928 roku",
+              },
             },
             {
               id: "c",
-              label: { en: "A royal decree of Casimir", pl: "Dekrecie Kazimierza Wielkiego" },
+              label: {
+                en: "A royal decree of Casimir",
+                pl: "Dekrecie Kazimierza Wielkiego",
+              },
             },
           ],
           correctId: "b",
@@ -115,10 +183,22 @@ export const krakowStories: Story[] = [
   {
     id: "smok",
     cityId: "krakow",
-    title: { en: "The Wawel dragon", pl: "Smok wawelski" },
-    place: { en: "Wawel Hill", pl: "Wzgórze wawelskie" },
-    pin: { lat: 50.053, lng: 19.9334 },
-    image: { light: "/stories/smok.webp", dark: "/stories/smok-dark.webp" },
+    title: {
+      en: "The Wawel dragon",
+      pl: "Smok wawelski",
+    },
+    place: {
+      en: "Wawel Hill",
+      pl: "Wzgórze wawelskie",
+    },
+    pin: {
+      lat: 50.053,
+      lng: 19.9334,
+    },
+    image: {
+      light: "/stories/smok.webp",
+      dark: "/stories/smok-dark.webp",
+    },
     legend: {
       en: "A dragon lived under the hill and ate livestock — and, in darker tellings, people. Knights failed. A clever cobbler (Skuba) left a sulfur-stuffed skin. The beast drank the Vistula and burst. The city took the name of Krak.",
       pl: "Smok mieszkał pod wzgórzem i pożerał bydło — w mroczniejszych wersjach także ludzi. Rycerze nic nie wskórali. Sprytny szewczyk Skuba zostawił skórę wypchaną siarką. Bestia wypiła Wisłę i pękła. Miasto wzięło imię Kraka.",
@@ -140,11 +220,17 @@ export const krakowStories: Story[] = [
       steps: [
         {
           id: "den",
-          label: { en: "A dragon nests under Wawel", pl: "Smok gnieździ się pod Wawelem" },
+          label: {
+            en: "A dragon nests under Wawel",
+            pl: "Smok gnieździ się pod Wawelem",
+          },
         },
         {
           id: "tribute",
-          label: { en: "The town pays tribute in cattle", pl: "Gród płaci haracz bydłem" },
+          label: {
+            en: "The town pays tribute in cattle",
+            pl: "Gród płaci haracz bydłem",
+          },
         },
         {
           id: "sulfur",
@@ -155,7 +241,10 @@ export const krakowStories: Story[] = [
         },
         {
           id: "burst",
-          label: { en: "The dragon drinks the river and bursts", pl: "Smok pije rzekę i pęka" },
+          label: {
+            en: "The dragon drinks the river and bursts",
+            pl: "Smok pije rzekę i pęka",
+          },
         },
       ],
       correct: ["den", "tribute", "sulfur", "burst"],
@@ -164,10 +253,22 @@ export const krakowStories: Story[] = [
   {
     id: "wieze",
     cityId: "krakow",
-    title: { en: "Two unequal towers", pl: "Dwie nierówne wieże" },
-    place: { en: "St Mary’s towers", pl: "Wieże mariackie" },
-    pin: { lat: 50.06185, lng: 19.93975 },
-    image: { light: "/stories/wieze.webp", dark: "/stories/wieze-dark.webp" },
+    title: {
+      en: "Two unequal towers",
+      pl: "Dwie nierówne wieże",
+    },
+    place: {
+      en: "St Mary’s towers",
+      pl: "Wieże mariackie",
+    },
+    pin: {
+      lat: 50.06185,
+      lng: 19.93975,
+    },
+    image: {
+      light: "/stories/wieze.webp",
+      dark: "/stories/wieze-dark.webp",
+    },
     legend: {
       en: "Two brothers were hired to raise the towers. One murdered the other so his tower would stand taller. He finished the work, then killed himself with the same knife. The shorter tower is the unfinished guilt.",
       pl: "Dwóch braci miało wznieść wieże. Jeden zabił drugiego, by jego wieża była wyższa. Dokończył robotę i przebił się tym samym nożem. Niższa wieża to niedokończona wina.",
@@ -195,10 +296,22 @@ export const krakowStories: Story[] = [
   {
     id: "lajkonik",
     cityId: "krakow",
-    title: { en: "The hobby-horse Tatar", pl: "Lajkonik" },
-    place: { en: "Zwierzyniec to the Rynek", pl: "Zwierzyniec — Rynek" },
-    pin: { lat: 50.0545, lng: 19.9145 },
-    image: { light: "/stories/lajkonik.webp", dark: "/stories/lajkonik-dark.webp" },
+    title: {
+      en: "The hobby-horse Tatar",
+      pl: "Lajkonik",
+    },
+    place: {
+      en: "Zwierzyniec to the Rynek",
+      pl: "Zwierzyniec — Rynek",
+    },
+    pin: {
+      lat: 50.0545,
+      lng: 19.9145,
+    },
+    image: {
+      light: "/stories/lajkonik.webp",
+      dark: "/stories/lajkonik-dark.webp",
+    },
     legend: {
       en: "Tatars camped by the Vistula near Zwierzyniec. Raftsmen (włóczkowie) struck first, killed a commander, and rode into town in his clothes. The city was saved. The ride is repeated every year.",
       pl: "Tatarzy stanęli nad Wisłą koło Zwierzyńca. Włóczkowie uderzyli pierwsi, zabili wodza i wjechali do miasta w jego stroju. Grodu uratowano. Przejazd powtarza się co roku.",
@@ -220,16 +333,31 @@ export const krakowStories: Story[] = [
       steps: [
         {
           id: "camp",
-          label: { en: "Raiders camp near Zwierzyniec", pl: "Najeźdźcy obozują koło Zwierzyńca" },
+          label: {
+            en: "Raiders camp near Zwierzyniec",
+            pl: "Najeźdźcy obozują koło Zwierzyńca",
+          },
         },
-        { id: "rafts", label: { en: "Raftsmen attack first", pl: "Włóczkowie atakują pierwsi" } },
+        {
+          id: "rafts",
+          label: {
+            en: "Raftsmen attack first",
+            pl: "Włóczkowie atakują pierwsi",
+          },
+        },
         {
           id: "dress",
-          label: { en: "The leader puts on Tatar dress", pl: "Przywódca wkłada tatarski strój" },
+          label: {
+            en: "The leader puts on Tatar dress",
+            pl: "Przywódca wkłada tatarski strój",
+          },
         },
         {
           id: "square",
-          label: { en: "A triumphant ride to the Rynek", pl: "Triumfalny wjazd na Rynek" },
+          label: {
+            en: "A triumphant ride to the Rynek",
+            pl: "Triumfalny wjazd na Rynek",
+          },
         },
       ],
       correct: ["camp", "rafts", "dress", "square"],
@@ -238,10 +366,22 @@ export const krakowStories: Story[] = [
   {
     id: "golebie",
     cityId: "krakow",
-    title: { en: "The square’s pigeons", pl: "Gołębie na Rynku" },
-    place: { en: "Main Market Square", pl: "Rynek Główny" },
-    pin: { lat: 50.06135, lng: 19.937 },
-    image: { light: "/stories/golebie.webp", dark: "/stories/golebie-dark.webp" },
+    title: {
+      en: "The square’s pigeons",
+      pl: "Gołębie na Rynku",
+    },
+    place: {
+      en: "Main Market Square",
+      pl: "Rynek Główny",
+    },
+    pin: {
+      lat: 50.06135,
+      lng: 19.937,
+    },
+    image: {
+      light: "/stories/golebie.webp",
+      dark: "/stories/golebie-dark.webp",
+    },
     legend: {
       en: "They are not ordinary birds. Knights who betrayed a duke were turned into pigeons by a witch and doomed to circle the square until a just king undid the spell.",
       pl: "To nie zwykłe ptaki. Rycerzy, którzy zdradzili księcia, wiedźma zamieniła w gołębie. Krążą po Rynku, aż sprawiedliwy król zdjąłby urok.",
@@ -264,9 +404,27 @@ export const krakowStories: Story[] = [
             pl: "W legendzie kim były gołębie przed urokiem?",
           },
           options: [
-            { id: "a", label: { en: "Knights", pl: "Rycerzami" } },
-            { id: "b", label: { en: "Royal messengers", pl: "Królewskimi posłańcami" } },
-            { id: "c", label: { en: "Monks of Tyniec", pl: "Mnichami z Tyńca" } },
+            {
+              id: "a",
+              label: {
+                en: "Knights",
+                pl: "Rycerzami",
+              },
+            },
+            {
+              id: "b",
+              label: {
+                en: "Royal messengers",
+                pl: "Królewskimi posłańcami",
+              },
+            },
+            {
+              id: "c",
+              label: {
+                en: "Monks of Tyniec",
+                pl: "Mnichami z Tyńca",
+              },
+            },
           ],
           correctId: "a",
           explanation: {
@@ -283,7 +441,10 @@ export const krakowStories: Story[] = [
           options: [
             {
               id: "a",
-              label: { en: "Yes — it is a local custom", pl: "Tak — to lokalny zwyczaj" },
+              label: {
+                en: "Yes — it is a local custom",
+                pl: "Tak — to lokalny zwyczaj",
+              },
             },
             {
               id: "b",
@@ -292,7 +453,13 @@ export const krakowStories: Story[] = [
                 pl: "Nie — karmienie jest ograniczone i im szkodzi",
               },
             },
-            { id: "c", label: { en: "Only on Easter Monday", pl: "Tylko w lany poniedziałek" } },
+            {
+              id: "c",
+              label: {
+                en: "Only on Easter Monday",
+                pl: "Tylko w lany poniedziałek",
+              },
+            },
           ],
           correctId: "b",
           explanation: {
@@ -307,9 +474,27 @@ export const krakowStories: Story[] = [
             pl: "Klątwę zwykle wiąże się z którym władcą?",
           },
           options: [
-            { id: "a", label: { en: "Casimir the Great", pl: "Kazimierzem Wielkim" } },
-            { id: "b", label: { en: "Henryk Probus", pl: "Henrykiem Pobożnym / Probusem" } },
-            { id: "c", label: { en: "John III Sobieski", pl: "Janem III Sobieskim" } },
+            {
+              id: "a",
+              label: {
+                en: "Casimir the Great",
+                pl: "Kazimierzem Wielkim",
+              },
+            },
+            {
+              id: "b",
+              label: {
+                en: "Henryk Probus",
+                pl: "Henrykiem Pobożnym / Probusem",
+              },
+            },
+            {
+              id: "c",
+              label: {
+                en: "John III Sobieski",
+                pl: "Janem III Sobieskim",
+              },
+            },
           ],
           correctId: "b",
           explanation: {
@@ -323,10 +508,22 @@ export const krakowStories: Story[] = [
   {
     id: "rynek",
     cityId: "krakow",
-    title: { en: "A city drawn with a ruler", pl: "Miasto od linijki" },
-    place: { en: "Main Market Square", pl: "Rynek Główny" },
-    pin: { lat: 50.06155, lng: 19.9374 },
-    image: { light: "/stories/rynek.webp", dark: "/stories/rynek-dark.webp" },
+    title: {
+      en: "A city drawn with a ruler",
+      pl: "Miasto od linijki",
+    },
+    place: {
+      en: "Main Market Square",
+      pl: "Rynek Główny",
+    },
+    pin: {
+      lat: 50.06155,
+      lng: 19.9374,
+    },
+    image: {
+      light: "/stories/rynek.webp",
+      dark: "/stories/rynek-dark.webp",
+    },
     legend: {
       en: "Kraków feels inevitable — as if the square had always been there. The founding stories prefer kings, dragons, and fate.",
       pl: "Kraków wydaje się oczywisty — jakby Rynek był tu od zawsze. Opowieści założycielskie wolą królów, smoki i przeznaczenie.",
@@ -349,9 +546,27 @@ export const krakowStories: Story[] = [
             pl: "W którym roku lokowano Kraków na prawie magdeburskim?",
           },
           options: [
-            { id: "a", label: { en: "1000", pl: "1000" } },
-            { id: "b", label: { en: "1257", pl: "1257" } },
-            { id: "c", label: { en: "1364", pl: "1364" } },
+            {
+              id: "a",
+              label: {
+                en: "1000",
+                pl: "1000",
+              },
+            },
+            {
+              id: "b",
+              label: {
+                en: "1257",
+                pl: "1257",
+              },
+            },
+            {
+              id: "c",
+              label: {
+                en: "1364",
+                pl: "1364",
+              },
+            },
           ],
           correctId: "b",
           explanation: {
@@ -366,9 +581,27 @@ export const krakowStories: Story[] = [
             pl: "Kto wydał przywilej lokacyjny z 1257 roku?",
           },
           options: [
-            { id: "a", label: { en: "Bolesław V the Chaste", pl: "Bolesław V Wstydliwy" } },
-            { id: "b", label: { en: "Krakus the cobbler", pl: "Krak szewczyk" } },
-            { id: "c", label: { en: "Casimir the Great", pl: "Kazimierz Wielki" } },
+            {
+              id: "a",
+              label: {
+                en: "Bolesław V the Chaste",
+                pl: "Bolesław V Wstydliwy",
+              },
+            },
+            {
+              id: "b",
+              label: {
+                en: "Krakus the cobbler",
+                pl: "Krak szewczyk",
+              },
+            },
+            {
+              id: "c",
+              label: {
+                en: "Casimir the Great",
+                pl: "Kazimierz Wielki",
+              },
+            },
           ],
           correctId: "a",
           explanation: {
@@ -383,9 +616,27 @@ export const krakowStories: Story[] = [
             pl: "Ile mniej więcej ma Rynek w boku?",
           },
           options: [
-            { id: "a", label: { en: "About 80 metres", pl: "Około 80 metrów" } },
-            { id: "b", label: { en: "About 200 metres", pl: "Około 200 metrów" } },
-            { id: "c", label: { en: "About 600 metres", pl: "Około 600 metrów" } },
+            {
+              id: "a",
+              label: {
+                en: "About 80 metres",
+                pl: "Około 80 metrów",
+              },
+            },
+            {
+              id: "b",
+              label: {
+                en: "About 200 metres",
+                pl: "Około 200 metrów",
+              },
+            },
+            {
+              id: "c",
+              label: {
+                en: "About 600 metres",
+                pl: "Około 600 metrów",
+              },
+            },
           ],
           correctId: "b",
           explanation: {
@@ -400,9 +651,27 @@ export const krakowStories: Story[] = [
             pl: "Co wciąż stoi na pierwotnej osi handlu Rynku?",
           },
           options: [
-            { id: "a", label: { en: "Wawel Castle", pl: "Zamek Wawelski" } },
-            { id: "b", label: { en: "The Cloth Hall (Sukiennice)", pl: "Sukiennice" } },
-            { id: "c", label: { en: "The Barbican", pl: "Barbakan" } },
+            {
+              id: "a",
+              label: {
+                en: "Wawel Castle",
+                pl: "Zamek Wawelski",
+              },
+            },
+            {
+              id: "b",
+              label: {
+                en: "The Cloth Hall (Sukiennice)",
+                pl: "Sukiennice",
+              },
+            },
+            {
+              id: "c",
+              label: {
+                en: "The Barbican",
+                pl: "Barbakan",
+              },
+            },
           ],
           correctId: "b",
           explanation: {

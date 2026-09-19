@@ -1,0 +1,142 @@
+// GENERATED FILE — do not hand-edit.
+// Source of truth: content/. Regenerate with `pnpm gen:content`.
+import type { Copy } from "./types";
+
+export const chrome = {
+  "home.eyebrow": {
+    en: "Poland, city by city",
+    pl: "Polska, miasto po mieście",
+  },
+  "home.title": {
+    en: "Stories that still stand.",
+    pl: "Opowieści, które wciąż stoją.",
+  },
+  "home.intro": {
+    en: "A map of Polish stories. We start in Kraków: six places, six short games. Legend beside the record. Other cities later.",
+    pl: "Mapa polskich opowieści. Zaczynamy od Krakowa: sześć miejsc, sześć krótkich gier. Legenda obok faktu. Potem kolejne miasta.",
+  },
+  "nav.poland": {
+    en: "Poland",
+    pl: "Polska",
+  },
+  "nav.next": {
+    en: "Next story",
+    pl: "Następna opowieść",
+  },
+  "nav.backToMap": {
+    en: "Back to the map",
+    pl: "Wróć do mapy",
+  },
+  "nav.open": {
+    en: "Open",
+    pl: "Otwórz",
+  },
+  "krakow.intro": {
+    en: "Open a pin. Read what people tell, and what can be checked. Play for a minute. Then go stand there.",
+    pl: "Otwórz pinezkę. Przeczytaj, co ludzie opowiadają, i co da się sprawdzić. Zagraj minutę. Potem idź na miejsce.",
+  },
+  "story.legend": {
+    en: "The legend",
+    pl: "Legenda",
+  },
+  "story.fact": {
+    en: "What we know",
+    pl: "Co wiemy",
+  },
+  "story.play": {
+    en: "Play",
+    pl: "Gra",
+  },
+  "story.seeToday": {
+    en: "See it today",
+    pl: "Zobacz dziś",
+  },
+  "status.notFound": {
+    en: "No such story.",
+    pl: "Nie ma takiej opowieści.",
+  },
+  "status.error": {
+    en: "Could not load this story.",
+    pl: "Nie udało się wczytać opowieści.",
+  },
+  "city.locked": {
+    en: "Coming next",
+    pl: "Wkrótce",
+  },
+  "theme.toLight": {
+    en: "Light mode",
+    pl: "Tryb jasny",
+  },
+  "theme.toDark": {
+    en: "Dark mode",
+    pl: "Tryb ciemny",
+  },
+  "hejnal.playing": {
+    en: "Playing…",
+    pl: "Gra…",
+  },
+  "hejnal.play": {
+    en: "Play the call",
+    pl: "Odtwórz hejnał",
+  },
+  "hejnal.caption": {
+    en: "A short F-major phrase. Cut mid-note — as from the tower.",
+    pl: "Krótki motyw w F-dur. Urwany w pół frazy — tak, jak na wieży.",
+  },
+  "game.towers.point": {
+    en: "Point",
+    pl: "Wskaż",
+  },
+  "game.towers.thisOne": {
+    en: "This one",
+    pl: "Ta",
+  },
+  "game.towers.correct": {
+    en: "Yes. ",
+    pl: "Tak. ",
+  },
+  "game.towers.incorrect": {
+    en: "Not that one. ",
+    pl: "Nie ta. ",
+  },
+  "game.order.kicker": {
+    en: "Order",
+    pl: "Kolejność",
+  },
+  "game.order.wrong": {
+    en: "Almost. Try again.",
+    pl: "Prawie. Spróbuj od nowa.",
+  },
+  "game.order.reset": {
+    en: "Reset",
+    pl: "Jeszcze raz",
+  },
+  "game.order.correct": {
+    en: "That is the order of things.",
+    pl: "Taka jest kolej rzeczy.",
+  },
+  "game.quiz.done": {
+    en: "Done",
+    pl: "Gotowe",
+  },
+  "game.quiz.question": {
+    en: "Question",
+    pl: "Pytanie",
+  },
+  "game.quiz.correct": {
+    en: "Yes.",
+    pl: "Tak.",
+  },
+  "game.quiz.incorrect": {
+    en: "Not that one.",
+    pl: "Nie ten.",
+  },
+  "game.quiz.finish": {
+    en: "Finish",
+    pl: "Zakończ",
+  },
+  "game.quiz.next": {
+    en: "Next",
+    pl: "Dalej",
+  },
+} satisfies Record<string, Copy>;

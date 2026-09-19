@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import type { Copy, OrderStep } from "@/data/types";
+import { useChrome } from "@/lib/chrome";
 import { t } from "@/lib/copy";
 import { useLocale } from "@/lib/progress";
 import { RADIUS } from "@/theme/tokens";
@@ -18,6 +19,7 @@ type Props = {
 
 const OrderGame = ({ prompt, steps, correct, onComplete }: Props) => {
   const locale = useLocale();
+  const c = useChrome();
   const pool = useMemo(() => shuffle(steps), [steps]);
   const [picked, setPicked] = useState<string[]>([]);
   const [status, setStatus] = useState<"play" | "wrong" | "right">("play");
@@ -53,7 +55,7 @@ const OrderGame = ({ prompt, steps, correct, onComplete }: Props) => {
       }}
     >
       <Typography variant="overline" color="text.secondary" sx={{ letterSpacing: "0.08em" }}>
-        {locale === "pl" ? "Kolejność" : "Order"}
+        {c("game.order.kicker")}
       </Typography>
       <Typography variant="h3" sx={{ mt: 1 }}>
         {t(prompt, locale)}
@@ -84,16 +86,16 @@ const OrderGame = ({ prompt, steps, correct, onComplete }: Props) => {
       {status === "wrong" ? (
         <Box sx={{ mt: 2 }}>
           <Typography variant="body2" sx={{ color: "var(--op-ink-soft)" }}>
-            {locale === "pl" ? "Prawie. Spróbuj od nowa." : "Almost. Try again."}
+            {c("game.order.wrong")}
           </Typography>
           <Button sx={{ mt: 1.5 }} variant="outlined" onClick={reset}>
-            {locale === "pl" ? "Jeszcze raz" : "Reset"}
+            {c("game.order.reset")}
           </Button>
         </Box>
       ) : null}
       {status === "right" ? (
         <Typography variant="body2" sx={{ mt: 2, color: "success.main" }}>
-          {locale === "pl" ? "Taka jest kolej rzeczy." : "That is the order of things."}
+          {c("game.order.correct")}
         </Typography>
       ) : null}
     </Box>

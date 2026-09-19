@@ -47,6 +47,8 @@ const gameSchema = z.discriminatedUnion("kind", [
   z.object({ kind: z.literal("towers"), prompt: copySchema, explanation: copySchema }),
 ]);
 
+export const chromeSchema = z.record(z.string(), copySchema);
+
 export const storySchema = z.object({
   id: z.string(),
   cityId: z.string(),

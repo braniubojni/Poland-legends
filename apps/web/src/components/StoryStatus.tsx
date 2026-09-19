@@ -1,13 +1,14 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { AppLink } from "@/components/AppLink";
-import type { Locale } from "@/data/types";
+import { useChrome } from "@/lib/chrome";
 
-const StoryStatus = ({ kind, locale }: { kind: "not-found" | "error"; locale: Locale }) => {
+const StoryStatus = ({ kind }: { kind: "not-found" | "error" }) => {
+  const c = useChrome();
   if (kind === "not-found") {
     return (
       <Box component="main">
-        <Typography>{locale === "pl" ? "Nie ma takiej opowieści." : "No such story."}</Typography>
+        <Typography>{c("status.notFound")}</Typography>
         <AppLink
           to="/krakow"
           style={{ marginTop: 16, display: "inline-flex", color: "var(--op-primary)" }}
@@ -19,9 +20,7 @@ const StoryStatus = ({ kind, locale }: { kind: "not-found" | "error"; locale: Lo
   }
   return (
     <Box component="main">
-      <Typography>
-        {locale === "pl" ? "Nie udało się wczytać opowieści." : "Could not load this story."}
-      </Typography>
+      <Typography>{c("status.error")}</Typography>
     </Box>
   );
 };
