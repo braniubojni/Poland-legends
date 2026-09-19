@@ -26,6 +26,6 @@ Do not implement from this README. Split work only by creating a numbered child 
 | 016 | **done**, superseded by 018 | Standard Go layout (`cmd/api` + `internal/app`) (removed) |
 | 017 | written | Richer six-story prose |
 | 018 | **done** | Remove Go/SQLite backend (static-only content) + TypeScript 7 |
-| 019 | written | Story image loaders |
+| 019 | **done** | Story image loaders |
 
 Child specs must include: Goal, Out of scope, Files, Done when (checkboxes, including tests covering ≥70% of the new behaviour, aim 80%). One child = one PR-sized change.

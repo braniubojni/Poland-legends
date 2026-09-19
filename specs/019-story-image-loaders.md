@@ -1,6 +1,6 @@
 # SPEC 019 — Story image loaders
 
-Status: **written** (not implemented)
+Status: **done**
 Covers: none (new, propose adding to 000 as P-08)
 Depends on: 004, 013
 Parent: [000-global.md](./000-global.md)
@@ -36,11 +36,11 @@ Parent: [000-global.md](./000-global.md)
 
 ## Done when
 
-- [ ] Story still shows a parchment placeholder (not blank/broken-image) until decoded
-- [ ] No layout shift between placeholder and loaded image
-- [ ] Error case shows a static fallback with alt text, no stuck spinner
-- [ ] Placeholder respects `prefers-reduced-motion`
-- [ ] Theme switch (light/dark still swap) re-triggers placeholder correctly, not a stale image
-- [ ] Tests cover ≥70% of this spec's new behaviour (aim 80%): load/error/theme-swap state transitions
-- [ ] typecheck / lint / fmt pass
-- [ ] 000 / README mark 019 **done**
+- [x] Story still shows a parchment placeholder (not blank/broken-image) until decoded
+- [x] No layout shift between placeholder and loaded image
+- [x] Error case shows a static fallback with alt text, no stuck spinner
+- [x] Placeholder respects `prefers-reduced-motion`
+- [x] Theme switch (light/dark still swap) re-triggers placeholder correctly, not a stale image
+- [x] Tests cover ≥70% of this spec's new behaviour (aim 80%): load/error/theme-swap state transitions
+- [x] typecheck / lint / fmt pass
+- [x] 000 / README mark 019 **done**
