@@ -27,5 +27,9 @@ Do not implement from this README. Split work only by creating a numbered child 
 | 017 | written | Richer six-story prose |
 | 018 | **done** | Remove Go/SQLite backend (static-only content) + TypeScript 7 |
 | 019 | **done** | Story image loaders |
+| 020 | written | Git hooks (Husky pre-commit/pre-push) |
+| 021 | written | Playwright e2e + 90% coverage gate |
+| 022 | written | Smart route lazy loading (story pages first) |
+| 023 | written | Global error boundary + retry |
 
 Child specs must include: Goal, Out of scope, Files, Done when (checkboxes, including tests covering ≥70% of the new behaviour, aim 80%). One child = one PR-sized change.

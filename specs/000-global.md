@@ -202,6 +202,20 @@ Same six Kraków IDs. Lengthen legend / fact / see-today (and quiz explanations 
 - No layout shift; static fallback with alt text on error, no stuck spinner. Honor `prefers-reduced-motion`.
 - Child: **019** (done)
 
+### P-10 — Smart route lazy loading (story pages first) → 022
+
+`autoCodeSplitting: true` (router-plugin, set since **005**) already splits each file route into its own chunk without a manual `.lazy.tsx`. Confirm what that already buys (MapLibre out of the story page's chunk?) before adding more — this is an investigate-then-fix spec, not a blind `React.lazy` wrap.
+
+- Bundle analysis first; `defaultPreload: "intent"` for instant-feeling nav despite splitting; any new `Suspense` fallback reuses 013's loader chrome.
+- Child: **022** (written, not implemented)
+
+### P-11 — Global error boundary + retry → 023
+
+`defaultErrorComponent` (route-level, done since early on) has no retry action, and nothing catches a throw outside the router (provider tree, before `RouterProvider` mounts) — that path is still a blank screen today.
+
+- Top-level class boundary reusing `AppErrorComponent`'s chrome; "Try again" on both the route-level and top-level surfaces; no infinite retry loop.
+- Child: **023** (written, not implemented)
+
 ---
 
 ## Tech stack changes
@@ -346,6 +360,22 @@ Netlify never runs `apps/api` (007c/010, locked) — production has always been 
 - While touching tooling: bump `apps/web`'s `typescript` to `^7.0.0` (stable since July 2026, drop-in `tsc`, ~10x faster typecheck). Unrelated to the backend removal but same spirit; rides along in one spec instead of two.
 - Child: **018** (done)
 
+### S-12 — Git hooks (Husky) → 020
+
+No local gate today; Netlify's build step only runs `pnpm --filter web build`, no typecheck/lint/knip/test anywhere in the pipeline.
+
+- `pre-commit`: `fmt:check` → `lint` → `typecheck` → `knip` → `build`. `pre-push`: `test`.
+- Husky v9, `"prepare": "husky"` at the root. No lint-staged, no commit-msg linting, no CI (separate future spec).
+- Child: **020** (written, not implemented)
+
+### S-13 — Playwright e2e + 90% coverage gate → 021
+
+Vitest unit tests only today, no coverage number tracked, no browser-level test.
+
+- `@vitest/coverage-v8` with a 90% statements/branches/functions/lines threshold on Vitest, scoped to exclude generated/vendored files (`routeTree.gen.ts`, `data/*.ts`, GeoJSON) — investigate actual uncovered lines before locking the exclusion list, don't pre-exclude what merely looks hard.
+- `@playwright/test` against the built `preview` server for golden-path flows (Poland → Kraków → story → game → completion persisted, locale/theme toggles). Runs on demand (`pnpm test:e2e`), not inside 020's pre-push hook — too slow for a local hook.
+- Child: **021** (written, not implemented)
+
 ---
 
 ## Backend (detail for 007 / 009) — historical, removed by 018
@@ -424,8 +454,12 @@ Do UI that users see before the rewrite. **005** is this repo in place, not a se
 | 19 | 017 Richer copy | P-08 | 009 |
 | 20 | 018 Remove Go/SQLite + TS7 | S-11 | 009 |
 | 21 | 019 Story image loaders | P-09 | 004, 013 |
+| 22 | 020 Git hooks (Husky) | S-12 | 005, 012 |
+| 23 | 021 Playwright + coverage | S-13 | 005, 011, 020 |
+| 24 | 022 Smart route lazy loading | P-10 | 004, 013, 019 |
+| 25 | 023 Global error boundary + retry | P-11 | none |
 
-**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, **008**, **009**, **010**, **011**, **012**, **013**, **014**, **015**, **016**, **018**, and **019** are done. **017** is written, not implemented. **018** has landed: production and dev both read the generated static path (`pnpm gen:content` from `content/seed.json`/`chrome.json`); there is no live backend anywhere, and 007/007c/S-09's "SQLite is SoT for local `pnpm dev:api`" no longer applies.
+**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, **008**, **009**, **010**, **011**, **012**, **013**, **014**, **015**, **016**, **018**, and **019** are done. **017**, **020**, **021**, **022**, and **023** are written, not implemented. **018** has landed: production and dev both read the generated static path (`pnpm gen:content` from `content/seed.json`/`chrome.json`); there is no live backend anywhere, and 007/007c/S-09's "SQLite is SoT for local `pnpm dev:api`" no longer applies.
 
 ---
 
