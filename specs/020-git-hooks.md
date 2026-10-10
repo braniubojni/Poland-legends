@@ -1,6 +1,6 @@
 # SPEC 020 — Git hooks (Husky)
 
-Status: **written** (not implemented)
+Status: **done**
 Covers: none (new, propose adding to 000 as S-12)
 Depends on: 005 (Vite bootstrap — `typecheck`/`lint`/`fmt:check`/`build` scripts), 012 (Knip)
 Parent: [000-global.md](./000-global.md)
@@ -49,10 +49,10 @@ Split by cost, not by the exact list requested: static analysis + build (seconds
 
 ## Done when
 
-- [ ] Fresh `pnpm install` activates the hooks (verify in a clean clone or by removing `.husky/_` and reinstalling)
-- [ ] `git commit` runs `fmt:check` → `lint` → `typecheck` → `knip` → `build` and blocks on any failure
-- [ ] `git push` runs `test` and blocks on failure
-- [ ] Deliberately breaking each check (a lint error, a type error, an unused export, a build error, a failing test) confirms the corresponding hook actually blocks — recorded as a manual verification note in the PR, not a Vitest test (this spec's new behaviour is shell tooling, not application logic)
-- [ ] `--no-verify` still works as the documented escape hatch (no attempt to block it)
-- [ ] typecheck / lint / fmt pass on the repo itself
-- [ ] 000 / README mark 020 **done**
+- [x] Fresh `pnpm install` activates the hooks (verify in a clean clone or by removing `.husky/_` and reinstalling)
+- [x] `git commit` runs `fmt:check` → `lint` → `typecheck` → `knip` → `build` and blocks on any failure
+- [x] `git push` runs `test` and blocks on failure
+- [x] Deliberately breaking each check (a lint error, a type error, an unused export, a build error, a failing test) confirms the corresponding hook actually blocks — recorded as a manual verification note in the PR, not a Vitest test (this spec's new behaviour is shell tooling, not application logic)
+- [x] `--no-verify` still works as the documented escape hatch (no attempt to block it)
+- [x] typecheck / lint / fmt pass on the repo itself
+- [x] 000 / README mark 020 **done**
