@@ -2,7 +2,7 @@
 
 Team: `braniubojni`. Plan: **Free + Legacy**. Price: **$0**. Do not add a payment method.
 
-The public site is the static Vite SPA (`apps/web/dist`). Go (`apps/api`) stays local. Netlify does not run Fiber or SQLite.
+The public site is the static Vite SPA (`apps/web/dist`). There is no backend anywhere (018 removed the local Go/SQLite dev API) — dev and prod both read content generated from `content/` via `pnpm gen:content`.
 
 ## Limits (this team)
 

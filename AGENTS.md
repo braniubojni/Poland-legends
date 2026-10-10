@@ -9,7 +9,7 @@ Read `specs/000-global.md` before writing code. Implement **one** child spec at 
 - Web: Vite SPA in `apps/web` — React 19, TypeScript, TanStack Router, **MUI v9** (custom parchment theme), React Context persist `opowiesci-v1`.
 - No TanStack Start. No Next.js. No SSR. No auth.
 - Lint/format: **oxlint** + **oxfmt**. Unused code: **Knip**. Tests: **Vitest v5**.
-- Go API (`apps/api`, Fiber + SQLite, spec 007, done) — local `pnpm dev:full` talks to it via `fetch` + TanStack Query + Zod (spec 008). Public host is **Netlify Free** static (007c / 010); do not wrap Fiber as a Function. `apps/web/src/data/` is 007's seed + 007c's production data path. Do not invent a second Node API.
+- No backend, local or in prod (018 removed the Go/SQLite dev API) — `pnpm dev` reads the same static content dev and prod, via TanStack Query + Zod (spec 008). Public host is **Netlify Free** static (007c / 010). `content/{seed,chrome}.json` is the source of truth (spec 009, relocated by 018); `apps/web/src/data/{cities,krakow,chrome}.ts` are **generated** from it via `pnpm gen:content` — do not hand-edit them. Do not invent a Node API.
 - Maps: MapLibre + OpenFreeMap. No Mapbox / CARTO / MapTiler keys.
 
 ## Commands
@@ -21,8 +21,7 @@ pnpm --filter web typecheck
 pnpm --filter web lint
 pnpm --filter web fmt:check
 pnpm --filter web knip
-pnpm dev:api        # cd apps/api && go run .
-pnpm dev:full       # web + api together
+pnpm gen:content    # regenerate apps/web/src/data/*.ts from content/
 ```
 
 ## Rules

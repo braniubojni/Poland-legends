@@ -17,10 +17,10 @@ const StoryPage = () => {
   const nextId = nextStoryId(cityResult.data?.stories ?? [], storyId);
 
   if (storyResult.error instanceof NotFoundError) {
-    return <StoryStatus kind="not-found" locale={locale} />;
+    return <StoryStatus kind="not-found" />;
   }
   if (storyResult.error) {
-    return <StoryStatus kind="error" locale={locale} />;
+    return <StoryStatus kind="error" />;
   }
   if (!story) return null;
 

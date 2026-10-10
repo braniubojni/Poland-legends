@@ -20,15 +20,24 @@ import {
   POLAND_ZOOM,
 } from "@/lib/geo";
 import type { Theme } from "@/lib/theme";
+import { OP_MAP_ATTRIBUTION_CONTROL } from "./attribution";
+import { addBorderOverlay, type BorderFeature } from "./border-helpers";
 import { localeBag } from "./localeBag";
+import type { MapLoadEvent } from "./loading-helpers";
+import polandBorderJson from "./poland-border.json";
 
 setWorkerUrl(maplibreWorkerUrl);
+
+const POLAND_BORDER_ID = "poland-border";
+const polandBorder = polandBorderJson as BorderFeature;
 
 export type PolandPinState = {
   locale: Locale;
   cities: City[];
   onSelect: (id: string) => void;
   theme: Theme;
+  lockedLabel: string;
+  onLoadEvent: (event: MapLoadEvent) => void;
 };
 
 class PolandHomeControl implements IControl {
@@ -57,12 +66,16 @@ class PolandHomeControl implements IControl {
   }
 }
 
-const placePins = (map: MlMap, locale: Locale, cities: City[], onSelect: (id: string) => void) => {
+const placePins = (
+  map: MlMap,
+  locale: Locale,
+  cities: City[],
+  onSelect: (id: string) => void,
+  lockedLabel: string,
+) => {
   const markers: Marker[] = [];
   for (const city of cities) {
-    const label = city.unlocked
-      ? t(city.name, locale)
-      : `${t(city.name, locale)} — ${locale === "pl" ? "Wkrótce" : "Coming next"}`;
+    const label = city.unlocked ? t(city.name, locale) : `${t(city.name, locale)} — ${lockedLabel}`;
     const el = document.createElement("button");
     el.type = "button";
     el.className = `op-city-pin ${city.unlocked ? "is-open" : "is-locked"}${city.coords.lat > 53.2 ? " is-north" : ""}`;
@@ -87,7 +100,13 @@ export const replacePolandPins = (
   state: PolandPinState,
 ) => {
   for (const marker of markersRef.current) marker.remove();
-  markersRef.current = placePins(map, state.locale, state.cities, state.onSelect);
+  markersRef.current = placePins(
+    map,
+    state.locale,
+    state.cities,
+    state.onSelect,
+    state.lockedLabel,
+  );
 };
 
 export const mountPolandMap = ({
@@ -112,11 +131,12 @@ export const mountPolandMap = ({
     maxZoom: 12,
     maxBounds: POLAND_MAX_BOUNDS,
     cooperativeGestures: true,
-    attributionControl: { compact: true },
+    attributionControl: OP_MAP_ATTRIBUTION_CONTROL,
     locale: localeBag(latest().locale),
     fadeDuration: 0,
   });
   mapRef.current = map;
+  latest().onLoadEvent("mount");
 
   map.addControl(new NavigationControl({ showCompass: false }), "top-left");
   map.addControl(new PolandHomeControl(), "top-left");
@@ -127,7 +147,9 @@ export const mountPolandMap = ({
     map.fitBounds(POLAND_BOUNDS, { ...POLAND_FIT, duration: 0 });
     const state = latest();
     applyMapTone(map, state.theme);
+    addBorderOverlay(map, POLAND_BORDER_ID, polandBorder, state.theme);
     replacePolandPins(map, markersRef, state);
+    state.onLoadEvent("load");
   });
 
   const resize = () => map.resize();
@@ -151,10 +173,13 @@ export const restylePolandMap = (
   styleUrl: string,
   latest: () => PolandPinState,
 ) => {
+  latest().onLoadEvent("restyle");
   map.setStyle(styleUrl, { diff: false });
   map.once("style.load", () => {
     const state = latest();
     applyMapTone(map, state.theme);
+    addBorderOverlay(map, POLAND_BORDER_ID, polandBorder, state.theme);
     replacePolandPins(map, markersRef, state);
+    state.onLoadEvent("style-load");
   });
 };

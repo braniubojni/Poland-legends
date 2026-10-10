@@ -52,12 +52,6 @@ body,
   background: var(--op-map);
 }
 
-.op-map-fallback {
-  position: absolute;
-  inset: 0;
-  background: var(--op-map);
-}
-
 .op-map {
   position: absolute;
   inset: 0;
@@ -120,6 +114,10 @@ body,
 
 .op-map .maplibregl-ctrl-attrib a {
   color: var(--op-muted);
+}
+
+.op-map .maplibregl-ctrl-attrib-button {
+  display: none;
 }
 
 .op-map .op-map-home {
@@ -275,6 +273,48 @@ body,
   height: 20rem;
   object-fit: cover;
   object-position: center 58%;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.op-story-still.is-loaded {
+  opacity: 1;
+}
+
+.op-story-skeleton {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: linear-gradient(
+    90deg,
+    var(--op-surface) 25%,
+    var(--op-border) 37%,
+    var(--op-surface) 63%
+  );
+  background-size: 400% 100%;
+  animation: op-story-shimmer 1.4s ease infinite;
+}
+
+@keyframes op-story-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.op-story-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--op-muted);
+  background: var(--op-surface);
 }
 
 .op-story-still[data-story="hejnal"],

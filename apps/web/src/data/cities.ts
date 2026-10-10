@@ -1,11 +1,19 @@
+// GENERATED FILE — do not hand-edit.
+// Source of truth: content/. Regenerate with `pnpm gen:content`.
 import type { City } from "./types";
 
 export const cities: City[] = [
   {
     id: "krakow",
-    name: { en: "Kraków", pl: "Kraków" },
+    name: {
+      en: "Kraków",
+      pl: "Kraków",
+    },
     unlocked: true,
-    coords: { lat: 50.0614, lng: 19.9373 },
+    coords: {
+      lat: 50.0614,
+      lng: 19.9373,
+    },
     blurb: {
       en: "Six living stories. Open a pin, read the legend beside the record, then play.",
       pl: "Sześć żywych opowieści. Otwórz pinezkę, przeczytaj legendę obok faktu i zagraj.",
@@ -13,9 +21,15 @@ export const cities: City[] = [
   },
   {
     id: "warsaw",
-    name: { en: "Warsaw", pl: "Warszawa" },
+    name: {
+      en: "Warsaw",
+      pl: "Warszawa",
+    },
     unlocked: false,
-    coords: { lat: 52.2297, lng: 21.0122 },
+    coords: {
+      lat: 52.2297,
+      lng: 21.0122,
+    },
     blurb: {
       en: "Coming next.",
       pl: "Wkrótce.",
@@ -23,9 +37,15 @@ export const cities: City[] = [
   },
   {
     id: "gdansk",
-    name: { en: "Gdańsk", pl: "Gdańsk" },
+    name: {
+      en: "Gdańsk",
+      pl: "Gdańsk",
+    },
     unlocked: false,
-    coords: { lat: 54.352, lng: 18.6466 },
+    coords: {
+      lat: 54.352,
+      lng: 18.6466,
+    },
     blurb: {
       en: "Coming next.",
       pl: "Wkrótce.",
@@ -33,9 +53,15 @@ export const cities: City[] = [
   },
   {
     id: "wroclaw",
-    name: { en: "Wrocław", pl: "Wrocław" },
+    name: {
+      en: "Wrocław",
+      pl: "Wrocław",
+    },
     unlocked: false,
-    coords: { lat: 51.1079, lng: 17.0385 },
+    coords: {
+      lat: 51.1079,
+      lng: 17.0385,
+    },
     blurb: {
       en: "Coming next.",
       pl: "Wkrótce.",
@@ -43,9 +69,15 @@ export const cities: City[] = [
   },
   {
     id: "poznan",
-    name: { en: "Poznań", pl: "Poznań" },
+    name: {
+      en: "Poznań",
+      pl: "Poznań",
+    },
     unlocked: false,
-    coords: { lat: 52.4064, lng: 16.9252 },
+    coords: {
+      lat: 52.4064,
+      lng: 16.9252,
+    },
     blurb: {
       en: "Coming next.",
       pl: "Wkrótce.",
@@ -53,9 +85,15 @@ export const cities: City[] = [
   },
   {
     id: "lublin",
-    name: { en: "Lublin", pl: "Lublin" },
+    name: {
+      en: "Lublin",
+      pl: "Lublin",
+    },
     unlocked: false,
-    coords: { lat: 51.2465, lng: 22.5684 },
+    coords: {
+      lat: 51.2465,
+      lng: 22.5684,
+    },
     blurb: {
       en: "Coming next.",
       pl: "Wkrótce.",

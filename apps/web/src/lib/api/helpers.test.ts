@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { NotFoundError } from "./client";
-import { loadCities, loadCity, loadStory } from "./helpers";
+import { loadChrome, loadCities, loadCity, loadStory, NotFoundError } from "./helpers";
 
 describe("loadCities", () => {
   it("returns the bundled city list", () => {
@@ -33,5 +32,13 @@ describe("loadStory", () => {
 
   it("throws NotFoundError for an unknown story", () => {
     expect(() => loadStory("krakow", "nope")).toThrow(NotFoundError);
+  });
+});
+
+describe("loadChrome", () => {
+  it("returns the bundled chrome map with both languages", () => {
+    const chrome = loadChrome();
+    expect(chrome["story.legend"]?.en).toBeTruthy();
+    expect(chrome["story.legend"]?.pl).toBeTruthy();
   });
 });

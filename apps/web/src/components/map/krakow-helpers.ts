@@ -20,9 +20,15 @@ import {
   KRAKOW_ZOOM,
 } from "@/lib/geo";
 import type { Theme } from "@/lib/theme";
+import { OP_MAP_ATTRIBUTION_CONTROL } from "./attribution";
+import { addBorderOverlay, rectangleFeature } from "./border-helpers";
 import { localeBag } from "./localeBag";
+import type { MapLoadEvent } from "./loading-helpers";
 
 setWorkerUrl(maplibreWorkerUrl);
+
+const KRAKOW_BORDER_ID = "krakow-border";
+const krakowBorder = rectangleFeature(KRAKOW_BOUNDS);
 
 export type KrakowPinState = {
   locale: Locale;
@@ -30,6 +36,7 @@ export type KrakowPinState = {
   completed: string[];
   onSelect: (id: string) => void;
   theme: Theme;
+  onLoadEvent: (event: MapLoadEvent) => void;
 };
 
 class KrakowHomeControl implements IControl {
@@ -121,11 +128,12 @@ export const mountKrakowMap = ({
     maxZoom: 17.5,
     maxBounds: KRAKOW_MAX_BOUNDS,
     cooperativeGestures: true,
-    attributionControl: { compact: true },
+    attributionControl: OP_MAP_ATTRIBUTION_CONTROL,
     locale: localeBag(latest().locale),
     fadeDuration: 0,
   });
   mapRef.current = map;
+  latest().onLoadEvent("mount");
 
   map.addControl(new NavigationControl({ showCompass: false }), "top-left");
   map.addControl(new KrakowHomeControl(), "top-left");
@@ -136,7 +144,9 @@ export const mountKrakowMap = ({
     map.fitBounds(KRAKOW_BOUNDS, { ...KRAKOW_FIT, duration: 0 });
     const state = latest();
     applyMapTone(map, state.theme);
+    addBorderOverlay(map, KRAKOW_BORDER_ID, krakowBorder, state.theme);
     replaceKrakowPins(map, markersRef, state);
+    state.onLoadEvent("load");
   });
 
   const resize = () => map.resize();
@@ -160,10 +170,13 @@ export const restyleKrakowMap = (
   styleUrl: string,
   latest: () => KrakowPinState,
 ) => {
+  latest().onLoadEvent("restyle");
   map.setStyle(styleUrl, { diff: false });
   map.once("style.load", () => {
     const state = latest();
     applyMapTone(map, state.theme);
+    addBorderOverlay(map, KRAKOW_BORDER_ID, krakowBorder, state.theme);
     replaceKrakowPins(map, markersRef, state);
+    state.onLoadEvent("style-load");
   });
 };

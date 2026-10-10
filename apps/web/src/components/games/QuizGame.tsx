@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import type { QuizQuestion } from "@/data/types";
+import { useChrome } from "@/lib/chrome";
 import { t } from "@/lib/copy";
 import { useLocale } from "@/lib/progress";
 import { RADIUS } from "@/theme/tokens";
@@ -15,6 +16,7 @@ type Props = {
 
 const QuizGame = ({ questions, onComplete }: Props) => {
   const locale = useLocale();
+  const c = useChrome();
   const [index, setIndex] = useState(0);
   const [picked, setPicked] = useState<string | null>(null);
   const [score, setScore] = useState(0);
@@ -53,7 +55,7 @@ const QuizGame = ({ questions, onComplete }: Props) => {
           bgcolor: "background.paper",
         }}
       >
-        <Typography variant="h3">{locale === "pl" ? "Gotowe" : "Done"}</Typography>
+        <Typography variant="h3">{c("game.quiz.done")}</Typography>
         <Typography color="text.secondary" sx={{ mt: 1 }}>
           {score}/{questions.length}
         </Typography>
@@ -72,7 +74,7 @@ const QuizGame = ({ questions, onComplete }: Props) => {
       }}
     >
       <Typography variant="overline" color="text.secondary" sx={{ letterSpacing: "0.08em" }}>
-        {locale === "pl" ? "Pytanie" : "Question"} {index + 1} / {questions.length}
+        {c("game.quiz.question")} {index + 1} / {questions.length}
       </Typography>
       <Typography variant="h3" sx={{ mt: 1 }}>
         {t(q.prompt, locale)}
@@ -104,23 +106,10 @@ const QuizGame = ({ questions, onComplete }: Props) => {
       {revealed ? (
         <Box sx={{ mt: 2 }}>
           <Typography variant="body2" sx={{ color: "var(--op-ink-soft)" }}>
-            {correct
-              ? locale === "pl"
-                ? "Tak."
-                : "Yes."
-              : locale === "pl"
-                ? "Nie ten."
-                : "Not that one."}{" "}
-            {t(q.explanation, locale)}
+            {correct ? c("game.quiz.correct") : c("game.quiz.incorrect")} {t(q.explanation, locale)}
           </Typography>
           <Button sx={{ mt: 2 }} variant="contained" onClick={next}>
-            {index + 1 >= questions.length
-              ? locale === "pl"
-                ? "Zakończ"
-                : "Finish"
-              : locale === "pl"
-                ? "Dalej"
-                : "Next"}
+            {index + 1 >= questions.length ? c("game.quiz.finish") : c("game.quiz.next")}
           </Button>
         </Box>
       ) : null}

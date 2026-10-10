@@ -1,6 +1,6 @@
 # SPEC 009 — Content API (SQLite SoT + chrome)
 
-Status: **written** (not implemented)
+Status: **done**
 Covers: **S-05**
 Depends on: 007, 008, **016** (layout first if both are open)
 Parent: [000-global.md](./000-global.md)
@@ -49,12 +49,12 @@ One seed. Local API serves it. Prod `queryFn`s read a generated dump of the same
 
 ## Done when
 
-- [ ] Local API serves cities, stories, and chrome from SQLite
-- [ ] `GET /v1/chrome` matches the Zod schema; web uses `['chrome']`
-- [ ] Inline `locale === "pl" ?` chrome in the listed UI is gone (wordmark `Opowieści` / `PL`/`EN` labels may stay)
-- [ ] Generate command produces `cities.ts` / `krakow.ts` / `chrome.ts` from the same seed
-- [ ] Prod path still has **no** `localhost` fetch (007c)
-- [ ] Seed copy is 1:1 with pre-009 prose (017 not mixed in)
-- [ ] Tests cover ≥70% of this spec’s new behaviour (aim 80%): chrome 200, missing-key handling, generate dump round-trip, Zod parse. Skip Netlify UI.
-- [ ] typecheck / lint / fmt / `go test` pass
-- [ ] 000 / README mark 009 **done**
+- [x] Local API serves cities, stories, and chrome from SQLite
+- [x] `GET /v1/chrome` matches the Zod schema; web uses `['chrome']`
+- [x] Inline `locale === "pl" ?` chrome in the listed UI is gone (wordmark `Opowieści` / `PL`/`EN` labels may stay)
+- [x] Generate command produces `cities.ts` / `krakow.ts` / `chrome.ts` from the same seed
+- [x] Prod path still has **no** `localhost` fetch (007c)
+- [x] Seed copy is 1:1 with pre-009 prose (017 not mixed in)
+- [x] Tests cover ≥70% of this spec’s new behaviour (aim 80%): chrome 200, missing-key handling, generate dump round-trip, Zod parse. Skip Netlify UI.
+- [x] typecheck / lint / fmt / `go test` pass
+- [x] 000 / README mark 009 **done**

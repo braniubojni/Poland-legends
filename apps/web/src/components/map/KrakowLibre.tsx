@@ -5,15 +5,17 @@ import { MAP_STYLES } from "@/lib/geo";
 import { useStoredTheme } from "@/lib/progress";
 import { resolveTheme } from "@/lib/theme";
 import { mountKrakowMap, replaceKrakowPins, restyleKrakowMap } from "./krakow-helpers";
+import type { MapLoadEvent } from "./loading-helpers";
 
 type Props = {
   locale: Locale;
   stories: StorySummary[];
   completed: string[];
   onSelect: (storyId: string) => void;
+  onLoadEvent: (event: MapLoadEvent) => void;
 };
 
-const KrakowLibre = ({ locale, stories, completed, onSelect }: Props) => {
+const KrakowLibre = ({ locale, stories, completed, onSelect, onLoadEvent }: Props) => {
   const storedTheme = useStoredTheme();
   const theme =
     storedTheme === "light" || storedTheme === "dark" ? storedTheme : resolveTheme(storedTheme);
@@ -22,7 +24,14 @@ const KrakowLibre = ({ locale, stories, completed, onSelect }: Props) => {
   const markersRef = useRef<Marker[]>([]);
   const styleRef = useRef(MAP_STYLES[theme]);
 
-  const latest = useEffectEvent(() => ({ locale, stories, completed, onSelect, theme }));
+  const latest = useEffectEvent(() => ({
+    locale,
+    stories,
+    completed,
+    onSelect,
+    theme,
+    onLoadEvent,
+  }));
 
   useEffect(() => {
     const root = wrapRef.current;

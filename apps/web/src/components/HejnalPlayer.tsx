@@ -3,12 +3,12 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Volume2 } from "lucide-react";
-import { useLocale } from "@/lib/progress";
+import { useChrome } from "@/lib/chrome";
 import { RADIUS } from "@/theme/tokens";
 import { playHejnal } from "./hejnal-helpers";
 
 const HejnalPlayer = () => {
-  const locale = useLocale();
+  const c = useChrome();
   const ctxRef = useRef<AudioContext | null>(null);
   const [playing, setPlaying] = useState(false);
 
@@ -47,18 +47,10 @@ const HejnalPlayer = () => {
         sx={{ minWidth: 176 }}
       >
         <Volume2 size={16} style={{ marginRight: 8 }} />
-        {locale === "pl"
-          ? playing
-            ? "Gra…"
-            : "Odtwórz hejnał"
-          : playing
-            ? "Playing…"
-            : "Play the call"}
+        {playing ? c("hejnal.playing") : c("hejnal.play")}
       </Button>
       <Typography variant="body2" color="text.secondary">
-        {locale === "pl"
-          ? "Krótki motyw w F-dur. Urwany w pół frazy — tak, jak na wieży."
-          : "A short F-major phrase. Cut mid-note — as from the tower."}
+        {c("hejnal.caption")}
       </Typography>
     </Box>
   );

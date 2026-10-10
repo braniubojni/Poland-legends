@@ -1,18 +1,23 @@
 import { useEffect, useEffectEvent, useRef } from "react";
 import { Map as MlMap, Marker } from "maplibre-gl";
 import type { City, Locale } from "@/data/types";
+import { useChrome } from "@/lib/chrome";
 import { MAP_STYLES } from "@/lib/geo";
 import { useStoredTheme } from "@/lib/progress";
 import { resolveTheme } from "@/lib/theme";
+import type { MapLoadEvent } from "./loading-helpers";
 import { mountPolandMap, replacePolandPins, restylePolandMap } from "./poland-helpers";
 
 type Props = {
   locale: Locale;
   cities: City[];
   onSelect: (cityId: string) => void;
+  onLoadEvent: (event: MapLoadEvent) => void;
 };
 
-const PolandLibre = ({ locale, cities, onSelect }: Props) => {
+const PolandLibre = ({ locale, cities, onSelect, onLoadEvent }: Props) => {
+  const c = useChrome();
+  const lockedLabel = c("city.locked");
   const storedTheme = useStoredTheme();
   const theme =
     storedTheme === "light" || storedTheme === "dark" ? storedTheme : resolveTheme(storedTheme);
@@ -21,7 +26,14 @@ const PolandLibre = ({ locale, cities, onSelect }: Props) => {
   const markersRef = useRef<Marker[]>([]);
   const styleRef = useRef(MAP_STYLES[theme]);
 
-  const latest = useEffectEvent(() => ({ locale, cities, onSelect, theme }));
+  const latest = useEffectEvent(() => ({
+    locale,
+    cities,
+    onSelect,
+    theme,
+    lockedLabel,
+    onLoadEvent,
+  }));
 
   useEffect(() => {
     const root = wrapRef.current;
@@ -47,7 +59,7 @@ const PolandLibre = ({ locale, cities, onSelect }: Props) => {
     const map = mapRef.current;
     if (!map) return;
     replacePolandPins(map, markersRef, latest());
-  }, [locale, cities]);
+  }, [locale, cities, lockedLabel]);
 
   return (
     <div ref={wrapRef} className={`op-map ${theme === "dark" ? "op-map-dark" : "op-map-light"}`} />

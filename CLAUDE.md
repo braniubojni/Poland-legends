@@ -21,7 +21,7 @@ Opowieści — map of Polish legends. Poland map → city → story pin → lege
 - Vite SPA at `apps/web` — React 19, TypeScript, TanStack Router (file-based routes), MUI v9 (custom parchment theme — must not look like a default dashboard: no Roboto, no purple, no elevated AppBar).
 - State: React Context (`ProgressProvider`), persisted to `localStorage` key `opowiesci-v1` (versioned, with migration).
 - Maps: MapLibre + OpenFreeMap public styles only — no Mapbox/CARTO/MapTiler keys, ever.
-- Data: `apps/web/src/data/` is 007's seed and 007c's production path; local `pnpm dev:full` talks to `apps/api` (008). Public host is Netlify Free static — do not wrap Fiber as a Function. Do not invent a Node API.
+- Data: `content/{seed,chrome}.json` is the source of truth (spec 009, relocated by 018); `apps/web/src/data/{cities,krakow,chrome}.ts` are **generated** from it via `pnpm gen:content` — never hand-edit them, edit the seed and regenerate. No backend, local or in prod (018 removed the Go/SQLite dev API) — `pnpm dev` reads the same static content dev and prod. Public host is Netlify Free static. Do not invent a Node API.
 - Lint/format: oxlint + oxfmt. Unused code: Knip. Tests: Vitest v5.
 - No SSR, no auth, no TanStack Start, no Next.js.
 
@@ -39,9 +39,7 @@ pnpm --filter web fmt          # oxfmt (write)
 pnpm --filter web fmt:check    # oxfmt --check
 pnpm --filter web test         # vitest run
 pnpm --filter web knip         # unused files / exports / deps
-
-pnpm dev:api                    # cd apps/api && go run . (spec 007, not wired to the web app yet)
-pnpm dev:full                   # web + api together
+pnpm gen:content                # regenerate apps/web/src/data/*.ts from content/ (spec 009, relocated by 018)
 ```
 
 Root `package.json` scripts (`dev`/`build`/`typecheck`/`lint`/`fmt`/`test`/`knip`) just forward to the same `--filter web` commands. To run a single test file: `pnpm --filter web test <path-or-pattern>` (Vitest picks up args after `run`).
@@ -53,7 +51,7 @@ Root `package.json` scripts (`dev`/`build`/`typecheck`/`lint`/`fmt`/`test`/`knip
 - **Colocated helpers**: pure helpers, one-off controls/classes, and long `useEffect` bodies (mount/listeners/cleanup) live in a `helpers.ts` next to the component (e.g. `components/map/helpers.ts`), not a global `src/helpers.ts`. The component file should be wiring + JSX calling a named helper.
 - **React 19 APIs**: use `useEffectEvent` instead of the `ref.current = value` stale-callback pattern, `<Activity>` for offscreen-but-alive UI, `<Suspense>` for async boundaries, `use()` for reading a Promise/Context in render, and `ref` as a plain prop instead of `forwardRef`. No RSC, no `use server`.
 
-- **Spec tests**: cover **at least 70%** of a child spec’s new behaviour before marking it done (aim **80%**). Vitest next to helpers; Go `go test`. See `.cursor/rules/spec-test-coverage.mdc`.
+- **Spec tests**: cover **at least 70%** of a child spec’s new behaviour before marking it done (aim **80%**). Vitest next to helpers. See `.cursor/rules/spec-test-coverage.mdc`.
 
 Note: spec 011 retrofitted `apps/web` to these rules. Don't "fix" unrelated files as a side effect of an unrelated change.
 

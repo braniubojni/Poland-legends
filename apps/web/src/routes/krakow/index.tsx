@@ -6,10 +6,11 @@ import { ArrowLeft } from "lucide-react";
 import { AppLink } from "@/components/AppLink";
 import { KrakowMap } from "@/components/KrakowMap";
 import { cityQueryOptions } from "@/lib/api";
-import { useCompleted, useLocale } from "@/lib/progress";
+import { useChrome } from "@/lib/chrome";
+import { useCompleted } from "@/lib/progress";
 
 const KrakowPage = () => {
-  const locale = useLocale();
+  const c = useChrome();
   const completed = useCompleted();
   const { data: city } = useQuery(cityQueryOptions("krakow"));
   const stories = city?.stories ?? [];
@@ -29,15 +30,13 @@ const KrakowPage = () => {
         }}
       >
         <ArrowLeft size={16} />
-        {locale === "pl" ? "Polska" : "Poland"}
+        {c("nav.poland")}
       </AppLink>
       <Typography variant="h1" sx={{ mt: 2 }}>
         Kraków
       </Typography>
       <Typography sx={{ mt: 1.5, maxWidth: "65ch", color: "var(--op-ink-soft)" }}>
-        {locale === "pl"
-          ? "Otwórz pinezkę. Przeczytaj, co ludzie opowiadają, i co da się sprawdzić. Zagraj minutę. Potem idź na miejsce."
-          : "Open a pin. Read what people tell, and what can be checked. Play for a minute. Then go stand there."}
+        {c("krakow.intro")}
       </Typography>
       <Typography
         variant="body2"

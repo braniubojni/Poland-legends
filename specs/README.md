@@ -13,17 +13,23 @@ Do not implement from this README. Split work only by creating a numbered child 
 | 004 | **done** | Story images |
 | 005 | **done** | Local web bootstrap (Vite SPA + MUI + oxlint/oxfmt + Vitest) |
 | 006 | **done** | State: Context API + persist |
-| 007 | **done** | Go API + SQLite + rate limit + logging |
-| 007c | **done** | Netlify Free prep (static SPA, Go stays local) |
-| 008 | **done** | TanStack Query + fetch + Zod |
-| 009 | written | Content API: SQLite SoT + chrome; prod generated 007c dump |
+| 007 | **done**, superseded by 018 | Go API + SQLite + rate limit + logging (removed) |
+| 007c | **done**, superseded by 018 | Netlify Free prep (static SPA, Go stays local — no Go left) |
+| 008 | **done** | TanStack Query + fetch + Zod (fetch branch removed by 018) |
+| 009 | **done**, content pipeline kept | Content API: SQLite SoT + chrome; pipeline relocated to `content/` by 018 |
 | 010 | **done** | Netlify Free publish (depends on 007c) |
 | 011 | **done** | Align `apps/web` to house rules (expressions, size, helpers, React 19) |
 | 012 | **done** | Knip (unused files, exports, dependencies) |
-| 013 | written | Map loaders (overlay + list skeletons) |
-| 014 | written | Hide compact attribution “i” |
-| 015 | written | Poland + Kraków playable borders |
-| 016 | written | Standard Go layout (`cmd/api` + `internal/app`) |
+| 013 | **done** | Map loaders (overlay + list skeletons) |
+| 014 | **done** | Hide compact attribution “i” |
+| 015 | **done** | Poland + Kraków playable borders |
+| 016 | **done**, superseded by 018 | Standard Go layout (`cmd/api` + `internal/app`) (removed) |
 | 017 | written | Richer six-story prose |
+| 018 | **done** | Remove Go/SQLite backend (static-only content) + TypeScript 7 |
+| 019 | **done** | Story image loaders |
+| 020 | written | Git hooks (Husky pre-commit/pre-push) |
+| 021 | written | Playwright e2e + 90% coverage gate |
+| 022 | written | Smart route lazy loading (story pages first) |
+| 023 | written | Global error boundary + retry |
 
 Child specs must include: Goal, Out of scope, Files, Done when (checkboxes, including tests covering ≥70% of the new behaviour, aim 80%). One child = one PR-sized change.
