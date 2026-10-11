@@ -366,7 +366,7 @@ No local gate today; Netlify's build step only runs `pnpm --filter web build`, n
 
 - `pre-commit`: `fmt:check` → `lint` → `typecheck` → `knip` → `build`. `pre-push`: `test`.
 - Husky v9, `"prepare": "husky"` at the root. No lint-staged, no commit-msg linting, no CI (separate future spec).
-- Child: **020** (written, not implemented)
+- Child: **020** (**done**)
 
 ### S-13 — Playwright e2e + 90% coverage gate → 021
 
@@ -459,7 +459,7 @@ Do UI that users see before the rewrite. **005** is this repo in place, not a se
 | 24 | 022 Smart route lazy loading | P-10 | 004, 013, 019 |
 | 25 | 023 Global error boundary + retry | P-11 | none |
 
-**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, **008**, **009**, **010**, **011**, **012**, **013**, **014**, **015**, **016**, **018**, and **019** are done. **017**, **020**, **021**, **022**, and **023** are written, not implemented. **018** has landed: production and dev both read the generated static path (`pnpm gen:content` from `content/seed.json`/`chrome.json`); there is no live backend anywhere, and 007/007c/S-09's "SQLite is SoT for local `pnpm dev:api`" no longer applies.
+**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, **008**, **009**, **010**, **011**, **012**, **013**, **014**, **015**, **016**, **018**, **019**, and **020** are done. **017**, **021**, **022**, and **023** are written, not implemented. **018** has landed: production and dev both read the generated static path (`pnpm gen:content` from `content/seed.json`/`chrome.json`); there is no live backend anywhere, and 007/007c/S-09's "SQLite is SoT for local `pnpm dev:api`" no longer applies.
 
 ---
 

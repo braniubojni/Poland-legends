@@ -13,6 +13,10 @@
     "fmt:check": "pnpm --filter web fmt:check",
     "test": "pnpm --filter web test",
     "knip": "pnpm --filter web knip",
-    "gen:content": "node scripts/gen-content.mjs && pnpm fmt"
+    "gen:content": "node scripts/gen-content.mjs && pnpm fmt",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
   }
 }
