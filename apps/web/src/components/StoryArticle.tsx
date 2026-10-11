@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
 import { AppLink } from "@/components/AppLink";
+import CopyParagraphs from "@/components/CopyParagraphs";
 import { HejnalPlayer } from "@/components/HejnalPlayer";
 import { StoryArt } from "@/components/StoryArt";
 import { StoryGame } from "@/components/games/StoryGame";
@@ -59,9 +60,7 @@ const StoryArticle = ({ story, locale, nextId, onComplete, onNext, onBack }: Pro
 
       <Box component="section" sx={{ mt: 4 }}>
         <Typography variant="h2">{c("story.legend")}</Typography>
-        <Typography sx={{ mt: 1.5, maxWidth: "65ch", color: "var(--op-ink-soft)" }}>
-          {t(story.legend, locale)}
-        </Typography>
+        <CopyParagraphs text={t(story.legend, locale)} />
       </Box>
 
       <Box
@@ -76,9 +75,7 @@ const StoryArticle = ({ story, locale, nextId, onComplete, onNext, onBack }: Pro
         }}
       >
         <Typography variant="h2">{c("story.fact")}</Typography>
-        <Typography sx={{ mt: 1.5, maxWidth: "65ch", color: "var(--op-ink-soft)" }}>
-          {t(story.fact, locale)}
-        </Typography>
+        <CopyParagraphs text={t(story.fact, locale)} />
       </Box>
 
       <Box component="section" sx={{ mt: 4 }}>
@@ -106,9 +103,7 @@ const StoryArticle = ({ story, locale, nextId, onComplete, onNext, onBack }: Pro
         </Box>
         <Box>
           <Typography variant="h3">{c("story.seeToday")}</Typography>
-          <Typography sx={{ mt: 1, maxWidth: "65ch", color: "var(--op-ink-soft)" }}>
-            {t(story.seeToday, locale)}
-          </Typography>
+          <CopyParagraphs text={t(story.seeToday, locale)} firstMt={1} />
         </Box>
       </Box>
 

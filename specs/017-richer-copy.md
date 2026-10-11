@@ -1,6 +1,6 @@
 # SPEC 017 — Richer six-story prose
 
-Status: **written** (not implemented)
+Status: **done**
 Covers: **P-08**
 Depends on: 009
 Parent: [000-global.md](./000-global.md)
@@ -40,17 +40,17 @@ Do not add stories. Do not lengthen for its own sake past what a phone story pag
 ## Files
 
 - `specs/017-richer-copy.md` (this)
-- API seed (`apps/api/internal/db/` seed JSON / chrome unchanged)
-- Regenerated `apps/web/src/data/krakow.ts` (via 009 generate)
-- Tests that the six IDs still exist and legend/fact/seeToday are non-empty in both locales (not a copy-quality linter)
+- `content/seed.json` (relocated by 018; chrome unchanged)
+- Regenerated `apps/web/src/data/krakow.ts` via `pnpm gen:content`
+- `apps/web/src/components/copy-paragraphs-helpers.ts` and its test (six IDs, both locales non-empty, legend paragraphs, stable answers — not a copy-quality linter)
 - `specs/000-global.md`, `specs/README.md`
 
 ## Done when
 
-- [ ] All six stories have longer legend + sourced fact + richer see-today in **en** and **pl**
-- [ ] Same six IDs; no new stories
-- [ ] Quiz/order/towers answers unchanged unless a documented fact fix required
-- [ ] Seed is edited; 007c dump regenerated (not a one-off TS-only edit)
-- [ ] Tests cover ≥70% of this spec’s new behaviour (aim 80%): six IDs present, both locales non-empty for legend/fact/seeToday, game `correctId`/`correct` stable vs pre-017 except documented fixes. Skip subjective prose review.
-- [ ] typecheck / lint / fmt pass
-- [ ] 000 / README mark 017 **done**
+- [x] All six stories have longer legend + sourced fact + richer see-today in **en** and **pl**
+- [x] Same six IDs; no new stories
+- [x] Quiz/order/towers answers unchanged unless a documented fact fix required (`golebie` g3 option `b` Polish label now names Henryk IV Probus, not Henryk II Pobożny; `correctId` stays `b`)
+- [x] Seed is edited; dump regenerated via `pnpm gen:content` (not a one-off TS-only edit)
+- [x] Tests cover ≥70% of this spec’s new behaviour (aim 80%): six IDs present, both locales non-empty for legend/fact/seeToday, game `correctId`/`correct` stable vs pre-017 except documented fixes. Skip subjective prose review.
+- [x] typecheck / lint / fmt pass
+- [x] 000 / README mark 017 **done**

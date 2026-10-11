@@ -55,16 +55,16 @@
       "pin": { "lat": 50.0616, "lng": 19.9394 },
       "image": { "light": "/stories/hejnal.webp", "dark": "/stories/hejnal-dark.webp" },
       "legend": {
-        "en": "During a Tatar raid a watchman on the taller tower sounded the alarm. An arrow struck his throat. The melody breaks off mid-phrase. The gates closed in time.",
-        "pl": "Podczas najazdu tatarskiego strażnik na wyższej wieży zagrał alarm. Strzała przeszyła mu gardło. Melodia urywa się w pół frazy. Bramy zdążono zamknąć."
+        "en": "During a Tatar raid a watchman stood on the taller tower of St Mary’s. He sounded the alarm. An arrow struck his throat, and the melody broke off mid-phrase. The gates closed in time.\n\nThe city kept the broken note. Every hour the call still stops where the watchman stopped.",
+        "pl": "Podczas najazdu tatarskiego strażnik stał na wyższej wieży Mariackiej. Zagrał alarm. Strzała przeszyła mu gardło, a melodia urwała się w pół frazy. Bramy zdążono zamknąć.\n\nMiasto zatrzymało urwany dźwięk. Co godzinę hejnał wciąż milknie tam, gdzie zamilkł strażnik."
       },
       "fact": {
-        "en": "The call is real and old. City pay records name a trumpeter at St Mary’s in 1392. Hejnał comes from Hungarian hajnal — dawn. It marked gates, fire, and danger. Firefighters still play it hourly to four directions. The arrow tale as we know it was written in the 1920s and spread by Eric P. Kelly’s The Trumpeter of Krakow (1928).",
-        "pl": "Hejnał jest prawdziwy i stary. Miejskie rachunki z 1392 roku płacą trębaczowi na Mariackim. Słowo hejnał pochodzi od węgierskiego hajnal — świt. Służył do bram, pożaru i alarmu. Strażacy wciąż grają go co godzinę na cztery strony świata. Historia o strzale, jaką znamy, powstała w latach 20. XX wieku i rozeszła się dzięki powieści Erica P. Kelly’ego The Trumpeter of Krakow (1928)."
+        "en": "The call is real and old. City pay records of 1392 name a trumpeter at St Mary’s. The word hejnał comes from Hungarian hajnal — dawn. It marked the gates, fire, and danger. Firefighters still play it every hour, to four directions. At noon the same call goes out live on Polish Radio, and has done since 1927.\n\nThe arrow tale is young. In 1919 Anna Pruszyńska told it to the American Eric P. Kelly. He published The Trumpeter of Krakow in 1928. Keep the legend. Do not file it as a medieval court record.",
+        "pl": "Hejnał jest prawdziwy i stary. Miejskie rachunki z 1392 roku wymieniają trębacza na Mariackim. Słowo hejnał pochodzi od węgierskiego hajnal — świt. Oznaczał bramy, pożar i alarm. Strażacy wciąż grają go co godzinę, na cztery strony świata. W południe ten sam sygnał idzie na żywo w Polskim Radiu — od 1927 roku.\n\nHistoria o strzale jest młoda. W 1919 roku Anna Pruszyńska opowiedziała ją Amerykaninowi Ericowi P. Kelly’emu. On wydał The Trumpeter of Krakow w 1928 roku. Zostaw legendę. Nie wpinaj jej do średniowiecznych akt."
       },
       "seeToday": {
-        "en": "Stand on the Rynek at any full hour. Look at the taller tower — the hejnalica. At noon the same call goes out on Polish Radio.",
-        "pl": "Stań na Rynku o pełnej godzinie. Patrz na wyższą wieżę — hejnalicę. W południe ten sam hejnał idzie w Polskie Radio."
+        "en": "Stand on the Rynek at any full hour and look up at the taller tower — the hejnalica. A small window opens. The trumpeter plays once to each side of the square, and the last note breaks off.\n\nAt noon you can hear the same call on Polish Radio, sent live from the tower.",
+        "pl": "Stań na Rynku o pełnej godzinie i patrz na wyższą wieżę — hejnalicę. Otwiera się małe okienko. Trębacz gra raz na każdą stronę placu, a ostatni dźwięk się urywa.\n\nW południe ten sam hejnał słychać w Polskim Radiu, nadawany na żywo z wieży."
       },
       "game": {
         "kind": "quiz",
@@ -142,16 +142,16 @@
       "pin": { "lat": 50.053, "lng": 19.9334 },
       "image": { "light": "/stories/smok.webp", "dark": "/stories/smok-dark.webp" },
       "legend": {
-        "en": "A dragon lived under the hill and ate livestock — and, in darker tellings, people. Knights failed. A clever cobbler (Skuba) left a sulfur-stuffed skin. The beast drank the Vistula and burst. The city took the name of Krak.",
-        "pl": "Smok mieszkał pod wzgórzem i pożerał bydło — w mroczniejszych wersjach także ludzi. Rycerze nic nie wskórali. Sprytny szewczyk Skuba zostawił skórę wypchaną siarką. Bestia wypiła Wisłę i pękła. Miasto wzięło imię Kraka."
+        "en": "A dragon lived in a den under Wawel and ate the town’s livestock. In darker tellings it ate people too. Knights went down and did not come back.\n\nKrak’s sons — in the later, popular tale, a cobbler named Skuba — stuffed a calf skin with sulfur and left it as bait. The beast swallowed the skin, drank the Vistula to quench the burn, and burst. The city took the name of Krak.",
+        "pl": "Smok mieszkał w jamie pod Wawelem i pożerał bydło grodu. W mroczniejszych wersjach zjadał także ludzi. Rycerze schodzili w dół i nie wracali.\n\nSynowie Kraka — w późniejszej, popularnej opowieści szewczyk Skuba — wypchali cielęcą skórę siarką i zostawili ją jako przynętę. Bestia połknęła skórę, wypiła Wisłę, żeby ugasić żar, i pękła. Miasto wzięło imię Kraka."
       },
       "fact": {
-        "en": "The oldest written version is Bishop Wincenty Kadłubek’s chronicle (turn of the 12th/13th century): Krak’s sons feed the monster sulfur-stuffed cattle. The popular cobbler arrives later. The cave is a real limestone den. Bones hung at the cathedral were long called dragon bones; they are prehistoric.",
-        "pl": "Najstarszy zapis to kronika biskupa Wincentego Kadłubka (przełom XII i XIII w.): synowie Kraka karmią potwora bydłem z siarką. Popularny szewczyk pojawia się później. Jaskinia jest prawdziwą wapienną grotą. Kości przy katedrze długo zwano smoczymi; są prehistoryczne."
+        "en": "The oldest written version is Bishop Wincenty Kadłubek’s chronicle, from the turn of the 12th and 13th centuries. There Krak’s sons feed the monster cattle stuffed with sulfur. The clever cobbler arrives in later tellings.\n\nThe cave is a real limestone den under the hill, open to the river. Bones hung for years by the cathedral were called the dragon’s. They are prehistoric.",
+        "pl": "Najstarszy zapis to kronika biskupa Wincentego Kadłubka, z przełomu XII i XIII wieku. Tam synowie Kraka karmią potwora bydłem wypchanym siarką. Sprytny szewczyk pojawia się w późniejszych opowieściach.\n\nJaskinia jest prawdziwą wapienną grotą pod wzgórzem, otwartą ku rzece. Kości, które latami wisiały przy katedrze, zwano smoczymi. Są prehistoryczne."
       },
       "seeToday": {
-        "en": "Walk down to the Vistula. The bronze dragon breathes fire every few minutes. The den can be walked in season.",
-        "pl": "Zejdź nad Wisłę. Spiżowy smok zieje ogniem co kilka minut. Jamę można zwiedzać sezonowo."
+        "en": "Walk down from the castle to the Vistula bank. A bronze dragon stands at the cave mouth and breathes fire every few minutes.\n\nIn season you can walk the den itself — low, damp, and short — and come out facing the river.",
+        "pl": "Zejdź z zamku nad brzeg Wisły. Spiżowy smok stoi u wylotu jamy i co kilka minut zieje ogniem.\n\nSezonowo można przejść samą grotę — niską, wilgotną i krótką — i wyjść twarzą do rzeki."
       },
       "game": {
         "kind": "order",
@@ -173,16 +173,16 @@
       "pin": { "lat": 50.06185, "lng": 19.93975 },
       "image": { "light": "/stories/wieze.webp", "dark": "/stories/wieze-dark.webp" },
       "legend": {
-        "en": "Two brothers were hired to raise the towers. One murdered the other so his tower would stand taller. He finished the work, then killed himself with the same knife. The shorter tower is the unfinished guilt.",
-        "pl": "Dwóch braci miało wznieść wieże. Jeden zabił drugiego, by jego wieża była wyższa. Dokończył robotę i przebił się tym samym nożem. Niższa wieża to niedokończona wina."
+        "en": "Two brothers were hired to raise the towers of St Mary’s. Each wanted his own to stand taller. The one who was winning murdered the other, finished the work, and then killed himself with the same knife.\n\nThe shorter tower was left as it was. People read it as unfinished guilt.",
+        "pl": "Dwóch braci wynajęto, by wznieśli wieże Mariackie. Każdy chciał, żeby jego była wyższa. Ten, który wygrywał, zabił drugiego, dokończył robotę i przebił się tym samym nożem.\n\nNiższą wieżę zostawiono taką, jaka była. Czyta się ją jako niedokończoną winę."
       },
       "fact": {
-        "en": "The towers really differ. The northern one — the hejnalica — is about 81 metres with a sharp Gothic crown. The other is lower, with a Renaissance helm. That is design and centuries of rebuilding, not a documented fratricide.",
-        "pl": "Wieże naprawdę się różnią. Północna — hejnalica — ma około 81 metrów i ostry gotycki hełm. Druga jest niższa, z renesansowym zwieńczeniem. To projekt i wieki przebudów, nie udokumentowane bratobójstwo."
+        "en": "The towers really do not match. The northern one — the hejnalica — is about 81 metres, with a sharp late-Gothic crown. The other is lower, and wears a Renaissance helm. That difference is design and centuries of rebuilding.\n\nNo court record names the brothers or the knife. The fratricide is a legend told about a fact you can see.",
+        "pl": "Wieże naprawdę do siebie nie pasują. Północna — hejnalica — ma około 81 metrów i ostry późnogotycki hełm. Druga jest niższa i nosi renesansowe zwieńczenie. Ta różnica to projekt i wieki przebudów.\n\nŻaden akt nie wymienia braci ani noża. Bratobójstwo jest legendą opowiedzianą o fakcie, który widać."
       },
       "seeToday": {
-        "en": "Stand by the Cloth Hall and compare the silhouettes. The taller tower is the one that still speaks every hour.",
-        "pl": "Stań przy Sukiennicach i porównaj sylwetki. Z wyższej wieży miasto wciąż odzywa się co godzinę."
+        "en": "Stand by the Cloth Hall and look at both silhouettes against the sky. The taller, sharper tower is the one that still speaks every hour. The shorter one keeps its rounder helm and stays quiet.",
+        "pl": "Stań przy Sukiennicach i porównaj obie sylwetki na niebie. Wyższa, ostrzejsza wieża to ta, z której miasto wciąż odzywa się co godzinę. Niższa trzyma okrąglejszy hełm i milczy."
       },
       "game": {
         "kind": "towers",
@@ -201,16 +201,16 @@
       "pin": { "lat": 50.0545, "lng": 19.9145 },
       "image": { "light": "/stories/lajkonik.webp", "dark": "/stories/lajkonik-dark.webp" },
       "legend": {
-        "en": "Tatars camped by the Vistula near Zwierzyniec. Raftsmen (włóczkowie) struck first, killed a commander, and rode into town in his clothes. The city was saved. The ride is repeated every year.",
-        "pl": "Tatarzy stanęli nad Wisłą koło Zwierzyńca. Włóczkowie uderzyli pierwsi, zabili wodza i wjechali do miasta w jego stroju. Grodu uratowano. Przejazd powtarza się co roku."
+        "en": "Tatars camped by the Vistula near Zwierzyniec, during the octave of Corpus Christi. Raftsmen — the włóczkowie — struck first. They killed a commander, put on his clothes, and rode his horse into town.\n\nThe city was saved. Kraków repeats the ride every year: a man in Tatar dress on a hobby horse, a mace, a crowd that pays a small tribute and takes a tap for luck.",
+        "pl": "Tatarzy stanęli nad Wisłą koło Zwierzyńca, w oktawie Bożego Ciała. Włóczkowie uderzyli pierwsi. Zabili wodza, włożyli jego strój i wjechali na jego koniu do miasta.\n\nGród ocalono. Kraków powtarza ten przejazd co roku: człowiek w tatarskim stroju na drewnianym koniku, buława, tłum, który płaci drobny haracz i bierze uderzenie na szczęście."
       },
       "fact": {
-        "en": "The parade is old — at least since 1738 — and still runs on the Thursday in the octave of Corpus Christi. The neat Tatar-victory plot was written down in 1820 by Konstanty Majeranowski. A man in a Tatar costume on a wooden horse still collects tribute and taps spectators with a mace for luck.",
-        "pl": "Pochód jest stary — co najmniej od 1738 roku — i wciąż idzie w czwartek w oktawie Bożego Ciała. Zgrabną fabułę o zwycięstwie nad Tatarami spisał w 1820 roku Konstanty Majeranowski. Człowiek w tatarskim stroju na drewnianym koniku wciąż zbiera haracz i uderza buławą na szczęście."
+        "en": "The parade is old. The first written notice of the Zwierzyniec hobby horse is from 1738, a quarrel after the ride. It still goes out on the Thursday in the octave of Corpus Christi, from Zwierzyniec toward the Rynek.\n\nThe neat plot — raftsmen beating the Tatars — was written down in 1820 by Konstanty Majeranowski, in Pszczółka Krakowska. The costume is kept year-round at the Museum of Kraków.",
+        "pl": "Pochód jest stary. Pierwsza pisana wzmianka o koniku zwierzynieckim pochodzi z 1738 roku: sprzeczka po przejeździe. Wciąż wychodzi w czwartek w oktawie Bożego Ciała, ze Zwierzyńca w stronę Rynku.\n\nZgrabną fabułę — włóczkowie biją Tatarów — spisał w 1820 roku Konstanty Majeranowski w „Pszczółce Krakowskiej”. Strój przez cały rok trzyma Muzeum Krakowa."
       },
       "seeToday": {
-        "en": "Catch the parade on the Thursday after Corpus Christi, Zwierzyniec to the Rynek. The costume lives year-round in the Museum of Kraków.",
-        "pl": "Pochód: czwartek po Bożym Ciele, ze Zwierzyńca na Rynek. Strój przez cały rok jest w Muzeum Krakowa."
+        "en": "If you are in Kraków on that Thursday, wait along the route from the Norbertine convent in Zwierzyniec to the Main Market Square. Lajkonik collects a coin and taps passers-by with the mace.\n\nOn any other day the costume is in the Museum of Kraków. Look there, and do not expect the horse on the square.",
+        "pl": "Jeśli jesteś w Krakowie w ten czwartek, czekaj na trasie od klasztoru norbertanek na Zwierzyńcu po Rynek Główny. Lajkonik zbiera monetę i uderza przechodniów buławą.\n\nW każdy inny dzień strój jest w Muzeum Krakowa. Szukaj go tam i nie czekaj konika na placu."
       },
       "game": {
         "kind": "order",
@@ -232,16 +232,16 @@
       "pin": { "lat": 50.06135, "lng": 19.937 },
       "image": { "light": "/stories/golebie.webp", "dark": "/stories/golebie-dark.webp" },
       "legend": {
-        "en": "They are not ordinary birds. Knights who betrayed a duke were turned into pigeons by a witch and doomed to circle the square until a just king undid the spell.",
-        "pl": "To nie zwykłe ptaki. Rycerzy, którzy zdradzili księcia, wiedźma zamieniła w gołębie. Krążą po Rynku, aż sprawiedliwy król zdjąłby urok."
+        "en": "The pigeons on the Rynek are not ordinary birds. When Duke Henryk IV Probus wanted a crown and had no gold, he went to a witch. She turned his knights into pigeons.\n\nThe birds settled on St Mary’s and pecked at the walls. What fell to the ground became coins. Probus took the gold and set off for Rome, to ask the pope for a kingdom. He feasted the money away on the road and never came back. The knights are still on the square, waiting.",
+        "pl": "Gołębie na Rynku to nie zwykłe ptaki. Kiedy książę Henryk IV Probus chciał korony, a nie miał złota, poszedł do czarownicy. Ta zamieniła jego rycerzy w gołębie.\n\nPtaki obsiadły kościół Mariacki i dziobały mury. To, co spadło na ziemię, stawało się monetami. Probus wziął złoto i ruszył do Rzymu, prosić papieża o królestwo. Roztrwonił pieniądze w drodze i nigdy nie wrócił. Rycerze wciąż są na placu i czekają."
       },
       "fact": {
-        "en": "The flock is real; the curse is a later folk tale, often tied to Henryk Probus. Feeding is restricted — grain and breadcrumbs harm the birds and the stone. Look, do not feed.",
-        "pl": "Stado jest prawdziwe; klątwa to późniejsza opowieść, często wiązana z Henrykiem Pobożnym. Karmienie jest ograniczone — ziarno i bułka szkodzą ptakom i kamieniowi. Patrz, nie karm."
+        "en": "The flock is real. The spell is a later folk tale, told about Henryk IV Probus — also called Prawy — a 13th-century duke of Wrocław and Kraków who did seek a Polish crown. It is not about Henryk II Pobożny, who died at Legnica in 1241.\n\nFeeding the birds is restricted. Grain and breadcrumbs harm them and stain the stone. Look. Do not feed.",
+        "pl": "Stado jest prawdziwe. Urok to późniejsza opowieść ludowa o Henryku IV Probusie — zwanym też Prawym — trzynastowiecznym księciu wrocławskim i krakowskim, który naprawdę starał się o polską koronę. Nie chodzi o Henryka II Pobożnego, który zginął pod Legnicą w 1241 roku.\n\nKarmienie ptaków jest ograniczone. Ziarno i bułka szkodzą im i brudzą kamień. Patrz. Nie karm."
       },
       "seeToday": {
-        "en": "They still work the flags of the Cloth Hall. Leave the bag in your pocket.",
-        "pl": "Wciąż krążą przy Sukiennicach. Schowaj torebkę z karmą."
+        "en": "They still work the ledges and the flags of the Cloth Hall, thickest in the morning before the square fills. Leave any bag of grain in your pocket. The walls of St Mary’s are the ones the tale says they pecked for gold.",
+        "pl": "Wciąż pracują na gzymsach i przy Sukiennicach, najgęściej rano, zanim plac się zapełni. Torebkę z ziarnem zostaw w kieszeni. Mury Mariackiego to te, które w opowieści ptaki dziobały po złoto."
       },
       "game": {
         "kind": "quiz",
@@ -285,7 +285,7 @@
             },
             "options": [
               { "id": "a", "label": { "en": "Casimir the Great", "pl": "Kazimierzem Wielkim" } },
-              { "id": "b", "label": { "en": "Henryk Probus", "pl": "Henrykiem Pobożnym / Probusem" } },
+              { "id": "b", "label": { "en": "Henryk Probus", "pl": "Henrykiem IV Probusem (Prawym)" } },
               { "id": "c", "label": { "en": "John III Sobieski", "pl": "Janem III Sobieskim" } }
             ],
             "correctId": "b",
@@ -305,16 +305,16 @@
       "pin": { "lat": 50.06155, "lng": 19.9374 },
       "image": { "light": "/stories/rynek.webp", "dark": "/stories/rynek-dark.webp" },
       "legend": {
-        "en": "Kraków feels inevitable — as if the square had always been there. The founding stories prefer kings, dragons, and fate.",
-        "pl": "Kraków wydaje się oczywisty — jakby Rynek był tu od zawsze. Opowieści założycielskie wolą królów, smoki i przeznaczenie."
+        "en": "Kraków feels inevitable, as if the square had always been there. Founding tales prefer a king, a dragon, and fate: a city that grew because it had to.\n\nThe square you walk was drawn. After fire and a raid, someone took a rope and a rule and laid a town on purpose.",
+        "pl": "Kraków wydaje się oczywisty, jakby Rynek był tu od zawsze. Opowieści założycielskie wolą króla, smoka i przeznaczenie: miasto, które urosło, bo musiało.\n\nPlac, po którym chodzisz, został narysowany. Po pożarze i najeździe ktoś wziął sznur i linijkę i wytyczył miasto z zamysłu."
       },
       "fact": {
-        "en": "In 1257 Duke Bolesław V the Chaste chartered Kraków under Magdeburg law after the Tatar destruction of 1241. The Rynek was laid out as a planned grid — about 200 by 200 metres, one of the largest medieval squares in Europe. The Cloth Hall sits on the original trade axis. This is the hard-history pin: a city rebuilt on purpose.",
-        "pl": "W 1257 roku książę Bolesław V Wstydliwy lokował Kraków na prawie magdeburskim po zniszczeniach tatarskich z 1241. Rynek wytyczono jako planową sieć — około 200 na 200 metrów, jeden z największych średniowiecznych placów Europy. Sukiennice stoją na osi handlu. To pinezka twardej historii: miasto odbudowane z zamysłu."
+        "en": "In 1257 Duke Bolesław V the Chaste chartered Kraków under Magdeburg law, after the Tatar destruction of 1241. The Rynek was laid out as a planned grid, about 200 metres on a side — one of the largest medieval squares in Europe. The Cloth Hall still sits on the original trade axis.\n\nThis is the hard-history pin: a city rebuilt on purpose. The charter is the record. The dragon is the other story.",
+        "pl": "W 1257 roku książę Bolesław V Wstydliwy lokował Kraków na prawie magdeburskim, po zniszczeniach tatarskich z 1241. Rynek wytyczono jako planową sieć, około 200 metrów w boku — jeden z największych średniowiecznych placów Europy. Sukiennice wciąż stoją na pierwotnej osi handlu.\n\nTo pinezka twardej historii: miasto odbudowane z zamysłu. Przywilej jest zapisem. Smok jest inną opowieścią."
       },
       "seeToday": {
-        "en": "Walk the square edge to edge. Then go under it — Rynek Underground shows the pre-1257 streets still in the ground.",
-        "pl": "Przejdź Rynek od krawędzi do krawędzi. Potem zejdź pod spód — Rynek Underground pokazuje ulice sprzed 1257 roku, wciąż w ziemi."
+        "en": "Walk the square edge to edge. It takes a few minutes; that width is the 1257 measure. Then go under it. Rynek Underground keeps the older streets in the ground, the ones the charter buried when the new grid was drawn.",
+        "pl": "Przejdź Rynek od krawędzi do krawędzi. Zajmie to kilka minut; ta szerokość to miara z 1257 roku. Potem zejdź pod spód. Rynek Underground trzyma w ziemi starsze ulice, te, które przywilej przykrył, kiedy rysowano nową sieć."
       },
       "game": {
         "kind": "quiz",
