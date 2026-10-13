@@ -1,9 +1,16 @@
 const FORBIDDEN_UNUSED_CODE_TOOLS = ["ts-prune", "depcheck", "unimported"] as const;
 
 export const knipConfig = {
-  entry: ["index.html", "src/main.tsx", "src/routes/**/*.tsx"],
+  entry: [
+    "index.html",
+    "src/main.tsx",
+    "src/routes/**/*.tsx",
+    "playwright.config.ts",
+    "e2e/**/*.ts",
+  ],
   ignore: [".grok/**", "artifacts/**", "specs/**"],
   vitest: true,
+  playwright: true,
   treatConfigHintsAsErrors: false,
 };
 

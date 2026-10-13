@@ -30,8 +30,15 @@ describe("knip wiring", () => {
   it("uses Vite SPA entries, TanStack file routes, and Vitest", () => {
     expect(hasRequiredEntries(knipConfig.entry)).toBe(true);
     expect(knipConfig.entry).toEqual(
-      expect.arrayContaining(["index.html", "src/main.tsx", "src/routes/**/*.tsx"]),
+      expect.arrayContaining([
+        "index.html",
+        "src/main.tsx",
+        "src/routes/**/*.tsx",
+        "playwright.config.ts",
+        "e2e/**/*.ts",
+      ]),
     );
+    expect(knipConfig.playwright).toBe(true);
     expect(vitestIsEnabled(knipConfig)).toBe(true);
   });
 

@@ -12,6 +12,7 @@
     "fmt": "pnpm --filter web fmt",
     "fmt:check": "pnpm --filter web fmt:check",
     "test": "pnpm --filter web test",
+    "test:e2e": "pnpm --filter web test:e2e",
     "knip": "pnpm --filter web knip",
     "gen:content": "node scripts/gen-content.mjs && pnpm fmt",
     "prepare": "husky"

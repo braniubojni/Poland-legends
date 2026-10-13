@@ -1,6 +1,6 @@
 # SPEC 023 — Global error boundary + retry
 
-Status: **written** (not implemented)
+Status: **done**
 Covers: none (new, propose adding to 000 as P-11)
 Depends on: none functionally; touches the same `main.tsx`/`router.tsx` area as 022, implement after or coordinate to avoid a conflicting diff
 Parent: [000-global.md](./000-global.md)
@@ -41,10 +41,10 @@ No uncaught render error anywhere in the tree produces a blank screen. Every err
 
 ## Done when
 
-- [ ] A thrown error inside a route shows `AppErrorComponent` with a working "Try again" that re-attempts the route's data and recovers if the underlying cause is gone
-- [ ] A thrown error outside the router (simulate via a provider that throws in a test) is caught by the top-level boundary, not a blank screen
-- [ ] "Try again" on the top-level boundary re-renders the tree; a persistent failure doesn't loop
-- [ ] Visual parity between the two error surfaces (same component/chrome, no bare MUI default)
-- [ ] Tests cover ≥70% of this spec's new behaviour (aim 80%): catch, reset/retry, persistent-failure-no-loop
-- [ ] typecheck / lint / fmt pass
-- [ ] 000 / README mark 023 **done**
+- [x] A thrown error inside a route shows `AppErrorComponent` with a working "Try again" that re-attempts the route's data and recovers if the underlying cause is gone
+- [x] A thrown error outside the router (simulate via a provider that throws in a test) is caught by the top-level boundary, not a blank screen
+- [x] "Try again" on the top-level boundary re-renders the tree; a persistent failure doesn't loop
+- [x] Visual parity between the two error surfaces (same component/chrome, no bare MUI default)
+- [x] Tests cover ≥70% of this spec's new behaviour (aim 80%): catch, reset/retry, persistent-failure-no-loop
+- [x] typecheck / lint / fmt pass
+- [x] 000 / README mark 023 **done**

@@ -27,6 +27,7 @@ pnpm gen:content    # regenerate apps/web/src/data/*.ts from content/
 ## Rules
 
 - Do not add features that are not in the active spec.
+- When discussing, drafting, reviewing, or amending a spec, change only files in `specs/`. Do not edit `apps/`, tests, content JSON, generated data, or config until the user explicitly asks to implement that spec.
 - MUI must not look like a default dashboard (no Roboto, no purple, no elevated AppBar).
 - Keep the six Kraków stories’ facts/legend copy except for typos.
 - After implementing a spec, cover **at least 70%** of the new behaviour with tests (aim **80%**), tick Done checkboxes, and mark 000 / README.

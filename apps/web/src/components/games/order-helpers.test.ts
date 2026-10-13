@@ -21,5 +21,12 @@ describe("orderStepTone", () => {
       borderColor: "divider",
       bgcolor: "background.default",
     });
+    expect(orderStepTone(-1, "right").borderColor).toBe("divider");
+    expect(orderStepTone(-1, "wrong").borderColor).toBe("divider");
+  });
+
+  it("marks a correct step and a wrong step", () => {
+    expect(orderStepTone(1, "right").borderColor).toBe("success.main");
+    expect(orderStepTone(1, "wrong").borderColor).toBe("primary.main");
   });
 });

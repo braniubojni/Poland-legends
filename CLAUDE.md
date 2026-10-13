@@ -11,6 +11,7 @@ Opowieści — map of Polish legends. Poland map → city → story pin → lege
 `specs/000-global.md` is the locked backlog + architecture lock; it is **not** an implementation spec. Real work happens in numbered child specs (`specs/001-…md` … `specs/012-…md`, plus `007c`, see `specs/README.md` for status). Rules:
 
 - Implement **one** child spec at a time. No drive-by stack rewrites, no features outside the active spec.
+- When the user is discussing, drafting, reviewing, or amending a spec, make no application code changes. That work is read-only except for files inside `specs/`. Do not edit `apps/`, tests, content JSON, generated data, or config until the user explicitly asks to implement that spec.
 - If a child spec would conflict with `000-global.md`, stop and amend 000 first — don't just diverge in code.
 - After implementing a spec, cover **at least 70%** of the new behaviour with tests (aim **80%**), tick its Done checkboxes, and update the status table in `specs/README.md` / `000-global.md`.
 - Keep the six Kraków stories' facts/legend copy unchanged except for typos (explicit non-goal to alter them).

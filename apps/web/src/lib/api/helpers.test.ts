@@ -28,6 +28,8 @@ describe("loadStory", () => {
     const story = loadStory("krakow", "hejnal");
     expect(story.id).toBe("hejnal");
     expect(story.game.kind).toBe("quiz");
+    expect(loadStory("krakow", "smok").game.kind).toBe("order");
+    expect(loadStory("krakow", "wieze").game.kind).toBe("towers");
   });
 
   it("throws NotFoundError for an unknown story", () => {
