@@ -216,6 +216,29 @@ Same six Kraków IDs. Lengthen legend / fact / see-today (and quiz explanations 
 - Top-level class boundary reusing `AppErrorComponent`'s chrome; "Try again" on both the route-level and top-level surfaces; no infinite retry loop.
 - Child: **023** (written, not implemented)
 
+### P-12 — Quiz progress ring → 024
+
+Completion is a raw `done/total` fraction, and a quiz only prints the question index and a final score. One resolved item should read as a share of the set.
+
+- Crimson determinate circle. Fill is `round(100 × resolved / total)`: one of four is 25%, one of five is 20%.
+- Quiz: questions answered while playing; correct/total on the done screen. Header and `/krakow`: stories completed, including small screens.
+- Child: **024** (written, not implemented)
+
+### P-13 — Remove playable-area and custom country borders → 025
+
+**015** highlighted the Kraków camera box and a vendored Poland polygon. The city frame goes. A Poland-only stroke stays only if OpenFreeMap can isolate that border; the stock `boundary_*` layers cannot (they paint every country, and Poland’s lines carry no `adm0_*` code), so the custom polygon goes too.
+
+- No GeoJSON overlay. Do not recolor `boundary_2`.
+- Child: **025** (written, not implemented)
+
+### P-14 — Resume a quiz where it was left → 026
+
+The map pin and the Kraków list mark a finished story, but the quiz keeps each pick in component state. Open **The broken call** again and it starts at question 1.
+
+- Save each picked option in `opowiesci-v1`. Come back to 2 of 4 resolved: those two stay revealed, the third is the open question.
+- All picked: show those picks, do not restart. A story already in `completed` with no stored picks opens revealed, not blank.
+- Child: **026** (written, not implemented)
+
 ---
 
 ## Tech stack changes
@@ -374,7 +397,7 @@ Vitest unit tests only today, no coverage number tracked, no browser-level test.
 
 - `@vitest/coverage-v8` with a 90% statements/branches/functions/lines threshold on Vitest, scoped to exclude generated/vendored files (`routeTree.gen.ts`, `data/*.ts`, GeoJSON) — investigate actual uncovered lines before locking the exclusion list, don't pre-exclude what merely looks hard.
 - `@playwright/test` against the built `preview` server for golden-path flows (Poland → Kraków → story → game → completion persisted, locale/theme toggles). Runs on demand (`pnpm test:e2e`), not inside 020's pre-push hook — too slow for a local hook.
-- Child: **021** (written, not implemented)
+- Child: **021** (**done**)
 
 ---
 
@@ -458,8 +481,11 @@ Do UI that users see before the rewrite. **005** is this repo in place, not a se
 | 23 | 021 Playwright + coverage | S-13 | 005, 011, 020 |
 | 24 | 022 Smart route lazy loading | P-10 | 004, 013, 019 |
 | 25 | 023 Global error boundary + retry | P-11 | none |
+| 26 | 024 Quiz progress ring | P-12 | 006 |
+| 27 | 025 Remove map border overlays | P-13 | 015 |
+| 28 | 026 Resume a quiz | P-14 | 006, 024 |
 
-**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, **008**, **009**, **010**, **011**, **012**, **013**, **014**, **015**, **016**, **017**, **018**, **019**, and **020** are done. **021**, **022**, and **023** are written, not implemented. **018** has landed: production and dev both read the generated static path (`pnpm gen:content` from `content/seed.json`/`chrome.json`); there is no live backend anywhere, and 007/007c/S-09's "SQLite is SoT for local `pnpm dev:api`" no longer applies.
+**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, **008**, **009**, **010**, **011**, **012**, **013**, **014**, **015**, **016**, **017**, **018**, **019**, **020**, and **021** are done. **022**, **023**, **024**, **025**, and **026** are written, not implemented. **018** has landed: production and dev both read the generated static path (`pnpm gen:content` from `content/seed.json`/`chrome.json`); there is no live backend anywhere, and 007/007c/S-09's "SQLite is SoT for local `pnpm dev:api`" no longer applies.
 
 ---
 

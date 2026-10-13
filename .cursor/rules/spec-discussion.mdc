@@ -1,0 +1,23 @@
+---
+description: While a spec is being discussed, edit only files in specs/ — not the app.
+alwaysApply: true
+---
+
+# Spec discussion stays in the spec
+
+When the user is discussing, drafting, reviewing, or amending a spec, make no application code changes. That work is read-only. The only files you may edit are inside `specs/`.
+
+Not allowed until they explicitly ask to implement:
+
+- `apps/**`, tests, generated data, content JSON, config, lockfiles, or any other application code
+
+```text
+User: "On the spec, a quiz with 2 of 4 answered should reopen on the third."
+❌ QuizGame.tsx, progress helpers, or a drive-by fix
+✅ specs/026-quiz-resume.md (and the 000 / README status lines if the child is registered)
+
+User: "Implement 026."
+✅ Code changes for that spec are in scope.
+```
+
+Do not treat writing or updating a spec as permission to start the implementation.
