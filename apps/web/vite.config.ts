@@ -22,7 +22,7 @@ export default defineConfig({
     sourcemap: false,
   },
   test: {
-    include: ["src/**/*.test.ts"],
+    include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
     coverage: {
       provider: "v8",
       reporter: ["text", "html"],

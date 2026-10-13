@@ -1,44 +1,58 @@
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import type { ErrorComponentProps } from "@tanstack/react-router";
+import { ThemeProvider } from "@mui/material/styles";
+import { useRouter, type ErrorComponentProps } from "@tanstack/react-router";
 import { TriangleAlert } from "lucide-react";
+import { errorMessage, errorMode, retryRoute } from "@/lib/error-helpers";
+import { createOpTheme } from "@/theme/opowiesci";
 
-const FALLBACK_MESSAGE = "An unexpected error occurred. Try reloading the page.";
-
-const errorMessage = (error: unknown): string => {
-  if (error instanceof Error && error.message) return error.message;
-  if (typeof error === "string" && error) return error;
-  return FALLBACK_MESSAGE;
+type ScreenProps = {
+  error: unknown;
+  onRetry: () => void;
 };
 
-const AppErrorComponent = ({ error }: ErrorComponentProps) => (
-  <Box
-    component="main"
-    sx={{
-      display: "flex",
-      minHeight: "100vh",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 1.5,
-      px: 3,
-      textAlign: "center",
-      bgcolor: "background.default",
-      color: "text.primary",
-    }}
-  >
-    <Box sx={{ color: "primary.main" }} aria-hidden>
-      <TriangleAlert size={40} strokeWidth={2} />
-    </Box>
-    <Typography variant="h3">Something went wrong</Typography>
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      sx={{ maxWidth: 448, overflowWrap: "anywhere" }}
+const ErrorScreen = ({ error, onRetry }: ScreenProps) => (
+  <ThemeProvider theme={createOpTheme(errorMode(document.documentElement.dataset.theme))}>
+    <Box
+      component="main"
+      sx={{
+        display: "flex",
+        minHeight: "100vh",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 1.5,
+        px: 3,
+        textAlign: "center",
+        bgcolor: "background.default",
+        color: "text.primary",
+      }}
     >
-      {errorMessage(error)}
-    </Typography>
-  </Box>
+      <Box sx={{ color: "primary.main" }} aria-hidden>
+        <TriangleAlert size={40} strokeWidth={2} />
+      </Box>
+      <Typography variant="h3">Something went wrong</Typography>
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        sx={{ maxWidth: 448, overflowWrap: "anywhere" }}
+      >
+        {errorMessage(error)}
+      </Typography>
+      <Button variant="contained" onClick={onRetry}>
+        Try again
+      </Button>
+    </Box>
+  </ThemeProvider>
 );
 
-export { AppErrorComponent };
+const AppErrorComponent = ({ error, reset }: ErrorComponentProps) => {
+  const router = useRouter();
+  const retry = () => {
+    retryRoute(() => router.invalidate(), reset);
+  };
+  return <ErrorScreen error={error} onRetry={retry} />;
+};
+
+export { AppErrorComponent, ErrorScreen };

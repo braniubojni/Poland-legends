@@ -214,7 +214,7 @@ Same six Kraków IDs. Lengthen legend / fact / see-today (and quiz explanations 
 `defaultErrorComponent` (route-level, done since early on) has no retry action, and nothing catches a throw outside the router (provider tree, before `RouterProvider` mounts) — that path is still a blank screen today.
 
 - Top-level class boundary reusing `AppErrorComponent`'s chrome; "Try again" on both the route-level and top-level surfaces; no infinite retry loop.
-- Child: **023** (written, not implemented)
+- Child: **023** (done)
 
 ### P-12 — Quiz progress ring → 024
 
@@ -485,7 +485,7 @@ Do UI that users see before the rewrite. **005** is this repo in place, not a se
 | 27 | 025 Remove map border overlays | P-13 | 015 |
 | 28 | 026 Resume a quiz | P-14 | 006, 024 |
 
-**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, **008**, **009**, **010**, **011**, **012**, **013**, **014**, **015**, **016**, **017**, **018**, **019**, **020**, and **021** are done. **022**, **023**, **024**, **025**, and **026** are written, not implemented. **018** has landed: production and dev both read the generated static path (`pnpm gen:content` from `content/seed.json`/`chrome.json`); there is no live backend anywhere, and 007/007c/S-09's "SQLite is SoT for local `pnpm dev:api`" no longer applies.
+**001–004** landed on the Grok/TanStack Start tree. **005** converts this same repo in place to `apps/web` (Vite SPA). **006**, **007**, **007c**, **008**, **009**, **010**, **011**, **012**, **013**, **014**, **015**, **016**, **017**, **018**, **019**, **020**, **021**, and **023** are done. **022**, **024**, **025**, and **026** are written, not implemented. **018** has landed: production and dev both read the generated static path (`pnpm gen:content` from `content/seed.json`/`chrome.json`); there is no live backend anywhere, and 007/007c/S-09's "SQLite is SoT for local `pnpm dev:api`" no longer applies.
 
 ---
 

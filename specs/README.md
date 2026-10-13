@@ -30,7 +30,7 @@ Do not implement from this README. Split work only by creating a numbered child 
 | 020 | **done** | Git hooks (Husky pre-commit/pre-push) |
 | 021 | **done** | Playwright e2e + 90% coverage gate |
 | 022 | written | Smart route lazy loading (story pages first) |
-| 023 | written | Global error boundary + retry |
+| 023 | **done** | Global error boundary + retry |
 | 024 | written | Quiz progress ring |
 | 025 | written | Remove playable-area and custom country borders |
 | 026 | written | Resume a quiz where it was left |
